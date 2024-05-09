@@ -3,29 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
     <title>forms</title>
   </head>
+
   <body>
+    <main>
     <h1>FORMULARIO</h1>
     <form action="">
-      <label>Ingrese su nombre: <input type="text" /></label><br />
-      <label>Ingrese su edad: <input type="number" /></label><br />
-      <label
-        >Seleccione su sexo: Hombre<input
+      <label name="nombre"
+        >Ingrese su nombre:
+        <input id="nombre" type="text" minlength="5" required /></label
+      ><br />
+      <label name="edad"
+        >Ingrese su edad:
+        <input id="edad" type="number" min="18" max="60" required placeholder="18+"/></label
+      ><br />
+      Seleccione su sexo:
+      <label name="hombre"
+        >Hombre<input
+          id="hombre"
           name="sexo"
           type="radio"
           value="hombre"
-        />
-        Mujer<input name="sexo" type="radio" value="mujer" /></label
-      ><br /><label><input type="checkbox" /></label
-      ><label><input type="submit" /></label
-      ><label><input type="date" /></label>
-      <select name="" id="">
-        <option value=""></option>
-        <option value=""></option>
-        <option value=""></option>
-      </select>
-      <textarea name="" id=""></textarea>
+          checked
+      /></label>
+      <label name="mujer"
+        >Mujer<input id="sexo" name="sexo" type="radio" value="mujer" />
+      </label>
+      <label name="otro"
+        >Otro<input id="sexo" name="sexo" type="radio" value="otro"
+      /></label>
+      <br />
+      Hobbies:
+      <label name="football"
+        >Football<input id="football" type="checkbox"
+      /></label>
+      <label name="football"
+        >Football<input id="football" type="checkbox"
+      /></label>
+      <label name="no-football"
+        >no me gusta el Football<input
+          id="no-football"
+          type="checkbox"
+          disabled /></label
+      ><br />
+      <label name="date">Fecha de nacimiento: <input id="date" type="date" /></label><br />
+      <label name="nacionalidad">
+        Nacionalidad:
+        <select name="nacionalidad" id="nacionalidad">
+          <option value="">Elegir pais</option>
+          <option value="argentina">Argentina</option>
+          <option value="españa">España</option>
+          <option value="venezuela">Venezuela</option>
+        </select> </label
+      ><br />
+      <label name="descripcion">Escribe una breve descripcion de ti: <br>
+      <textarea rows="4" cols="40"></textarea>
+    </label><br />
+      <input type="submit" value="Enviar" />
     </form>
+</main>
   </body>
 </html>
