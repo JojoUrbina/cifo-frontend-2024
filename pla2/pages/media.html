@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <ul>
-              <li><a href="#">Inicio</a></li>
-              <li><a href="#">Acerca de</a></li>
-              <li><a href="#">Servicios</a></li>
-              <li><a href="#">Contacto</a></li>
-            </ul>
-          </nav>
+      <nav>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Acerca de</a></li>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-        
+      <h2>Archivo de Audio Local</h2>
+      <audio controls>
+        <source src="../assets/audio/viejooeste.mp3" type="audio/mp3" />
+        Tu navegador no soporta el elemento de audio.
+      </audio>
+      <h2>Archivo de Video Local</h2>
+      <video controls width="400">
+        <source src="../assets/media/Checker Palindrome.mp4" type="video/mp4" />
+        Tu navegador no soporta el elemento de video.
+      </video>
+
+      <h2>Video de Youtube</h2>
+      <iframe
+        width="400"
+        height="369"
+        src="https://www.youtube.com/embed/hTUyShQfsQk"
+        title="TACHIRITA FC VS REAL FÉNIX - COPA DE CAMPEONES GOLI 2023 - FECHA 1"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
     </main>
-</body>
+  </body>
 </html>
