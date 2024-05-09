@@ -1,0 +1,1 @@
+Los estilos implementados se mantuvieron en lo mas basicos para mantener la consigna de intentar mantener el estilo con solo HTML
