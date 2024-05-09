@@ -1,1 +1,3 @@
-Los estilos implementados se mantuvieron en lo mas basicos para mantener la consigna de intentar mantener el estilo con solo HTML
+Los estilos implementados se mantuvieron en lo mas basicos para mantener la consigna de intentar mantener el estilo con solo HTML.
+
+El proyecto lo podra ver cargado en github su historial de commits.
