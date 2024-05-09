@@ -17,10 +17,18 @@ nav{
     padding: 5px;
     
 }
-ul{
+nav ul{
     display: flex;
 justify-content: space-evenly;
+list-style: none;
+}
+li a{
+    text-decoration: none;
+    color: black;
 
+}
+li a:hover{
+   color:rgb(167, 163, 163)
 }
 main{
     width: 500px;
