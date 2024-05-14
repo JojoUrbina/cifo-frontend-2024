@@ -1,38 +1,76 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-main{
-    margin:0 auto;
-    padding: 10px;
-    width: 600px;
-    height: 100vh;
-    box-shadow: 0px 2px 2px 2px rgb(156, 155, 155);
+html {
+  font-size: 14px;
+}
+main {
+  margin: 0 auto;
+  padding: 15px;
+  width: 600px;
+  height: 100%;
+  box-shadow: 0px 2px 2px 2px rgb(156, 155, 155);
+}
+h1 {
+  margin: 30px;
+  font-size: 3em;
+}
 
+#external {
+  background-color: red;
+  color: white;
+  display: inline;
 }
-h1{
-    text-align: center;
-    margin: 30px;
-}
-#external{
-    background-color: red;
-    color: white;
-    display: inline;
-}
-table{
-    border: 2px inline red;
-}
-th{
-    background-color: rgb(202, 198, 198);
-    border: red;
-    min-width: 150px;
-    padding: 10px;
 
+/*Tablas*/
+#tabla1 {
+  margin: 10px auto;
+  border-collapse: collapse;
 }
-td{
-    background-color: rgba(224, 224, 224, 0.274);
-    text-align: center;
-    padding: 10px;
-    
+#tabla1 th {
+  background-color: rgb(202, 198, 198);
+  min-width: 120px;
+  padding: 6px;
+}
+#tabla1 td {
+  background-color: rgba(224, 224, 224, 0.274);
+  text-align: center;
+  padding: 5px;
+}
+#tabla2 {
+  margin: 10px auto;
+  height: 100%;
+  border-collapse: collapse;
+}
+#tabla2 th {
+  background-color: #a6e3e9;
+  font-size: 0.8rem;
+  color: #1a8d97;
+  min-width: 120px;
+  padding: 6px;
+  border: 1px solid rgba(146, 147, 148, 0.452);
+}
+#tabla2 th:first-of-type {
+  min-width: 20px;
+}
+#tabla2 td {
+  background-color: #e3fdfd;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid rgba(146, 147, 148, 0.452);
+  font-size: 0.9rem;
+}
+#tabla2 tbody tr.checked td{
+  background-color: rgb(165, 214, 230)
+}
+
+/*Estilos de texto */
+.subtitulos {
+  font-size: 2rem;
+  margin: 20px auto;
+}
+.text-center {
+  text-align: center;
 }
