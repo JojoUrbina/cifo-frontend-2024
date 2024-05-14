@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pla3</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <style>
-        #internal{
-           background-color: blue;
-           color: white;
-            display: inline;
-        }
+      #internal {
+        background-color: blue;
+        color: white;
+        display: inline;
+      }
     </style>
-</head>
-<body>
-    <h1>Diferencias entre los estilos CSS <strong>Inline</strong>,<strong>Internal</strong>Y <strong>External</strong></h1>
-    <h2>Inline</h2>
-    <p style="background-color: yellow; display: inline;">Este es un parrafo aplicado con estilo CSS en linea</p>
-    <H2>Internal</H2>
-    <p id="internal">Este es un parrafo con estilo aplicado con CSS Interno</p>
-    <h2>Externo</h2>
-    <p id="external">Este es un parrafo con estilo aplicado con CSS Externo</p>
-
-</body>
+  </head>
+  <body>
+    <h1>
+      Diferencias entre los estilos CSS <strong>Inline</strong>,<strong
+        > Internal,</strong><strong> External.</strong>
+    </h1>
+    <h3>Inline</h3>
+    <p style="background-color: yellow; display: inline">
+      Este es un parrafo aplicado con estilo CSS en linea.
+    </p>
+    <p>
+      Su estilo se limita a la etiqueta donde se aplica sin afectar los estilos
+      de los otros elementos, se podra tomar como algo negativo o positivo
+      dependiendo del problema a resolver.
+    </p>
+    <h3>Internal</h3>
+    <p id="internal">Este es un parrafo con estilo aplicado con CSS Interno.</p>
+    <p>
+      Se recomienda cuando se quiere cargar solo un archivo a la web y que los
+      estilos esten aplicados solo a este documento.
+    </p>
+    <h3>Externo</h3>
+    <p id="external">Este es un parrafo con estilo aplicado con CSS Externo.</p>
+    <p>
+      Es mas recomendable el CSS externo cuando se utiliza mas de una pagina
+      web, facilita la organizacion y distribuye los estilos en todas las
+      paginas necesarias aparte de poder reciclar de esta forma los estilos.
+    </p>
+  </body>
 </html>
