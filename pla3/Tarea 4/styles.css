@@ -1,19 +1,51 @@
-:root{
-    --primary-color:
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+:root {
+  --primary-color: rgb(20, 30, 40);
+  --secundary-color: linen;
+  --orangered-color: orangered; 
+  --link-color:#00beef;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-h1,h2{
-    text-align: center;
-    margin: 20px 0;
+html {
+  font-size: 15px;
 }
-main{
-
+h1 {
+    font-size: 3rem;
+  font-family: "Poetsen One", sans-serif;
+  text-align: center;
+  color: var(--orangered-color);
+  margin: 20px 0;
+  
 }
-
-
+h3
+{
+  font-family: "Raleway", sans-serif;
+  margin: 15px 0;
+  font-size: 1.2rem;
+}
+body {
+  background-color: var(--primary-color);
+  line-height: 1.5;
+  font-size: 1rem;
+  color: var(--secundary-color);
+}
+main {
+  width: 700px;
+  margin: 20px auto;
+}
+ul{
+    margin:1.5rem;
+}
+a{
+    text-decoration: none;
+    color: var(--link-color);
+}
+a:hover{
+    color: var(--orangered-color);
+}
