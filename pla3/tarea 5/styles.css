@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 12px;
+}
+hr {
+    border: none;
+    border-bottom: 1px dotted black;
+    margin: 1rem 0;
+  }
+#primer-texto{
+    background-color: blue;
+    color: white;
+}
