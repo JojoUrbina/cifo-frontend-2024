@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animaciones CSS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f3f3;
+        }
+        .animation-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .animation-item {
+            margin-bottom: 20px;
+        }
+        /* styles.css */
+
+/* Animación de entrada */
+.animation-entry {
+    width: 100px;
+    height: 100px;
+    background-color: #ff7f0e;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de rotación */
+.animation-rotate {
+    width: 100px;
+    height: 100px;
+    background-color: #2ecc71;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animación de cambio de color */
+.animation-color {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    animation: changeColor 3s ease-in-out alternate infinite;
+}
+
+@keyframes changeColor {
+    from {
+        background-color: #3498db;
+    }
+    to {
+        background-color: #e74c3c;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="animation-container">
+        <div class="animation-item">
+            <h2>Animación de entrada</h2>
+            <div class="animation-entry"></div>
+            <p>Esta animación muestra un elemento que entra en la página con un efecto de desvanecimiento.</p>
+        </div>
+        <div class="animation-item">
+            <h2>Animación de rotación</h2>
+            <div class="animation-rotate"></div>
+            <p>Esta animación hace que un elemento gire continuamente en sentido horario.</p>
+        </div>
+        <div class="animation-item">
+            <h2>Animación de cambio de color</h2>
+            <div class="animation-color"></div>
+            <p>Esta animación cambia el color de fondo de un elemento de forma gradual.</p>
+        </div>
+    </div>
+</body>
+</html>

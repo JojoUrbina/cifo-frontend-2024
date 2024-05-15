@@ -1,0 +1,54 @@
+/* styles.css */
+
+/* Animación de entrada */
+.animation-entry {
+    width: 100px;
+    height: 100px;
+    background-color: #ff7f0e;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de rotación */
+.animation-rotate {
+    width: 100px;
+    height: 100px;
+    background-color: #2ecc71;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animación de cambio de color */
+.animation-color {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    animation: changeColor 3s ease-in-out alternate infinite;
+}
+
+@keyframes changeColor {
+    from {
+        background-color: #3498db;
+    }
+    to {
+        background-color: #e74c3c;
+    }
+}
