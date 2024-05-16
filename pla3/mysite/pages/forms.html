@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <title>Forms</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="texts.html">Texts</a></li>
+          <li><a href="images.html">Images</a></li>
+          <li><a href="links.html">Links</a></li>
+          <li><a href="lists.html">Lists</a></li>
+          <li><a href="table.html">Table</a></li>
+          <li><a href="forms.html">Forms</a></li>
+          <li><a href="sections.html">Sections</a></li>
+          <li><a href="media.html">Media</a></li>
+          <li><a href="meta.html">Meta</a></li>
+
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <!-- No agregue estilos al formulario para cumplir con la tarea, solo la base de todas las paginas-->
+      <h1>FORMULARIO</h1>
+      <form action="">
+        <label name="nombre"
+          >Ingrese su nombre:
+          <input id="nombre" type="text" minlength="5" required /></label
+        ><br />
+        <label name="edad"
+          >Ingrese su edad:
+          <input
+            id="edad"
+            type="number"
+            min="18"
+            max="60"
+            required
+            placeholder="18+" /></label
+        ><br />
+        Seleccione su sexo:
+        <label name="hombre"
+          >Hombre<input
+            id="hombre"
+            name="sexo"
+            type="radio"
+            value="hombre"
+            checked
+        /></label>
+        <label name="mujer"
+          >Mujer<input id="sexo" name="sexo" type="radio" value="mujer" />
+        </label>
+        <label name="otro"
+          >Otro<input id="sexo" name="sexo" type="radio" value="otro"
+        /></label>
+        <br />
+        Hobbies:
+        <label name="football"
+          >Football<input id="football" type="checkbox"
+        /></label>
+        <label name="football"
+          >Football<input id="football" type="checkbox"
+        /></label>
+        <label name="no-football"
+          >No me gusta el football<input
+            id="no-football"
+            type="checkbox"
+            disabled /></label
+        ><br />
+        <label name="date"
+          >Fecha de nacimiento: <input id="date" type="date" /></label
+        ><br />
+        <label name="nacionalidad">
+          Nacionalidad:
+          <select name="nacionalidad" id="nacionalidad">
+            <option value="">Elegir pais</option>
+            <option value="argentina">Argentina</option>
+            <option value="españa">España</option>
+            <option value="venezuela">Venezuela</option>
+          </select> </label
+        ><br />
+        <label name="descripcion"
+          >Escribe una breve descripcion de ti: <br />
+          <textarea rows="4" cols="40"></textarea></label
+        ><br />
+        <input type="submit" value="Enviar" />
+      </form>
+    </main>
+  </body>
+</html>
