@@ -1,0 +1,13 @@
+main {
+  width: 700px;
+  margin: 0 auto;
+}
+div {
+  margin-bottom: 10px;
+}
+.rojo {
+  background-color: red;
+}
+.card-personalizada {
+  width: 400px;
+}
