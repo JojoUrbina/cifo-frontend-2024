@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap");
 
-
 :root {
   --primary-color: rgb(20, 30, 40);
   --secundary-color: linen;
@@ -10,7 +9,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box ;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -21,10 +20,10 @@ h1 {
   margin: 3rem 0;
   text-shadow: 2px 2px 2px rgba(255, 0, 0, 0.61);
 }
-h2{
-    margin: 20px 0;
+h2 {
+  margin: 20px 0;
 }
-h3{
+h3 {
   font-family: "Raleway", sans-serif;
   margin: 1rem 0;
   font-size: 1.2rem;
@@ -43,5 +42,4 @@ main {
 }
 p {
   margin: 1rem 0;
-  
 }
