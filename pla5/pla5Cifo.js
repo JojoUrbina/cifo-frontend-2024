@@ -1,4 +1,4 @@
- /** ---------------------------------------------------------------------------
+/** ---------------------------------------------------------------------------
  * Desenvolupament Web Frontend
  * PLA 5: Fonaments de JavaScript
  * Mòdul: 2
@@ -21,8 +21,11 @@ const nope = false;
 let condition = cifo === question;
 condition = distance >= 42000;
 const pi_sign = "π";
-const pi_text = "The number π is a mathematical constant, approximately equal to 3.1416, defined in "+ "the ratio between a circle's circumference and its diameter, the symbol is " + pi_sign;
-const cifo_text = `El Bruc is approximately ${distance} meters away from the ${cifo} location.`
+const pi_text =
+  "The number π is a mathematical constant, approximately equal to 3.1416, defined in " +
+  "the ratio between a circle's circumference and its diameter, the symbol is " +
+  pi_sign;
+const cifo_text = `El Bruc is approximately ${distance} meters away from the ${cifo} location.`;
 console.log(cifo_text);
 /* Task 2 ------------------------------------------------------------------ */
 
@@ -30,15 +33,34 @@ const lang = "ca";
 const age = 38;
 
 // Write your first `if` block below this line:
-if(age >=30){console.log("You are a boomer!")} 
-
+if (age >= 30) {
+  console.log("You are a boomer!");
+}
 // Write your second `if` block below this line:
-
-
+if (age >= 36) {
+  console.log("A boomer for sure");
+} else if (age >= 21) {
+  console.log("Quite close to be a boomer");
+} else {
+  console.log("Too young to be boomer");
+}
 // Write your `switch` block below this line:
-
+switch (lang) {
+  case "es":
+    console.log("Spanish");
+    break;
+  case "ca":
+    console.log("Catalan");
+    break;
+  case "fr":
+    console.log("French");
+    break;
+  default:
+    console.log("Unknown");
+    break;
+}
 // Replace `null` in the line below with your your one-liner using a ternary operator:
-console.log(null);
+console.log(lang === "ca" ? "Catalan" : "Some other language");
 
 /* Task 3 ------------------------------------------------------------------ */
 
@@ -47,22 +69,46 @@ let sum = 0;
 let product = 1;
 
 // Write your `for` loop below this line:
-
+for (let i = 1; i <= num; i++) {
+  sum += i;
+}
+console.log(sum);
 // Write your `while` loop below this line:
+let i = 1;
+while (i <= num) {
+  product *= i;
+
+  i++;
+}
+/* Forma modificando la variable num
+while (num) {
+  product *= num;
+  num--;
+}
+*/
+console.log(product);
 
 // Write your `do...while` loop below this line:
-
+do {
+  console.log(num);
+  num--;
+} while (num >= 3);
 /* Task 4 ------------------------------------------------------------------ */
 
-function func1() {
+function func1(n) {
+  //Agregue el parametro n
   return n + 10;
 }
 
 function func2(n) {
-  n = n * n;
+  //Agregue el return
+  return n = n * n;
 }
 
-function func3() {}
+function func3(name,city) {
+  //se agrego los parametros necesarios, el return y comillas invertidas para estructurar la respuesta esperada.
+  return `Hello ${name} from ${city}`
+}
 
 function func4(n) {
   n = n * 42;
@@ -84,13 +130,13 @@ function fumc6(n) {
 // But uncomment them to check your results.
 
 // expected 23, got error :(
-// console.log(func1(13));
+ console.log(func1(13));
 
 // expected 25, got undefined :(
-// console.log(func2(5));
+ console.log(func2(5));
 
 // expected 'Hello Mike from London', got undefined :(
-// console.log(func3('Mike', 'London'));
+ console.log(func3('Mike', 'London'));
 
 // expected '63 is a pretty big number', got number 630 :(
 // console.log(func4(15));
