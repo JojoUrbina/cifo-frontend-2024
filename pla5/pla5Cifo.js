@@ -102,26 +102,29 @@ function func1(n) {
 
 function func2(n) {
   //Agregue el return
-  return n = n * n;
+  return (n = n * n);
 }
 
-function func3(name,city) {
+function func3(name, city) {
   //se agrego los parametros necesarios, el return y comillas invertidas para estructurar la respuesta esperada.
-  return `Hello ${name} from ${city}`
+  return `Hello ${name} from ${city}`;
 }
 
 function func4(n) {
+  //Se corrigio el retorno, cambio de retornar el parametro n a la variable m.
   n = n * 42;
   let m = n / 10;
   m = m + " is a pretty big number";
-  return n;
+  return m;
 }
 
-function func5() {
+function func5(city1, city2) {
+  //Se agregaron los parametros para que la funcion pueda recibir city1 y city2.
   return "First we take " + city1 + " then we take " + city2;
 }
 
-function fumc6(n) {
+function func6(n) {
+  //Se corrigio el nombre de la funcion
   n = "Double of " + n + " is " + n * 2;
   return n;
 }
@@ -130,22 +133,22 @@ function fumc6(n) {
 // But uncomment them to check your results.
 
 // expected 23, got error :(
- console.log(func1(13));
+console.log(func1(13));
 
 // expected 25, got undefined :(
- console.log(func2(5));
+console.log(func2(5));
 
 // expected 'Hello Mike from London', got undefined :(
- console.log(func3('Mike', 'London'));
+console.log(func3("Mike", "London"));
 
 // expected '63 is a pretty big number', got number 630 :(
-// console.log(func4(15));
+console.log(func4(15));
 
 // expected 'First we take Manhattan then we take Berlin', got error :(
-// console.log(func5('Manhattan', 'Berlin'));
+console.log(func5("Manhattan", "Berlin"));
 
 // expected 'Double of 7 is 14', got error :(
-// console.log(func6(7));
+console.log(func6(7));
 
 /* Task 5 ------------------------------------------------------------------ */
 
@@ -170,20 +173,20 @@ const mixed = [
 const years = [1978, 2021, 1657, 2301, 1867, 2008];
 
 // Replace the `null`s in the code below with your one-liners:
-console.log(null);
-console.log(null);
-console.log(null);
-console.log(null);
-console.log(null);
+console.log(days.length);
+console.log(mixed[2]);
+console.log(numbers[numbers.length - 1]);
+console.log(mixed[mixed.length - 2].e);
+console.log(mixed[mixed.length - 3][0][1]);
 
 // Replace the `null`s in the code below (do not add any new line):
-const tuesdayToFriday = null;
+const tuesdayToFriday = days.slice(1, 5);
 console.log(tuesdayToFriday);
-const sortedDays = null;
+const sortedDays = days.sort();
 console.log(sortedDays);
-const number = null;
+const number = Number(numbers.join(""));
 console.log(number);
-const maxYear = null;
+const maxYear = years.reduce((a, b) => Math.max(a, b)); //Math.max([...years]), seria el mas corto pero se recomienda reduce para no sobre carcar de argumentos Math.max.
 console.log(maxYear);
 
 // Today is Friday
@@ -194,6 +197,9 @@ console.log(maxYear);
 // Today is Tuesday
 // Today is Wednesday
 // Write your `for` loop below this line:
+for (let i = 0; i < days.length; i++) {
+  console.log(`Today is ${days.sort()[i]}`);
+}
 
 /* Task 6 ------------------------------------------------------------------ */
 
@@ -212,12 +218,17 @@ const laptop = {
 };
 
 // Replace the `null`s in the code below with your one-liners:
-console.log(null);
-console.log(null);
-console.log(null);
-console.log(null);
+console.log(laptop.os);
+console.log(laptop.year + 10);
+console.log(laptop.apps[laptop.apps.length - 1]);
+console.log(laptop.owner.phone);
 
 // Write your code to change some properties below this line:
+laptop.memory = "32 GB";
+laptop.apps.push("Spotify");
+laptop.apps.push("Docker");
+laptop.apps.shift();
+laptop.owner.name = "Jorman";
 
 // brand property has value Apple
 // model property has value MacBook Pro
@@ -229,4 +240,58 @@ console.log(null);
 // owner property is an object with 2 fields
 // Write your `for` loop below this line:
 
-/* Task 7 ------------------------------------------------------------------ */
+for (const key in laptop) {
+  if (Array.isArray(laptop[key])) {
+    console.log(
+      `${key} property is an array with ${laptop[key].length} elements`
+    );
+  } else if (typeof laptop[key] === "object") {
+    console.log(
+      `${key} property is an object with ${
+        Object.keys(laptop[key]).length
+      } fields`
+    );
+  } else {
+    console.log(`${key} property has an value ${laptop[key]}`);
+  }
+}
+
+/*Diferencia entre for in y for of
+
+La diferencia radica en como recorre los elementos de un objeto o lista y que es lo que devuelve.
+for of itera sobre  los valores de la estructura de datos directamente y devuelve el valor de cada elemento ademas de mantener el orden de iteracion. (tambien con otros tipos de iterables como strings. etc)
+
+for of itera sobre propiedades enumerables de un objeto de volviendo cada keys(clave) , se utiliza frecuentemente en objetos, es util para inspeccionar todas las propiedades de un objeto.
+
+Se debe usar for in para objetos ya que permite iterar sobre las keys de toda la estructura de datos y for of para los arrays ya que itera sobre los elementos directamente, de forma ordenada y mas predecible.
+/* Task 7 
+
+¿Qué función u operador podemos usar para ver si una variable contiene un número?
+typeof(variable) === "number"
+!isNaN(variable)
+
+¿Qué función –y con qué sintaxis concreta– podemos usar para cambiar todas las veces que una secuencia de caracteres aparece en una cadena de texto? Por ejemplo, para pasar de abracadabra a ibricidibri.
+.replaceAll("a", "i")
+Tambien se puede usar expresiones regulares 
+.replaceAll(/a/g,"i")
+
+¿Qué función usamos para obtener el componente mes (month, un número) de una fecha? ¿Hay algo relevante a tener en cuenta con el valor que obtenemos?
+const fecha = new Date();
+fecha.getMonth() + 1;
+Al obtener la fecha es importante tener cuenta el indexado ya que enero seria 0, febrero 1,etc.
+
+¿Qué función podemos usar para convertir una cadena de texto a minúsculas?
+"cadena de texto".toLowerCase()
+
+¿Qué función podemos usar para obtener la representación ISO de una fecha?
+new Date().toISOString())
+
+¿Qué función podemos usar para convertir un array de números en otro array también de números pero donde cada número sea el cuadrado del número original? Por ejemplo, pasar del array [1, 2, 3, 4] al array [1, 4, 9, 16].
+array.map((numero) => numero * numero)
+
+¿Qué función podemos usar para filtrar todos los elementos de un array, de tal manera que obtengamos otro array solo con los elementos que cumplan una determinada condición? Por ejemplo, pasar del array [null, 'Lucas', undefined, 42, {}, 13, new Date(), [], 0] al array [42, 13, 0], donde el criterio elegido en este caso ha sido quedarnos solo con los elementos que son números.
+array1.filter((elemento) => typeof(elemento) === "number")
+
+En esta tarea no pueden programar ninguna función propia ni escribir más de una línea de código por cada pregunta. Recuerden que lo que se pide es que usen funciones propias de JavaScript que ya existen.
+
+------------------------------------------------------------------ */

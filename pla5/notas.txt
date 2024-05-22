@@ -1,0 +1,16 @@
+Contesten las siguientes preguntas en el archivo pla5.js. Usen un comentario multilínea /* */ y creen pequeños ejemplos que muestren el funcionamiento de cada función:
+¿Qué función u operador podemos usar para ver si una variable contiene un número?
+
+¿Qué función –y con qué sintaxis concreta– podemos usar para cambiar todas las veces que una secuencia de caracteres aparece en una cadena de texto? Por ejemplo, para pasar de abracadabra a ibricidibri.
+
+¿Qué función usamos para obtener el componente mes (month, un número) de una fecha? ¿Hay algo relevante a tener en cuenta con el valor que obtenemos?
+
+¿Qué función podemos usar para convertir una cadena de texto a minúsculas?
+
+¿Qué función podemos usar para obtener la representación ISO de una fecha?
+
+¿Qué función podemos usar para convertir un array de números en otro array también de números pero donde cada número sea el cuadrado del número original? Por ejemplo, pasar del array [1, 2, 3, 4] al array [1, 4, 9, 16].
+
+¿Qué función podemos usar para filtrar todos los elementos de un array, de tal manera que obtengamos otro array solo con los elementos que cumplan una determinada condición? Por ejemplo, pasar del array [null, 'Lucas', undefined, 42, {}, 13, new Date(), [], 0] al array [42, 13, 0], donde el criterio elegido en este caso ha sido quedarnos solo con los elementos que son números.
+En esta tarea no pueden programar ninguna función propia ni escribir más de una línea de código por cada pregunta. Recuerden que lo que se pide es que usen funciones propias de JavaScript que ya existen.
+
