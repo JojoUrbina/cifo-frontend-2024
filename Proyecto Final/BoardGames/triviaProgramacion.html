@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivia de Programación</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #question-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #options-container {
+      margin-top: 20px;
+    }
+
+    .option {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Trivia de Programación</h1>
+  <div id="question-container"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const questionContainer = document.getElementById('question-container');
+
+      // Petición a la API de trivia para obtener una pregunta aleatoria de programación
+      fetch('https://opentdb.com/api.php?amount=1&category=18&type=multiple')
+        .then(response => response.json())
+        .then(data => {
+          const questionData = data.results[0];
+          renderQuestion(questionData);
+        })
+        .catch(error => console.error('Error fetching trivia API:', error));
+
+      // Función para renderizar una pregunta en el contenedor
+      function renderQuestion(questionData) {
+        const options = shuffle([...questionData.incorrect_answers, questionData.correct_answer]);
+        const optionsHTML = options.map(option => `<div class="option"><input type="radio" name="option" value="${option}">${option}</div>`).join('');
+        const questionHTML = `
+          <div>
+            <h2>${questionData.question}</h2>
+            <form id="answer-form">
+              <div id="options-container">
+                ${optionsHTML}
+              </div>
+              <button type="button" onclick="checkAnswer('${questionData.correct_answer}')">Verificar Respuesta</button>
+              <div id="result"></div>
+            </form>
+          </div>
+        `;
+        questionContainer.innerHTML = questionHTML;
+      }
+
+      // Función para verificar la respuesta
+      window.checkAnswer = function(correctAnswer) {
+        const selectedOption = document.querySelector('input[name="option"]:checked');
+        if (selectedOption) {
+          const userAnswer = selectedOption.value;
+          const resultContainer = document.getElementById('result');
+          if (userAnswer === correctAnswer) {
+            resultContainer.textContent = '¡Respuesta Correcta!';
+          } else {
+            resultContainer.textContent = 'Respuesta Incorrecta. La respuesta correcta es: ' + correctAnswer;
+          }
+        } else {
+          alert('Por favor selecciona una opción.');
+        }
+      };
+
+      // Función para mezclar las opciones de respuesta
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+    });
+  </script>
+</body>
+</html>
