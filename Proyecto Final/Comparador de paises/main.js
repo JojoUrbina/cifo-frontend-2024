@@ -62,7 +62,6 @@ async function cargarDatos() {
 
       addCeldaAFila(moneda.flags.alt, tr, "", moneda.flags.png);
       addCeldaAFila("ver mas", tr, "", "");
-
       tbody.appendChild(tr);
     } else {
       //console.log(moneda.name.common, "No tiene currencies");
