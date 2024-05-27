@@ -3,7 +3,8 @@ a:hover{
     border: none;
 }
 td{
-    width: auto;
-    max-width: 900px !important;
-    background-color: red;
+    max-width: 4em !important;
+}
+.bandera{
+    width: 4em;
 }
