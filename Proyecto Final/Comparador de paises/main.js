@@ -25,7 +25,7 @@ function addCeldaAFila(text, tr, moneda, imagen) {
 }
 
 async function actualizarMontos(monto) {
-  const res = await fetch("divisas.json");
+  const res = await fetch("https://open.er-api.com/v6/latest/EUR");
   const data = await res.json();
   const tarifas = data.rates;
   for (const tarifa in tarifas) {
@@ -39,7 +39,7 @@ async function actualizarMontos(monto) {
 }
 
 async function cargarDatos() {
-  const res = await fetch("paises.json");
+  const res = await fetch("https://restcountries.com/v3.1/all");
   const data = await res.json();
   const dataOrdenada = [...data].sort((a, b) => {
     if (a.name.common < b.name.common) {
