@@ -40,9 +40,7 @@ async function cargarDatos() {
 //---------------------------------
 
 /*let monto = 0;
-inputMonto.addEventListener("input", (event) => {
-  monto = Number(event.target.value);
-});
+
 console.log(tbody);*/
 //------------------------------------------------
 
