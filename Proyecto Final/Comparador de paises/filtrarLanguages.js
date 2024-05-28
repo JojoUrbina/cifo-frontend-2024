@@ -43,7 +43,7 @@ async function cargarDatos() {
 
 console.log(tbody);*/
 //------------------------------------------------
-
+/*
 let monto = 100;
 const eur = 1
 const eurUsd = 1.084277;
@@ -72,7 +72,7 @@ console.log(`${monto} $monedaElegida equivalen a ${monedaElegidaUsd} dolares`);
 const USDARS = 864.75;
 const USDGBP = 0.785489;
 const ARSUSD = 0.001156;
-
+*/
 /*const divisas = {
   "EUR": 1,
   "AED": 3.982002,
@@ -241,4 +241,21 @@ const ARSUSD = 0.001156;
 for( const moneda in divisas){
   console.log(`1 euro son ${divisas[moneda]} ${moneda}`);
 }
+*/
+/*async function unaFuncion(params) {
+const response = await fetch("https://restcountries.com/v3.1/all");
+const data = await response.json();
+console.log("Datos recibidos:", data);
+}
+unaFuncion()
+
+const dataOrdenada = [...data].sort((a, b) => {
+  if (a.name.common < b.name.common) {
+    return -1;
+  }
+  if (a.name.common > b.name.common) {
+    return 1;
+  }
+  return 0;
+});
 */
