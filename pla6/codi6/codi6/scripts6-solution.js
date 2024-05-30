@@ -172,6 +172,7 @@ la  tabla  todas  las  filas  correspondientes  a  clientes  mor
 esconder  estas  filas,  debe  eliminarlas  del  todo.  Además,  el  saldo  total  deberá  actualizarse  para  reflejar  el  total  de  
 las  filas  que  permanezcan.
  */
+/*
 const filasClientes = document.querySelectorAll("#customers tbody tr");
 const celdaTotalBalance = document.querySelector("tfoot tr td.amount");
 document.addEventListener("DOMContentLoaded", () => {
@@ -211,11 +212,10 @@ function filtrarIndicesClientesMorosos(filasClientes) {
 function pintarClientesMorososPorIndice(filasClientes) {
   const indicesClientesMorosos = filtrarIndicesClientesMorosos(filasClientes);
 
-  indicesClientesMorosos.forEach((indice) => {
-    const celdasPorFilaCliente = filasClientes[indice].querySelectorAll("td");
-    for (let i = 0; i < celdasPorFilaCliente.length; i++) {
-      celdasPorFilaCliente[i].classList.add("unpaid");
-    }
+  indicesClientesMorosos.forEach((indiceClienteMoroso) => {
+    filasClientes[indiceClienteMoroso]
+      .querySelectorAll("td")[2]
+      .classList.add("unpaid");
   });
 }
 
@@ -233,9 +233,33 @@ function actualizarCeldaTotalBalance(celdaTotalBalance, filasClientes) {
   celdaTotalBalance.textContent = calcularBalance(filasClientes);
 }
 
+*/
+
 /* Task 5 --------------------------------------------------------------------------------------- */
 
 let rating = 0;
+
+const estrellas = document.querySelectorAll(".star-gray");
+
+function pintarEstrellaPink(estrella) {
+  estrella.classList.replace("star-gray", "star-pink");
+}
+function pintarEstrellagray(estrella) {
+  estrella.classList.replace("star-pink", "star-gray");
+}
+
+for (const [indice, estrella] of estrellas.entries()) {
+  estrella.addEventListener("click", () => {
+    for (let i = 0; i < estrellas.length; i++) {
+      if (i <= indice) {
+        pintarEstrellaPink(estrellas[i]);
+        rating = indice + 1;
+      } else {
+        pintarEstrellagray(estrellas[i]);
+      }
+    }
+  });
+}
 
 /* Task 5 solution ------------------------------------------------------------------------------ */
 
