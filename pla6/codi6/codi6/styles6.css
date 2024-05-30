@@ -157,6 +157,7 @@ tfoot .amount + td {
   border: 3px #fff solid;
   border-radius: 10px;
   transition: all 30ms linear;
+  
 }
 
 /* Task 7 --------------------------------------------------------------------------------------- */

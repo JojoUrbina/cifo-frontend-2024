@@ -236,7 +236,7 @@ function actualizarCeldaTotalBalance(celdaTotalBalance, filasClientes) {
 */
 
 /* Task 5 --------------------------------------------------------------------------------------- */
-
+/*
 let rating = 0;
 
 const estrellas = document.querySelectorAll(".star-gray");
@@ -260,7 +260,7 @@ for (const [indice, estrella] of estrellas.entries()) {
     }
   });
 }
-
+*/
 /* Task 5 solution ------------------------------------------------------------------------------ */
 
 /* Task 6 --------------------------------------------------------------------------------------- */
@@ -269,6 +269,22 @@ for (const [indice, estrella] of estrellas.entries()) {
 const delta = 20;
 // Same initial value as left: 200px in CSS.
 let left = 200;
+document.body.addEventListener("keydown", (e) => {
+  moverBarra(e);
+});
+
+function moverBarra(e) {
+  const anchoDeContenedor =
+    document.querySelector(".bar-container").clientWidth;
+  const barra = document.querySelector(".bar");
+  const direccion = e.code;
+  if (direccion === "ArrowLeft" && left > 0) {
+    left -= delta;
+  } else if (direccion === "ArrowRight" && left <= anchoDeContenedor - 92) {
+    left += delta;
+  }
+  barra.style.left = `${left}px`;
+}
 
 /* Task 6 solution ------------------------------------------------------------------------------ */
 
