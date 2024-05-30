@@ -181,17 +181,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function removeUnpaid() {
   const filasClientes = document.querySelectorAll("#customers tbody tr");
-  const celdaTotalBalance = document.querySelector("tfoot tr td.amount");
-
   const indicesClientesMorosos = filtrarIndicesClientesMorosos(filasClientes);
-  indicesClientesMorosos.forEach((indice) => {
-    filasClientes[indice].remove();
-  });
 
-  actualizarCeldaTotalBalance(
-    celdaTotalBalance,
-    document.querySelectorAll("#customers tbody tr")
-  );
+  if (indicesClientesMorosos.length) {
+    indicesClientesMorosos.forEach((indice) => {
+      filasClientes[indice].remove();
+    });
+    const celdaTotalBalance = document.querySelector("tfoot tr td.amount");
+    actualizarCeldaTotalBalance(
+      celdaTotalBalance,
+      document.querySelectorAll("#customers tbody tr")
+    );
+  }
 }
 
 function filtrarIndicesClientesMorosos(filasClientes) {
@@ -209,14 +210,15 @@ function filtrarIndicesClientesMorosos(filasClientes) {
 
 function pintarClientesMorososPorIndice(filasClientes) {
   const indicesClientesMorosos = filtrarIndicesClientesMorosos(filasClientes);
+
   indicesClientesMorosos.forEach((indice) => {
-    const celdasPorFilaCliente = filasClientes[indice].querySelectorAll("td")
+    const celdasPorFilaCliente = filasClientes[indice].querySelectorAll("td");
     for (let i = 0; i < celdasPorFilaCliente.length; i++) {
       celdasPorFilaCliente[i].classList.add("unpaid");
     }
-    
   });
 }
+
 function calcularBalance(filasClientes) {
   let totalCeldasBalance = 0;
   for (let i = 0; i < filasClientes.length; i++) {
@@ -226,6 +228,7 @@ function calcularBalance(filasClientes) {
   }
   return totalCeldasBalance;
 }
+
 function actualizarCeldaTotalBalance(celdaTotalBalance, filasClientes) {
   celdaTotalBalance.textContent = calcularBalance(filasClientes);
 }
