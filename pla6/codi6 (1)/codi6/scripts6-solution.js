@@ -186,10 +186,12 @@ function removeUnpaid() {
   const indicesClientesMorosos = filtrarIndicesClientesMorosos(filasClientes);
   indicesClientesMorosos.forEach((indice) => {
     filasClientes[indice].remove();
-    console.log(filasClientes);
   });
-  
-  actualizarCeldaTotalBalance(celdaTotalBalance, document.querySelectorAll("#customers tbody tr"))
+
+  actualizarCeldaTotalBalance(
+    celdaTotalBalance,
+    document.querySelectorAll("#customers tbody tr")
+  );
 }
 
 function filtrarIndicesClientesMorosos(filasClientes) {
@@ -208,9 +210,11 @@ function filtrarIndicesClientesMorosos(filasClientes) {
 function pintarClientesMorososPorIndice(filasClientes) {
   const indicesClientesMorosos = filtrarIndicesClientesMorosos(filasClientes);
   indicesClientesMorosos.forEach((indice) => {
-    filasClientes[indice].querySelectorAll("td")[0].classList.add("unpaid");
-    filasClientes[indice].querySelectorAll("td")[1].classList.add("unpaid");
-    filasClientes[indice].querySelectorAll("td")[2].classList.add("unpaid");
+    const celdasPorFilaCliente = filasClientes[indice].querySelectorAll("td")
+    for (let i = 0; i < celdasPorFilaCliente.length; i++) {
+      celdasPorFilaCliente[i].classList.add("unpaid");
+    }
+    
   });
 }
 function calcularBalance(filasClientes) {
