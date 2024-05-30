@@ -79,7 +79,7 @@ navRoleAdministrador.addEventListener("click", () => {
   navRoleUsuario.classList.remove("role-selected");
   aplicarDisplayAElementosAdmin("");
 });
-*/
+
 /* Task 2 solution ------------------------------------------------------------------------------ */
 
 /* Task 3 --------------------------------------------------------------------------------------- */
@@ -120,7 +120,7 @@ let teams = [
 ];
 
 /* Task 3 solution ------------------------------------------------------------------------------ */
-function calcularPuntosFutbol(victorias, empates) {
+/*function calcularPuntosFutbol(victorias, empates) {
   return victorias * 3 + empates * 1;
 }
 
@@ -136,13 +136,95 @@ const equiposOrdenadosPorPuntos = teams.sort((a, b) => {
     return 0;
   }
 });
-console.log(teams);
+const tbodyFutbol = document.querySelector("#classification tbody")
 
+function agregarCelda(texto,tr,clase) {
+  const td = document.createElement("td")
+  td.textContent = texto
+  tr.appendChild(td)
+}
+
+teams.forEach(team => {
+  const tr = document.createElement("tr")
+  agregarCelda(team.team,tr)
+  agregarCelda(team.games.wins,tr)
+  agregarCelda(team.games.draws,tr)
+  agregarCelda(team.games.losses,tr)
+  agregarCelda(calcularPuntosFutbol(team.games.wins,team.games.draws),tr)
+  tbodyFutbol.appendChild(tr) 
+});
+const tr = document.querySelector("tbody tr")
+tr.classList.add("classification-first")*/
 /* Task 4 --------------------------------------------------------------------------------------- */
 
 // There is no initial provided code.
 
 /* Task 4 solution ------------------------------------------------------------------------------ */
+/**
+ * 1.  Cuando  se  carga  la  página  deben  verse  en  color  rojo  los  valores  negativos  de  la  tercera  columna.  Se  
+corresponden  con  las  deudas  que  ya  deberían  haberse  pagado  y  nos  interesa  que  queden  remarcadas.  Utilice  
+la  clase  unpaid  (ya  existente  en  la  hoja  de  estilos  externa).
+2.  Cuando  se  carga  la  página,  la  fila  de  los  totales  debe  mostrar  la  suma  de  todos  los  importes  de  la  columna  en  
+vez  del  0.00  €  que  aparece  por  defecto.
+3.  La  opción  Remove  unpaid  no  hace  nada,  pero  al  documento  HTML  tiene  asociada  una  función  a  través  del  
+atributo  onclick .  Implemente  esta  función  para  que  cuando  el  usuario  pulse  esta  opción  desaparezcan  de  
+la  tabla  todas  las  filas  correspondientes  a  clientes  morosos  (los  que  ya  deberían  haber  pagado).  No  debe  
+esconder  estas  filas,  debe  eliminarlas  del  todo.  Además,  el  saldo  total  deberá  actualizarse  para  reflejar  el  total  de  
+las  filas  que  permanezcan.
+ */
+const filasClientes = document.querySelectorAll("#customers tbody tr");
+const celdaTotalBalance = document.querySelector("tfoot tr td.amount");
+document.addEventListener("DOMContentLoaded", () => {
+  actualizarCeldaTotalBalance(celdaTotalBalance, filasClientes);
+  pintarClientesMorososPorIndice(filasClientes);
+});
+
+function removeUnpaid() {
+  const filasClientes = document.querySelectorAll("#customers tbody tr");
+  const celdaTotalBalance = document.querySelector("tfoot tr td.amount");
+
+  const indicesClientesMorosos = filtrarIndicesClientesMorosos(filasClientes);
+  indicesClientesMorosos.forEach((indice) => {
+    filasClientes[indice].remove();
+    console.log(filasClientes);
+  });
+  
+  actualizarCeldaTotalBalance(celdaTotalBalance, document.querySelectorAll("#customers tbody tr"))
+}
+
+function filtrarIndicesClientesMorosos(filasClientes) {
+  const indicesClientesMorosos = [];
+
+  for (let i = 0; i < filasClientes.length; i++) {
+    const diasHastaElPago = parseFloat(
+      filasClientes[i].querySelectorAll("td")[2].textContent
+    );
+
+    diasHastaElPago < 0 && indicesClientesMorosos.push(i);
+  }
+  return indicesClientesMorosos;
+}
+
+function pintarClientesMorososPorIndice(filasClientes) {
+  const indicesClientesMorosos = filtrarIndicesClientesMorosos(filasClientes);
+  indicesClientesMorosos.forEach((indice) => {
+    filasClientes[indice].querySelectorAll("td")[0].classList.add("unpaid");
+    filasClientes[indice].querySelectorAll("td")[1].classList.add("unpaid");
+    filasClientes[indice].querySelectorAll("td")[2].classList.add("unpaid");
+  });
+}
+function calcularBalance(filasClientes) {
+  let totalCeldasBalance = 0;
+  for (let i = 0; i < filasClientes.length; i++) {
+    totalCeldasBalance += Number(
+      filasClientes[i].querySelectorAll("td")[1].textContent
+    );
+  }
+  return totalCeldasBalance;
+}
+function actualizarCeldaTotalBalance(celdaTotalBalance, filasClientes) {
+  celdaTotalBalance.textContent = calcularBalance(filasClientes);
+}
 
 /* Task 5 --------------------------------------------------------------------------------------- */
 
