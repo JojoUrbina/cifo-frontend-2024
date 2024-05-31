@@ -265,6 +265,7 @@ for (const [indice, estrella] of estrellas.entries()) {
 
 /* Task 6 --------------------------------------------------------------------------------------- */
 
+/* Task 6 solution 
 // This is how many pixels the bar has to move each time.
 const delta = 20;
 // Same initial value as left: 200px in CSS.
@@ -277,19 +278,19 @@ function moverBarra(e) {
   const anchoDeContenedor =
     document.querySelector(".bar-container").clientWidth;
   const barra = document.querySelector(".bar");
-  const anchoBarra = 80 
+  const anchoBarra = 80;
   const direccion = e.code;
   if (direccion === "ArrowLeft") {
     left = Math.max(0, left - delta);
     console.log(left);
   } else if (direccion === "ArrowRight") {
     left = Math.min(anchoDeContenedor - anchoBarra, left + delta);
-    console.log(anchoDeContenedor-anchoBarra,left+delta);
   }
   barra.style.left = `${left}px`;
 }
 
-/* Task 6 solution && left <= anchoDeContenedor - 92------------------------------------------------------------------------------ */
+
+------------------------------------------------------------------------------ */
 
 /* Task 7 --------------------------------------------------------------------------------------- */
 
@@ -303,3 +304,49 @@ const fieldWidth = document.querySelector(".ball-container").clientWidth;
 const fieldHeight = document.querySelector(".ball-container").clientHeight;
 
 /* Task 7 solution ------------------------------------------------------------------------------ */
+const bola = document.querySelectorAll("div")[9];
+console.log(fieldWidth);
+console.log(fieldHeight);
+const anchoBola = 25;
+let direccionEjeVertical = "abajo";
+let direccionEjeHorizontal = "derecha";
+
+
+function aplicarMovimiento() {
+  if (direccionEjeVertical === "abajo") {
+    topCoord += topDelta;
+    if (topCoord === fieldHeight - anchoBola) {
+      direccionEjeVertical = "arriba";
+      console.log("toque abajo");
+    }
+  }
+  if (direccionEjeVertical === "arriba") {
+    topCoord -= topDelta;
+    if (topCoord === 0) {
+      direccionEjeVertical = "abajo";
+      console.log("toque arriba");
+    }
+  }
+
+
+
+
+  
+
+  bola.style.left = `${leftCoord}px`;
+  bola.style.top = `${topCoord}px`;
+}
+
+
+
+
+
+
+
+
+
+//setInterval(moverPelota, 50);
+
+function moverPelota(params) {
+  aplicarMovimiento();
+}
