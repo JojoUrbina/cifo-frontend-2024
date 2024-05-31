@@ -1,6 +1,5 @@
-// This is how many pixels the bar has to move each time.
+//barra
 const delta = 20;
-// Same initial value as left: 200px in CSS.
 let left = 200;
 document.body.addEventListener("keydown", (e) => {
   moverBarra(e);
@@ -20,24 +19,19 @@ function moverBarra(e) {
   barra.style.left = `${left}px`;
 }
 
-/* Task 7 --------------------------------------------------------------------------------------- */
-
-// These indicate how many pixels the ball has to move each time on each axis.
+//pelota
 let topDelta = (leftDelta = 5);
-// These are the coordinates for ball position.
 let topCoord = (leftCoord = 0);
-// This is the width of the playground area.
-const fieldWidth = document.querySelector(".ball-container").clientWidth;
-// This is the height of the playground area.
 const fieldHeight = document.querySelector(".ball-container").clientHeight;
 
-/* Task 7 solution ------------------------------------------------------------------------------ */
-const bola = document.querySelectorAll("div")[1];
+const bola = document.querySelector(".ball");
 const anchoBola = 25;
 let direccionEjeVertical = "abajo";
 let direccionEjeHorizontal = "derecha";
 
 function moverPelota() {
+  const fieldWidth = document.querySelector(".ball-container").clientWidth;
+
   if (direccionEjeVertical === "abajo") {
     topCoord += topDelta;
 
@@ -75,4 +69,22 @@ function moverPelota() {
   bola.style.left = `${leftCoord}px`;
   bola.style.top = `${topCoord}px`;
 }
-setInterval(moverPelota, 50);
+
+let intervalID = null;
+const btnInciar = document.querySelector("#iniciar-juego");
+
+btnInciar.addEventListener("click", () => {
+  empezarJuego();
+  btnInciar.textContent = "Continuar";
+});
+
+document.querySelector("#pausar-juego").addEventListener("click", () => {
+  clearInterval(intervalID);
+});
+
+function empezarJuego() {
+  if (intervalID !== null) {
+    clearInterval(intervalID);
+  }
+  intervalID = setInterval(moverPelota, 50);
+}
