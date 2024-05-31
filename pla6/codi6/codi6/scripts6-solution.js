@@ -305,25 +305,22 @@ const fieldHeight = document.querySelector(".ball-container").clientHeight;
 
 /* Task 7 solution ------------------------------------------------------------------------------ */
 const bola = document.querySelectorAll("div")[9];
-console.log(fieldWidth);
-console.log(fieldHeight);
 const anchoBola = 25;
 let direccionEjeVertical = "abajo";
 let direccionEjeHorizontal = "derecha";
 
-function aplicarMovimiento() {
-   if (direccionEjeVertical === "abajo") {
+function moverPelota() {
+  if (direccionEjeVertical === "abajo") {
     topCoord += topDelta;
     if (topCoord === fieldHeight - anchoBola) {
       direccionEjeVertical = "arriba";
-      console.log("toque abajo");
+      console.log("Pelota rebota en pared de abajo");
     }
-  }
-  if (direccionEjeVertical === "arriba") {
+  } else if (direccionEjeVertical === "arriba") {
     topCoord -= topDelta;
     if (topCoord === 0) {
       direccionEjeVertical = "abajo";
-      console.log("toque arriba");
+      console.log("Pelota rebota en pared de arriba");
     }
   }
 
@@ -331,24 +328,17 @@ function aplicarMovimiento() {
     leftCoord = Math.min(fieldWidth - anchoBola, leftCoord + leftDelta);
     if (leftCoord === fieldWidth - anchoBola) {
       direccionEjeHorizontal = "izquierda";
-      console.log("toque derecha");
+      console.log("Pelota rebota en pared derecha");
     }
-  }
-  if (direccionEjeHorizontal === "izquierda") {
+  } else if (direccionEjeHorizontal === "izquierda") {
     leftCoord = Math.max(0, leftCoord - leftDelta);
     if (leftCoord === 0) {
       direccionEjeHorizontal = "derecha";
-      console.log("toque izquierda");
+      console.log("Pelota rebota en pared izquierda");
     }
   }
-
 
   bola.style.left = `${leftCoord}px`;
   bola.style.top = `${topCoord}px`;
 }
-
-setInterval(moverPelota, 50);
-
-function moverPelota(params) {
-  aplicarMovimiento();
-}
+//setInterval(moverPelota, 50);
