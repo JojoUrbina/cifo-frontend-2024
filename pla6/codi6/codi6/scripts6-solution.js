@@ -277,16 +277,19 @@ function moverBarra(e) {
   const anchoDeContenedor =
     document.querySelector(".bar-container").clientWidth;
   const barra = document.querySelector(".bar");
+  const anchoBarra = 80 
   const direccion = e.code;
-  if (direccion === "ArrowLeft" && left > 0) {
-    left -= delta;
-  } else if (direccion === "ArrowRight" && left <= anchoDeContenedor - 92) {
-    left += delta;
+  if (direccion === "ArrowLeft") {
+    left = Math.max(0, left - delta);
+    console.log(left);
+  } else if (direccion === "ArrowRight") {
+    left = Math.min(anchoDeContenedor - anchoBarra, left + delta);
+    console.log(anchoDeContenedor-anchoBarra,left+delta);
   }
   barra.style.left = `${left}px`;
 }
 
-/* Task 6 solution ------------------------------------------------------------------------------ */
+/* Task 6 solution && left <= anchoDeContenedor - 92------------------------------------------------------------------------------ */
 
 /* Task 7 --------------------------------------------------------------------------------------- */
 
