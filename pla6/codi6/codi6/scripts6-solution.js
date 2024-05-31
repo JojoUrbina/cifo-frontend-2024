@@ -311,9 +311,8 @@ const anchoBola = 25;
 let direccionEjeVertical = "abajo";
 let direccionEjeHorizontal = "derecha";
 
-
 function aplicarMovimiento() {
-  if (direccionEjeVertical === "abajo") {
+   if (direccionEjeVertical === "abajo") {
     topCoord += topDelta;
     if (topCoord === fieldHeight - anchoBola) {
       direccionEjeVertical = "arriba";
@@ -328,24 +327,27 @@ function aplicarMovimiento() {
     }
   }
 
+  if (direccionEjeHorizontal === "derecha") {
+    leftCoord = Math.min(fieldWidth - anchoBola, leftCoord + leftDelta);
+    if (leftCoord === fieldWidth - anchoBola) {
+      direccionEjeHorizontal = "izquierda";
+      console.log("toque derecha");
+    }
+  }
+  if (direccionEjeHorizontal === "izquierda") {
+    leftCoord = Math.max(0, leftCoord - leftDelta);
+    if (leftCoord === 0) {
+      direccionEjeHorizontal = "derecha";
+      console.log("toque izquierda");
+    }
+  }
 
-
-
-  
 
   bola.style.left = `${leftCoord}px`;
   bola.style.top = `${topCoord}px`;
 }
 
-
-
-
-
-
-
-
-
-//setInterval(moverPelota, 50);
+setInterval(moverPelota, 50);
 
 function moverPelota(params) {
   aplicarMovimiento();
