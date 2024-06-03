@@ -6,17 +6,13 @@
  * The question about the DOM:
  * Your answer here...
  *  ¿Cómo definirías qué es exactamente y para qué sirve el DOM?
- * El DOM (Document Object Model) es una interfaz de programación que representa el documento HTML
- * en forma de una estructura de árbol. Es la API más usada en la web, ya que permite crear,
- * modificar y manipular los nodos en el documento HTML.
- *
- * Sirve para interactuar con cualquier nodo
- * del documento, cuya estructura es un árbol lógico. A cada rama se le pueden aplicar métodos
- * para interactuar con ellos. Además, los nodos tienen eventos y propiedades a las cuales se
- * puede acceder como objetos y aplicar los cambios en el momento.
- *
+ * El DOM o Document Object Model es una interfaz de programación que representa el documento HTML
+ * en forma de una estructura de árbol que sirve para interactuar con cualquier nodo del documento.
+ * Es la API más usada en la web, ya que permite crear, modificar y manipular los nodos en el
+ * documento HTML a la cual cada rama se le pueden aplicar métodos. Los nodos tienen eventos
+ * y propiedades a las cuales se puede acceder como objetos y aplicar los cambios al momento.
  * Esto mejora la experiencia de usuario ya que permite a los programadores crear interactividad
- * con la que pueden interactuar, con eventos de click, validacion de formularios entre otros.
+ * entre documentos, con eventos de click, validacion de formularios entre otros.
  *
  */
 /**
@@ -27,17 +23,18 @@
  *
  * El atributo defer es una propiedad de HTMLScriptElement que indica que el script debe cargarse
  * y ejecutarse después de que el documento HTML haya sido cargado. Esto garantiza
- * queel contenido del documento se cargue primero.
+ * que el contenido del documento se cargue primero.
  *
  * La diferencia entre ponerlo o no es importante dependiendo de dónde se coloque el script.
  * Si el script se coloca en el head sin el atributo defer, el navegador detendrá la carga del
  * contenido HTML para cargar y ejecutar el script inmediatamente, lo que puede causar errores si
  * el script intenta interactuar con el DOM antes de que el documento esté completamente cargado.
  *
- * En cambio, si se aplica el atributo defer, el script esperará a que el documento esté completamente
- * cargado antes de ejecutarse, lo que evita errores relacionados con la interacción temprana con el DOM.
- * Aunque, los scripts también pueden colocarse al final del body para lograr que carge despues del
- * procesamiento del documento HTML, aunque por semántica es preferible ubicarlos en el head con defer.
+ * En cambio, si se aplica el atributo defer, el script esperará a que el documento esté
+ * completamente cargado antes de ejecutarse, lo que evita errores relacionados con la interacción
+ * temprana con el DOM.Aunque, los scripts también pueden colocarse al final del body para lograr
+ * que carge despues del procesamiento del documento HTML, aunque por semántica es preferible
+ * ubicarlos en el head.
  */
 
 /**
@@ -45,8 +42,9 @@
  * Your answer here...
  *  En los métodos getElementBy... y getElementsBy... hay una s que los diferencia. ¿Qué
  * ¿implicaciones tiene esto en cuanto al valor que devuelven estos métodos?
- * getElementBy sin "s" devolvera el primer elemento que se especifique, es decir, si se espicifica
- * por className, devolvera el primer elemento que tenga la clase especificada.
+ * getElementBy sin "s" devolvera el primer elemento que se especifique,sea por classe, id o
+ * etiqueta, es decir, si se especifica por className, devolvera el primer elemento que tenga
+ * la clase buscada.
  * getElementBy con "s" devolvera una coleccion de todos los elementos que compartan la
  * clase("id,etiqueta,etc"), siendo esta coleccion una HTMLcollection, que es un objeto que se
  * actualiza automaticamente si hay cambios en el dom que afecta a los elementos seleccionados.
@@ -59,12 +57,12 @@
 /* Task 2 --------------------------------------------------------------------------------------- */
 
 // There is no initial provided code.
-/*const navRoleUsuario = document.querySelectorAll(".nav-role li")[0];
+const navRoleUsuario = document.querySelectorAll(".nav-role li")[0];
 const navRoleAdministrador = document.querySelectorAll(".nav-role li")[1];
-const liAdmin = document.querySelectorAll(".admin");
+const liRoleAdministrador = document.querySelectorAll(".admin");
 
-function aplicarDisplayAElementosAdmin(display) {
-  liAdmin.forEach((li) => {
+function mostrarUOcultarElementosAdmin(display) {
+  liRoleAdministrador.forEach((li) => {
     li.style.display = display;
   });
 }
@@ -72,12 +70,12 @@ function aplicarDisplayAElementosAdmin(display) {
 navRoleUsuario.addEventListener("click", () => {
   navRoleUsuario.classList.add("role-selected");
   navRoleAdministrador.classList.remove("role-selected");
-  aplicarDisplayAElementosAdmin("none");
+  mostrarUOcultarElementosAdmin("none");
 });
 navRoleAdministrador.addEventListener("click", () => {
   navRoleAdministrador.classList.add("role-selected");
   navRoleUsuario.classList.remove("role-selected");
-  aplicarDisplayAElementosAdmin("");
+  mostrarUOcultarElementosAdmin("");
 });
 
 /* Task 2 solution ------------------------------------------------------------------------------ */
@@ -120,13 +118,19 @@ let teams = [
 ];
 
 /* Task 3 solution ------------------------------------------------------------------------------ */
-/*function calcularPuntosFutbol(victorias, empates) {
-  return victorias * 3 + empates * 1;
+function calcularPuntosPorResultados(victorias, empates) {
+  return victorias * 3 + empates;
 }
 
 const equiposOrdenadosPorPuntos = teams.sort((a, b) => {
-  const puntosEquipoA = calcularPuntosFutbol(a.games.wins, a.games.draws);
-  const puntosEquipoB = calcularPuntosFutbol(b.games.wins, b.games.draws);
+  const puntosEquipoA = calcularPuntosPorResultados(
+    a.games.wins,
+    a.games.draws
+  );
+  const puntosEquipoB = calcularPuntosPorResultados(
+    b.games.wins,
+    b.games.draws
+  );
 
   if (puntosEquipoA > puntosEquipoB) {
     return -1;
@@ -136,25 +140,30 @@ const equiposOrdenadosPorPuntos = teams.sort((a, b) => {
     return 0;
   }
 });
-const tbodyFutbol = document.querySelector("#classification tbody")
+const tbodyFutbol = document.querySelector("#classification tbody");
 
-function agregarCelda(texto,tr,clase) {
-  const td = document.createElement("td")
-  td.textContent = texto
-  tr.appendChild(td)
+function agregarCelda(texto, tr) {
+  const td = document.createElement("td");
+  td.textContent = texto;
+  tr.appendChild(td);
 }
 
-teams.forEach(team => {
-  const tr = document.createElement("tr")
-  agregarCelda(team.team,tr)
-  agregarCelda(team.games.wins,tr)
-  agregarCelda(team.games.draws,tr)
-  agregarCelda(team.games.losses,tr)
-  agregarCelda(calcularPuntosFutbol(team.games.wins,team.games.draws),tr)
-  tbodyFutbol.appendChild(tr) 
+teams.forEach((team) => {
+  const tr = document.createElement("tr");
+  agregarCelda(team.team, tr);
+  agregarCelda(team.games.wins, tr);
+  agregarCelda(team.games.draws, tr);
+  agregarCelda(team.games.losses, tr);
+  agregarCelda(
+    calcularPuntosPorResultados(team.games.wins, team.games.draws),
+    tr
+  );
+  tbodyFutbol.appendChild(tr);
 });
-const tr = document.querySelector("tbody tr")
-tr.classList.add("classification-first")*/
+const primeraFilaDeClasificacionFutbol = document.querySelector(
+  "#classification tbody tr"
+);
+primeraFilaDeClasificacionFutbol.classList.add("classification-first");
 /* Task 4 --------------------------------------------------------------------------------------- */
 
 // There is no initial provided code.
@@ -172,7 +181,7 @@ la  tabla  todas  las  filas  correspondientes  a  clientes  mor
 esconder  estas  filas,  debe  eliminarlas  del  todo.  Además,  el  saldo  total  deberá  actualizarse  para  reflejar  el  total  de  
 las  filas  que  permanezcan.
  */
-/*
+
 const filasClientes = document.querySelectorAll("#customers tbody tr");
 const celdaTotalBalance = document.querySelector("tfoot tr td.amount");
 document.addEventListener("DOMContentLoaded", () => {
@@ -189,10 +198,11 @@ function removeUnpaid() {
       filasClientes[indice].remove();
     });
     const celdaTotalBalance = document.querySelector("tfoot tr td.amount");
-    actualizarCeldaTotalBalance(
-      celdaTotalBalance,
-      document.querySelectorAll("#customers tbody tr")
+    const filasClientesActualizada = document.querySelectorAll(
+      "#customers tbody tr"
     );
+
+    actualizarCeldaTotalBalance(celdaTotalBalance, filasClientesActualizada);
   }
 }
 
@@ -233,10 +243,8 @@ function actualizarCeldaTotalBalance(celdaTotalBalance, filasClientes) {
   celdaTotalBalance.textContent = calcularBalance(filasClientes);
 }
 
-*/
-
 /* Task 5 --------------------------------------------------------------------------------------- */
-/*
+
 let rating = 0;
 
 const estrellas = document.querySelectorAll(".star-gray");
@@ -244,7 +252,7 @@ const estrellas = document.querySelectorAll(".star-gray");
 function pintarEstrellaPink(estrella) {
   estrella.classList.replace("star-gray", "star-pink");
 }
-function pintarEstrellagray(estrella) {
+function pintarEstrellaGray(estrella) {
   estrella.classList.replace("star-pink", "star-gray");
 }
 
@@ -255,17 +263,17 @@ for (const [indice, estrella] of estrellas.entries()) {
         pintarEstrellaPink(estrellas[i]);
         rating = indice + 1;
       } else {
-        pintarEstrellagray(estrellas[i]);
+        pintarEstrellaGray(estrellas[i]);
       }
     }
   });
 }
-*/
+
 /* Task 5 solution ------------------------------------------------------------------------------ */
 
 /* Task 6 --------------------------------------------------------------------------------------- */
 
-/* Task 6 solution 
+/* Task 6 solution ----------------------------------------------------------------------------- */
 // This is how many pixels the bar has to move each time.
 const delta = 20;
 // Same initial value as left: 200px in CSS.
@@ -282,15 +290,11 @@ function moverBarra(e) {
   const direccion = e.code;
   if (direccion === "ArrowLeft") {
     left = Math.max(0, left - delta);
-    console.log(left);
   } else if (direccion === "ArrowRight") {
     left = Math.min(anchoDeContenedor - anchoBarra, left + delta);
   }
   barra.style.left = `${left}px`;
 }
-
-
------------------------------------------------------------------------------- */
 
 /* Task 7 --------------------------------------------------------------------------------------- */
 
@@ -341,4 +345,4 @@ function moverPelota() {
   bola.style.left = `${leftCoord}px`;
   bola.style.top = `${topCoord}px`;
 }
-//setInterval(moverPelota, 50);
+setInterval(moverPelota, 50);
