@@ -243,7 +243,7 @@ const dataOrdenada = [...data].sort((a, b) => {
 */
 const template = document.querySelector("template").content;
 
-async function cargarDatos() {
+/*async function cargarDatos() {
   const respuesta = await fetch("paises.json");
   const data = await respuesta.json();
   for (const { currencies, translations, languages, flags } of data) {
@@ -272,4 +272,11 @@ async function cargarDatos() {
   }
   console.log(template);
 }
-cargarDatos();
+cargarDatos();*/
+/*function agregarOpcionesASelect(divisa,valor) {
+    const $option = document.createElement("option");
+    $option.value = divisa;
+    $option.textContent = pais;
+    $seleccionarPais.appendChild($option);
+}
+agregarOpcionesASelect();*/
