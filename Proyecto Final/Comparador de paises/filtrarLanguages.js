@@ -1,42 +1,4 @@
-/* filtrar por lenguaje
-async function cargarDatos() {
-    const res = await fetch("data.json");
-    const data = await res.json();
-    const dataOrdenada = [...data].sort((a, b) => {
-      if (a.name.common < b.name.common) {
-        return -1;
-      }
-      if (a.name.common > b.name.common) {
-        return 1;
-      }
-      return 0;
-    });
-  
-    const divisa = [];
-  
-    for (const moneda of dataOrdenada) {
-      if (moneda.currencies) {
-        if (Object.keys(moneda.languages)[0] === "fra") {
-          const tr = document.createElement("tr");
-          addCeldaAFila(0.0, tr);
-          addCeldaAFila(Object.keys(moneda.currencies)[0], tr);
-          addCeldaAFila(moneda.name.common, tr, "w-25");
-          addCeldaAFila(Object.values(moneda.languages)[0], tr);
-          addCeldaAFila("bandera", tr);
-  
-          tbody.appendChild(tr);
-  
-          divisa.push(moneda);
-        }
-  
-      } else {
-        console.log(moneda.name.common, "No tiene currencies");
-      }
-    }
-    console.log(divisa.length);
-  }
-  cargarDatos();*/
-
+/* 
 //---------------------------------
 
 /*let monto = 0;
@@ -259,3 +221,55 @@ const dataOrdenada = [...data].sort((a, b) => {
   return 0;
 });
 */
+/*
+ <noscript> Tu navegador no soporta javascript </noscript>
+    <template>
+      <tr>
+        <td class="py-2 MDL">19.16$</td>
+        <td class="py-2">MDL</td>
+        <td class="py-2">Moldovan leu</td>
+        <td class="py-2">Moldavia</td>
+        <td class="py-2">Romanian</td>
+        <td class="py-2">
+          <img
+            src="https://flagcdn.com/w320/md.png"
+            alt="The flag of Moldova is composed of three equal vertical bands of blue, yellow and red, with the national coat of arms centered in the yellow band."
+            class="bandera img-thumbnail"
+          />
+        </td>
+        <td class="py-2">ver mas</td>
+      </tr>
+    </template>
+*/
+const template = document.querySelector("template").content;
+
+async function cargarDatos() {
+  const respuesta = await fetch("paises.json");
+  const data = await respuesta.json();
+  for (const { currencies, translations, languages, flags } of data) {
+    if (currencies) {
+      const divisa = Object.keys(currencies)[0];
+      const moneda = currencies[Object.keys(currencies)[0]].name;
+      const pais = translations.spa.common;
+      const lenguaje = Object.values(languages)[0];
+      const srcBandera = flags.png;
+      const altBandera = flags.alt;
+
+      const filaClonada = template.cloneNode(true);
+      const celdasClonadas = filaClonada.querySelectorAll("td");
+
+      celdasClonadas[0].textContent = 1;
+      celdasClonadas[0].classList.add(divisa)
+      celdasClonadas[1].textContent = divisa;
+      celdasClonadas[2].textContent = moneda;
+      celdasClonadas[3].textContent = pais;
+      celdasClonadas[4].textContent = lenguaje
+      celdasClonadas[5].querySelector("img").src = srcBandera
+      celdasClonadas[5].querySelector("img").alt = altBandera
+      celdasClonadas[6].textContent = "ver mas";
+      fragment.appendChild(filaClonada)
+    }
+  }
+  console.log(template);
+}
+cargarDatos();

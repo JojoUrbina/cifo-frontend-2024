@@ -346,3 +346,6 @@ function moverPelota() {
   bola.style.top = `${topCoord}px`;
 }
 setInterval(moverPelota, 50);
+// LINK PARA EL JUEGO BREAOUTK
+//https://jojourbina.github.io/Juego-Breakout/
+//EL CODIGO ESTARA CARGADO EN GITHUB https://github.com/JojoUrbina/Juego-Breakout
