@@ -1,26 +1,33 @@
-const $inputMonto = document.querySelector("#monto");
-const $seleccionarPais = document.querySelector("#seleccionarPais");
+const inputMonto = document.querySelector("#monto");
+const seleccionarPais = document.querySelector("#seleccionarPais");
 const tbody = document.querySelector("tbody");
 const fragment = document.createDocumentFragment();
+let tarifaActual = "EUR";
+let montoActual = 1
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarDatos();
 });
 
-$inputMonto.addEventListener("input", (e) => {
-  actualizarMontos(Number(e.target.value));
+inputMonto.addEventListener("input", (e) => {
+  montoActual = Number(e.target.value);
+  actualizarMontos(tarifaActual, montoActual);
+});
+seleccionarPais.addEventListener("change", (e) => {
+  actualizarMontos(e.target.value);
 });
 
-async function actualizarMontos(monto) {
-  const res = await fetch("divisas.json");
+async function actualizarMontos(tarifaSeleccionada, montoInput) {
+  tarifaActual = tarifaSeleccionada
+  const res = await fetch(`https://open.er-api.com/v6/latest/${tarifaActual}`);
   const data = await res.json();
   const tarifas = data.rates;
 
   for (const tarifa in tarifas) {
     const celdasMonto = document.getElementsByClassName(`${tarifa}`);
     for (const celda of celdasMonto) {
-      celda.textContent =
-        parseFloat((tarifas[tarifa] * (monto || 1)).toFixed(2)) + "$";
+      celda.textContent =Math.min
+        (tarifas[tarifa] * (montoInput || 1) ).toFixed(2) + "$";
     }
   }
 }
@@ -59,7 +66,7 @@ async function cargarDatos() {
   const data = await response.json();
   renderizarPaises(data);
   agregarDatosASelect(data);
-  actualizarMontos();
+  actualizarMontos(tarifaActual);
 }
 
 function agregarDatosASelect(data) {
@@ -77,9 +84,9 @@ function agregarDatosASelect(data) {
     if (currencies) {
       const divisa = Object.keys(currencies)[0];
       const pais = translations.spa.common;
-      const option = document.createElement("option");
-      option.value = divisa;
-      option.textContent = pais;
-      $seleccionarPais.appendChild(option);
+      const opcion = document.createElement("option");
+      opcion.value = divisa;
+      opcion.textContent = pais;
+      seleccionarPais.appendChild(opcion);
     }
 }
