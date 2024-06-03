@@ -1,6 +1,7 @@
 const inputMonto = document.querySelector("#monto");
 const seleccionarPais = document.querySelector("#seleccionarPais");
 const tbody = document.querySelector("tbody");
+const template = document.querySelector("template").content;
 const fragment = document.createDocumentFragment();
 let tarifaActual = "EUR";
 let montoActual = 1
@@ -14,7 +15,7 @@ inputMonto.addEventListener("input", (e) => {
   actualizarMontos(tarifaActual, montoActual);
 });
 seleccionarPais.addEventListener("change", (e) => {
-  actualizarMontos(e.target.value);
+  actualizarMontos(e.target.value,montoActual);
 });
 
 async function actualizarMontos(tarifaSeleccionada, montoInput) {

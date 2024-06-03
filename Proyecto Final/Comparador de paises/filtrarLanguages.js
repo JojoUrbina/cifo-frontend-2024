@@ -241,7 +241,7 @@ const dataOrdenada = [...data].sort((a, b) => {
       </tr>
     </template>
 */
-const template = document.querySelector("template").content;
+//const template = document.querySelector("template").content;
 
 /*async function cargarDatos() {
   const respuesta = await fetch("paises.json");
