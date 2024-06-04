@@ -25,10 +25,10 @@ inputMonto.addEventListener("input", (e) => {
 
 seleccionarPais.addEventListener("change", (e) => {
   const moneda = seleccionarPais.selectedOptions[0].id;
-  tarifaActual = e.target.value
+  tarifaActual = e.target.value;
   simboloInput.textContent = seleccionarPais.selectedOptions[0].className;
   inputMonto.placeholder = `Escribir monto en ${moneda}`;
-  
+
   actualizarMontos(tarifaActual, montoActual);
 });
 async function cargarDatos() {
@@ -90,7 +90,6 @@ function renderizarPaises(data) {
   }
   tbody.appendChild(fragment);
 }
-
 
 function renderizarOpcionesDePaisesSeleccionables(data) {
   data.sort((a, b) => {
