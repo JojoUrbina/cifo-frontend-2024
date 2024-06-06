@@ -17,10 +17,7 @@ td {
 }
 
 /*inicio del side menu*/
-#sidemenu {
-    position: relative;
-    left: -2rem;
-}
+
 
 .dropdown-toggle {
   outline: 0;
