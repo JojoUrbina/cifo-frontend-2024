@@ -16,9 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // CREATE FUNCTIONS WITH THESE NAMES IN YOUR CODE AND THEN UNCOMMENT THESE LINES TO RUN THEM
   // ajaxWeather(); // Task 3
   // fetchPokemon(); // Task 4 - fair use policy!!!
-  // fetchDataFromFile('books7.json'); // Task 5
-  // fetchDataFromFile('not-found.json'); // Task 5
-  // fetchCors(); // Task 6
+  //fetchDataFromFile("books7.json"); // Task 5
+  //fetchDataFromFile("not-found.json"); // Task 5
+  //fetchCors(); // Task 6
+  //fetchCorsConProxy()
 });
 
 /* Task 1 --------------------------------------------------------------------------------------- */
@@ -26,18 +27,42 @@ document.addEventListener("DOMContentLoaded", () => {
 /* This is a line with exactly 100 characters --------------------------------------------------- */
 
 /**
- * The question about CORS:
- * Your answer here...
+ * The question about CORS:. Por qué el mecanismo CORS no nos da nunca problemas cuando utilizamos
+ * la aplicación Postman o la extensión Thunder Client de Visual Studio Code pero, en cambio, sí
+ * nos da cuando accedemos exactamente al mismo endpoint desde el código JavaScript de nuestra
+ * aplicación web?
+ *
+ * Your answer here
+ * Porque si accedes desde un navegador web estaras haciendo una solicitud entre dominios y el
+ * mecanismo bloquea esas solicitudes a no ser que se configure para poder permitirlo habilitando
+ * CORS desde todos los origenes o desde el origen que necesitamos aunque existen mas formas.
+ *
+ * Las solicitudes desde postman y Thunder Client no se realizan desde un navegador web lo cual  no
+ * les afecta las restricciones CORS.
  */
 
 /**
- * The question about promises:
+ * The question about promises:¿Qué alternativas tenemos para trabajar en nuestro código con esta
+ * promesa de tal forma que logremos mostrar los resultados de los partidos al usuario?
+ *
  * Your answer here...
+ * Podemos utilizar el metodo then, que se encadena a la promesa y devolvera el resultado cuando este
+ * lo resuelva al completarse la promesa, se podria manejar los resultados, de igual forma
+ * async/await que le podriamos pasar un await a la solicitud fetch para que espere la resolucion
+ * de la promesa sin interferir con los demas procesos del codigo, y de esta forma manejarla y
+ * asi recibir la informacion solicitada.
  */
 
 /**
  * The question about HTTP response status codes:
  * Your answer here...
+ * 200: Solicitud exitosa
+ * 201: Se ha creado un nuevo recurso correctamente
+ * 204: solicitud procesada correctamente pero no devuelve contenido, pudo ser por una solicitud DELETE
+ * 301: URL solicitada ha sido movida permanentemente a otra ubicacion
+ * 401: No se puedre procesar por credenciales de autenticacion invalidas
+ * 404: No encuentra el recurso solicitado
+ * 503: Servidor no disponible en este momento, intentarlo mas tarde
  */
 
 /* Task 2 --------------------------------------------------------------------------------------- */
@@ -165,12 +190,14 @@ console.log(youtube.items.find((item) => item.id.videoId).id.videoId);
 
 // Use these constants to build your final endpoint.
 // You will need four parameters (timezone is already provided, you need to add the other three).
+
 const apiUrl = "https://api.open-meteo.com/v1/forecast?timezone=Europe/Madrid";
 const latitude = 41.60594;
 const longitude = 1.039171;
 
 /* Task 3 solution ------------------------------------------------------------------------------ */
-function obtenerData(apiUrl, latitude, longitude) {
+
+function ajaxWeather() {
   const url = `${apiUrl}&latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_min`;
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", url);
@@ -183,26 +210,27 @@ function obtenerData(apiUrl, latitude, longitude) {
   };
   xhttp.send();
 }
-obtenerData(apiUrl, latitude, longitude);
 
 /* Task 4 --------------------------------------------------------------------------------------- */
-//const pokeapiEndpoint = "https://pokeapi.co/api/v2/pokemon?offset=500&limit=50";
-const pokeapiEndpoint = "pokeapi.json";
+const pokeapiEndpoint = "https://pokeapi.co/api/v2/pokemon?offset=500&limit=50";
 
 /* Task 4 solution ------------------------------------------------------------------------------ */
 
-function fetchApiPoke(api) {
-  fetch(api)
+function fetchPokemon() {
+  function mostrarPokemon(data) {
+    //Funcion creada para practicar y mejorar la lectura de codigo y que sea lo mas clara posible.
+    //si es innecesario por favor un feedback que siempre suma.
+    const pokemonesConP = data.results
+      .filter((pokemon) => pokemon.name.includes("p"))
+      .map((pokemon) => pokemon.name);
+    console.log(pokemonesConP);
+  }
+
+  fetch(pokeapiEndpoint)
     .then((res) => res.json())
     .then((data) => mostrarPokemon(data));
 }
-function mostrarPokemon(data) {
-  const pokemonesConP = data.results
-    .filter((pokemon) => pokemon.name.includes("p"))
-    .map((pokemon) => pokemon.name);
-  console.log(pokemonesConP);
-}
-fetchApiPoke(pokeapiEndpoint);
+
 /* Task 5 --------------------------------------------------------------------------------------- 
 Lea el archivo books7.json utilizando fetch() con await . No se puede utilizar ningún then() en esta tarea. Guarde
 el contenido JSON, ya convertido en objetos de JavaScript, en una variable llamada fecha y utilice algún tipo de
@@ -210,12 +238,58 @@ estructura de iteración para calcular cuánto dinero nos costaría comprar dos 
 un importe cercano a los 400 euros, como puede comprobar usted mismo si hace el cálculo de forma
 manual. Muestre por consola este importe exacto con dos decimales.
 */
-
 // There is no initial provided code.
 
 /* Task 5 solution ------------------------------------------------------------------------------ */
 
+async function fetchDataFromFile(api) {
+  try {
+    const respuesta = await fetch(api);
+
+    if (!respuesta.ok) {
+      throw new Error(`HTTP error! status: ${respuesta.status}`);
+    }
+
+    const data = await respuesta.json();
+
+    const totalPrecioLibrosAlDoble = Number(
+      data
+        .reduce((a, b) => {
+          return (a += b.price * 2);
+        }, 0)
+        .toFixed(2)
+    );
+
+    console.log(totalPrecioLibrosAlDoble);
+  } catch (error) {
+    console.error("Error fetching the data:", error);
+  }
+}
 /* Task 6 --------------------------------------------------------------------------------------- */
+async function fetchCors() {
+  const respuesta = await fetch("https://www.freeforexapi.com/api/live");
+  const data = await respuesta.json();
+  console.log(data);
+}
+
+async function fetchCorsConProxy() {
+  //una de las formas de solucionar problemas de cors es utilizando un servicio de proxy intermedio
+  //que en este caso es cors-anywhere
+  const proxy = "https://cors-anywhere.herokuapp.com/";
+  const url = "https://www.freeforexapi.com/api/live";
+
+  const respuesta = await fetch(proxy + url, {
+    method: "GET",
+    headers: {
+      "X-Requested-With": "Demo",
+    },
+  });
+
+  const data = await respuesta.json();
+  console.log(data.supportedPairs);
+}
+
+//fetchCorsConProxy();
 
 // There is no initial provided code.
 
