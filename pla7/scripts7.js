@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //fetchDataFromFile("books7.json"); // Task 5
   //fetchDataFromFile("not-found.json"); // Task 5
   //fetchCors(); // Task 6
+  //Resolucion del problema CORS :
   //fetchCorsConProxy()
 });
 
@@ -162,10 +163,8 @@ console.log(
 console.log(
   googleMaps.markers.reduce((a, b) => {
     return Math.max(a, b.location.long);
-    you;
   }, 0)
 );
-
 // 3) El nombre del proveedor del producto con un identificador que incluye la cadena 9234 .
 console.log(
   database.find((producto) => producto._id.$oid.includes(9234)).supplier
@@ -231,13 +230,7 @@ function fetchPokemon() {
     .then((data) => mostrarPokemon(data));
 }
 
-/* Task 5 --------------------------------------------------------------------------------------- 
-Lea el archivo books7.json utilizando fetch() con await . No se puede utilizar ningún then() en esta tarea. Guarde
-el contenido JSON, ya convertido en objetos de JavaScript, en una variable llamada fecha y utilice algún tipo de
-estructura de iteración para calcular cuánto dinero nos costaría comprar dos ejemplares de cada libro. Debe dar
-un importe cercano a los 400 euros, como puede comprobar usted mismo si hace el cálculo de forma
-manual. Muestre por consola este importe exacto con dos decimales.
-*/
+/* Task 5 --------------------------------------------------------------------------------------- */
 // There is no initial provided code.
 
 /* Task 5 solution ------------------------------------------------------------------------------ */
@@ -278,7 +271,7 @@ async function fetchCorsConProxy() {
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const url = "https://www.freeforexapi.com/api/live";
 
-  const respuesta = await fetch(proxy + url, {
+  const respuesta = await fetch(`https://cors-anywhere.herokuapp.com/${url}`, {
     method: "GET",
     headers: {
       "X-Requested-With": "Demo",
@@ -286,11 +279,9 @@ async function fetchCorsConProxy() {
   });
 
   const data = await respuesta.json();
-  console.log(data.supportedPairs);
+  console.log(data);
 }
-
-//fetchCorsConProxy();
-
+// enlace para el permiso demo cors-anywhere: https://cors-anywhere.herokuapp.com/corsdemo
 // There is no initial provided code.
 
 /* Task 6 solution ------------------------------------------------------------------------------ */

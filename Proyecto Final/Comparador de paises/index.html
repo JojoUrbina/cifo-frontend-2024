@@ -79,17 +79,17 @@
             class="form-select"
             aria-label="Default select example"
           >
-            <option selected>Elige un pais</option>
+            <option selected value="EUR">Elige un pais</option>
           </select>
         </div>
       </div>
-     
 
-      <div class="container-fluid mt-5 d-flex flex-wrap gap-3 justify-content-center ">
-         <!--Inicio Side menu-->
+      <div
+        class="container-fluid mt-5 d-flex flex-wrap gap-3 justify-content-center"
+      >
+        <!--Inicio Side menu-->
 
-     
-        <div id="sidemenu" class="flex-shrink-0 px-3 " style="width: 180px">
+        <div id="sidemenu" class="flex-shrink-0 px-3" style="width: 180px">
           <a
             href="#"
             class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
@@ -264,12 +264,12 @@
             </li>
           </ul>
         </div>
- <!-- fin Side menu-->
+        <!-- fin Side menu-->
         <div class="table-responsive rounded-top-1 w-75">
           <table class="table table-hover table-sm">
             <thead class="table-light">
               <tr>
-                <th scope="col">Monto</th>
+                <th scope="col">Importe</th>
                 <th scope="col">Divisa</th>
                 <th scope="col">Moneda</th>
                 <th scope="col">Pais</th>
@@ -286,7 +286,7 @@
     <noscript> Tu navegador no soporta javascript </noscript>
     <template>
       <tr>
-        <td class="py-2 simbolo">0</td>
+        <td class="py-2 celda-importe"></td>
 
         <td class="py-2">MDL</td>
         <td class="py-2">Moldovan leu</td>
