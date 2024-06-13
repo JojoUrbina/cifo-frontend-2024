@@ -11,11 +11,10 @@ import {
 } from "./modules/funciones.js";
 
 document.addEventListener("DOMContentLoaded", () => {
- cargarDatos();
+  cargarDatos();
 });
 
 let dataPaises = [];
-
 
 document.querySelector("input#monto").addEventListener("input", (e) => {
   actualizarImportes(dataPaises);

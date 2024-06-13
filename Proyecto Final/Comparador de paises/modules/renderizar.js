@@ -23,9 +23,10 @@ export function renderizarOpcionesSelect(data) {
     const simboloDivisa =
       currencies[Object.keys(currencies)[0]].symbol?.replace(/\s/g, "") || "$";
     opcion.value = divisa;
-    opcion.textContent = pais;
+    opcion.textContent = ` ${pais} - ${moneda} - ${simboloDivisa} - ${divisa}`;
     opcion.classList.add(simboloDivisa);
-    opcion.setAttribute("id", moneda);
+
+    opcion.setAttribute("aria-label", moneda);
     seleccionarPais.appendChild(opcion);
   }
 }

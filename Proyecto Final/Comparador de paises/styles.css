@@ -1,5 +1,5 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 a:hover {
   text-decoration: none;
@@ -17,7 +17,6 @@ td {
 }
 
 /*inicio del side menu*/
-
 
 .dropdown-toggle {
   outline: 0;
@@ -68,3 +67,10 @@ td {
   overflow-y: auto;
 }
 /*fin del side menu*/
+svg {
+  width: 8px;
+}
+i {
+  margin-left: 0.2rem;
+  cursor: pointer;
+}
