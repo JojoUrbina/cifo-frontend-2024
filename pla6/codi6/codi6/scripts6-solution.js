@@ -78,6 +78,7 @@ navRoleAdministrador.addEventListener("click", () => {
   mostrarUOcultarElementosAdmin("");
 });
 
+//selectroleAdm
 /* Task 2 solution ------------------------------------------------------------------------------ */
 
 /* Task 3 --------------------------------------------------------------------------------------- */

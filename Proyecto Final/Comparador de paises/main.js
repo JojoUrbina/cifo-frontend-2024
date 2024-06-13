@@ -8,32 +8,37 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarDatos();
 });
 
-let paisesConTarifa = [];
+let dataPaises = [];
 
 inputMonto.addEventListener("input", (e) => {
   //montoActual = Number(e.target.value);
 
-  actualizarMontos();
+  actualizarMontos(Number(e.target.value));
 });
-function actualizarMontos() {
-  const importeEnInput = Number(document.querySelector("#monto").value);
-  const divisasSeleccionada =
+
+/* function calcularImportePais(pais) {
+  const divisaSeleccionada =
     document.querySelector("#seleccionarPais").selectedOptions[0].value;
-  const celdasImporte = [...document.querySelectorAll(".celda-importe")];
+  const importeEnInput = Number(document.querySelector("#monto").value);
+  const tarifaPaisSeleccionado = dataPaises.find(
+    (e) => e.currencies[divisaSeleccionada]
+  ).tarifa;
 
-  for (const pais of paisesConTarifa) {
-    pais.actualizarImportePais(importeEnInput || 1);
-
-    /*    const divisa = Object.keys(currencies)[1] || Object.keys(currencies)[0];
-  
-    //console.log(tarifa,divisa);
-    //importe.textContent = importe.textContent * (importeEnInput || 1)
-      //const simbolo = celda.classList[1];
-      const monto = Math.min(tarifas[tarifa] * (montoInput || 1)).toFixed(2);
-      celda.textContent = `${monto}  ${simbolo}`; */
+  if (divisaSeleccionada != "EUR") {
+    const nuevaTarifa = (pais.tarifa / tarifaPaisSeleccionado) * 1;
+    pais.tarifa = nuevaTarifa;
+    return nuevaTarifa * importeEnInput;
+  } else {
+    return pais.tarifa * importeEnInput;
   }
-  renderizarTabla(paisesConTarifa);
-  //console.log(paisesConTarifa[0].importe);
+} */
+
+function actualizarMontos(monto) {
+
+ for (const pais of dataPaises) {
+    pais.actualizarImportePais(monto);
+  } 
+  renderizarTabla(dataPaises);
 }
 
 seleccionarPais.addEventListener("change", (e) => {
@@ -51,10 +56,12 @@ async function cargarDatos() {
 
   const paises = await fetchPaises();
   const tarifas = await fetchTarifas();
-  paisesConTarifa = procesarData(paises, tarifas);
+  const paisesConTarifa = filtrarPaisesConTarifa(paises, tarifas);
+  dataPaises = procesarDataPaises(paisesConTarifa, tarifas);
 
-  renderizarTabla(paisesConTarifa);
-  renderizarOpcionesSelect(paisesConTarifa);
+  renderizarTabla(dataPaises);
+  renderizarOpcionesSelect(dataPaises);
+
   //actualizarMontos(tarifaActual);
 }
 
@@ -123,15 +130,9 @@ function ordenarPaisesPorOrdenAlfabetico(data) {
   });
   return paisesConTarifaOrdenados;
 }
-function procesarData(paises, tarifas) {
-  const paisesConCurrencies = paises.filter((pais) => pais.currencies);
-  const paisesConTarifa = paisesConCurrencies.filter(
-    (pais) =>
-      tarifas[Object.keys(pais.currencies)[0]] ||
-      tarifas[Object.keys(pais.currencies)[1]]
-  );
-
-  for (const pais of paisesConTarifa) {
+function procesarDataPaises(paises, tarifas) {
+  const dataPaises = [...paises];
+  for (const pais of dataPaises) {
     pais.tarifa = Number(
       (
         tarifas[Object.keys(pais.currencies)[0]] ||
@@ -140,11 +141,14 @@ function procesarData(paises, tarifas) {
     );
     pais.importe = pais.tarifa;
     pais.actualizarImportePais = function (monto) {
-      this.importe = Number(this.tarifa * monto).toFixed(2)
+      if (monto) {
+        this.importe = Number((monto * this.tarifa).toFixed(2));
+      } else {
+        this.importe = this.tarifa;
+      }
     };
   }
-
-  return paisesConTarifa;
+  return dataPaises;
 }
 async function fetchPaises() {
   const response = await fetch("paises.json");
@@ -156,4 +160,13 @@ async function fetchTarifas() {
   const data = await res.json();
   const tarifas = data.rates;
   return tarifas;
+}
+function filtrarPaisesConTarifa(paises, tarifas) {
+  const paisesConCurrencies = paises.filter((pais) => pais.currencies);
+  const paisesConTarifa = paisesConCurrencies.filter(
+    (pais) =>
+      tarifas[Object.keys(pais.currencies)[0]] ||
+      tarifas[Object.keys(pais.currencies)[1]]
+  );
+  return paisesConTarifa;
 }
