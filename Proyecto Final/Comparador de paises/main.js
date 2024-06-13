@@ -11,9 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 let dataPaises = [];
 
 inputMonto.addEventListener("input", (e) => {
-  //montoActual = Number(e.target.value);
-
-  actualizarMontos(Number(e.target.value));
+  actualizarImportes(Number(e.target.value));
+  renderizarTabla(dataPaises);
 });
 
 /* function calcularImportePais(pais) {
@@ -33,21 +32,24 @@ inputMonto.addEventListener("input", (e) => {
   }
 } */
 
-function actualizarMontos(monto) {
-
- for (const pais of dataPaises) {
+function actualizarImportes(monto) {
+  for (const pais of dataPaises) {
     pais.actualizarImportePais(monto);
-  } 
-  renderizarTabla(dataPaises);
+  }
 }
 
-seleccionarPais.addEventListener("change", (e) => {
+seleccionarPais.addEventListener("change", async (e) => {
   const moneda = seleccionarPais.selectedOptions[0].id;
-  tarifaActual = e.target.value;
   simboloInput.textContent = seleccionarPais.selectedOptions[0].className;
   inputMonto.placeholder = `Escribir monto en ${moneda}`;
 
-  //actualizarMontos(tarifaActual, montoActual);
+  const tarifaActual = e.target.value;
+  const tarifas = await fetchTarifas(tarifaActual);
+  procesarDataPaises(dataPaises, tarifas);
+  actualizarImportes();
+  renderizarTabla(dataPaises);
+
+  //actualizarImportes(tarifaActual, montoActual);
 });
 
 async function cargarDatos() {
@@ -62,7 +64,7 @@ async function cargarDatos() {
   renderizarTabla(dataPaises);
   renderizarOpcionesSelect(dataPaises);
 
-  //actualizarMontos(tarifaActual);
+  //actualizarImportes(tarifaActual);
 }
 
 function renderizarTabla(data) {
@@ -155,8 +157,10 @@ async function fetchPaises() {
   const data = await response.json();
   return data;
 }
-async function fetchTarifas() {
-  const res = await fetch(`divisas.json`);
+async function fetchTarifas(tarifa) {
+  const apiUrl = `https://open.er-api.com/v6/latest/${tarifa}`;
+  const url = tarifa ? apiUrl : `divisas.json`;
+  const res = await fetch(url);
   const data = await res.json();
   const tarifas = data.rates;
   return tarifas;
