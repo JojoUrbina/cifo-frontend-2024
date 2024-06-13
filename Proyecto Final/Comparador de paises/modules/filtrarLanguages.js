@@ -35,7 +35,7 @@ const USDARS = 864.75;
 const USDGBP = 0.785489;
 const ARSUSD = 0.001156;
 */
-const rates = {
+/*const rates = {
   EUR: 1,
   AED: 3.982002,
   AFN: 77.87299,
@@ -199,7 +199,7 @@ const rates = {
   ZMW: 28.770689,
   ZWL: 14.6513,
 };
-
+*/
 /*async function unaFuncion(params) {
 const response = await fetch("https://restcountries.com/v3.1/all");
 const data = await response.json();
@@ -276,7 +276,7 @@ cargarDatos();*/
     $seleccionarPais.appendChild($option);
 }
 agregarOpcionesASelect();*/
-
+/*
 const objeto = [{ precio: 20 }, { otroPrecio: 200 }];
 objeto.actualizarPrecio = function (monto) {
   this.precio = monto;
@@ -481,7 +481,7 @@ moldova.actualizarTarifa = function (tarifa) {
   this.tarifa = tarifa;
 };
 
-/* for (const divisa in divisas) {
+ for (const divisa in divisas) {
   //console.log(divisas[divisa]);
   //console.log(divisa);
   //console.log(moldova);
@@ -518,3 +518,8 @@ function procesarData(paises,tarifas) {
   return paisesConTarifa;
 }
  */
+export function hola() {
+  console.log("funciona");
+}
+ 
+

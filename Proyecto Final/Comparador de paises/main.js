@@ -1,8 +1,12 @@
-const inputMonto = document.querySelector("#monto");
+import { fetchPaises, fetchTarifas } from "./modules/fetch.js";
+import {
+  renderizarOpcionesSelect,
+  renderizarTabla,
+} from "./modules/renderizar.js";
+
+const inputMonto = document.querySelector("input#monto");
 const seleccionarPais = document.querySelector("#seleccionarPais");
-const tbody = document.querySelector("tbody");
-const template = document.querySelector("template").content;
-const fragment = document.createDocumentFragment();
+
 const simboloInput = document.querySelector("#inputGroup-sizing-md");
 document.addEventListener("DOMContentLoaded", () => {
   cargarDatos();
@@ -11,30 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
 let dataPaises = [];
 
 inputMonto.addEventListener("input", (e) => {
-  actualizarImportes(Number(e.target.value));
+  actualizarImportes();
   renderizarTabla(dataPaises);
 });
 
-/* function calcularImportePais(pais) {
-  const divisaSeleccionada =
-    document.querySelector("#seleccionarPais").selectedOptions[0].value;
-  const importeEnInput = Number(document.querySelector("#monto").value);
-  const tarifaPaisSeleccionado = dataPaises.find(
-    (e) => e.currencies[divisaSeleccionada]
-  ).tarifa;
-
-  if (divisaSeleccionada != "EUR") {
-    const nuevaTarifa = (pais.tarifa / tarifaPaisSeleccionado) * 1;
-    pais.tarifa = nuevaTarifa;
-    return nuevaTarifa * importeEnInput;
-  } else {
-    return pais.tarifa * importeEnInput;
-  }
-} */
-
-function actualizarImportes(monto) {
+function actualizarImportes() {
   for (const pais of dataPaises) {
-    pais.actualizarImportePais(monto);
+    pais.actualizarImportePais();
   }
 }
 
@@ -43,13 +30,12 @@ seleccionarPais.addEventListener("change", async (e) => {
   simboloInput.textContent = seleccionarPais.selectedOptions[0].className;
   inputMonto.placeholder = `Escribir monto en ${moneda}`;
 
-  const tarifaActual = e.target.value;
-  const tarifas = await fetchTarifas(tarifaActual);
+  const tarifaSeleccionada = e.target.value;
+  const tarifas = await fetchTarifas(tarifaSeleccionada);
+
   procesarDataPaises(dataPaises, tarifas);
   actualizarImportes();
   renderizarTabla(dataPaises);
-
-  //actualizarImportes(tarifaActual, montoActual);
 });
 
 async function cargarDatos() {
@@ -63,74 +49,6 @@ async function cargarDatos() {
 
   renderizarTabla(dataPaises);
   renderizarOpcionesSelect(dataPaises);
-
-  //actualizarImportes(tarifaActual);
-}
-
-function renderizarTabla(data) {
-  tbody.innerHTML = "";
-  for (const { currencies, translations, languages, flags, importe } of data) {
-    const divisa = Object.keys(currencies)[1] || Object.keys(currencies)[0];
-    const simbolo =
-      currencies[Object.keys(currencies)[0]].symbol?.replace(/\s/g, "") || "$";
-    const moneda = currencies[Object.keys(currencies)[0]].name;
-    const pais = translations.spa.common;
-    const lenguaje = Object.values(languages)[0];
-    const srcBandera = flags.png;
-    const altBandera = flags.alt;
-
-    const filasClonadas = template.cloneNode(true);
-    const celdasClonadas = filasClonadas.querySelectorAll("td");
-    celdasClonadas[0].textContent = importe + " " + simbolo;
-    celdasClonadas[0].classList.add(divisa);
-    celdasClonadas[1].textContent = divisa;
-    celdasClonadas[2].textContent = moneda;
-    celdasClonadas[3].textContent = pais;
-    celdasClonadas[4].textContent = lenguaje;
-    celdasClonadas[5].querySelector("img").src = srcBandera;
-    celdasClonadas[5].querySelector("img").alt = altBandera;
-    celdasClonadas[6].textContent = "ver mas";
-    fragment.appendChild(filasClonadas);
-  }
-  tbody.appendChild(fragment);
-}
-
-function renderizarOpcionesSelect(data) {
-  const paisesConTarifaOrdenados = ordenarPaisesPorOrdenAlfabetico(data);
-
-  for (const { currencies, translations } of paisesConTarifaOrdenados) {
-    const divisa = Object.keys(currencies)[1] || Object.keys(currencies)[0];
-    const pais = translations.spa.common;
-    const opcion = document.createElement("option");
-    const moneda = currencies[Object.keys(currencies)[0]].name;
-    const simboloDivisa =
-      currencies[Object.keys(currencies)[0]].symbol?.replace(/\s/g, "") || "$";
-    opcion.value = divisa;
-    opcion.textContent = pais;
-    opcion.classList.add(simboloDivisa);
-    opcion.setAttribute("id", moneda);
-    seleccionarPais.appendChild(opcion);
-  }
-}
-function filtrarSimbolo(currencies) {
-  if (currencies[Object.keys(currencies)[0]].symbol) {
-    return currencies[Object.keys(currencies)[0]].symbol.replace(/\s/g, "");
-  } else {
-    return "$";
-  }
-}
-function ordenarPaisesPorOrdenAlfabetico(data) {
-  const paisesConTarifaOrdenados = [...data];
-  paisesConTarifaOrdenados.sort((a, b) => {
-    if (a.name.common > b.name.common) {
-      return 1;
-    } else if (a.name.common < b.name.common) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-  return paisesConTarifaOrdenados;
 }
 function procesarDataPaises(paises, tarifas) {
   const dataPaises = [...paises];
@@ -142,28 +60,17 @@ function procesarDataPaises(paises, tarifas) {
       ).toFixed(2)
     );
     pais.importe = pais.tarifa;
-    pais.actualizarImportePais = function (monto) {
-      if (monto) {
-        this.importe = Number((monto * this.tarifa).toFixed(2));
+    pais.actualizarImportePais = function () {
+      const inputMontoValue = document.querySelector("#monto").value;
+
+      if (inputMontoValue) {
+        this.importe = Number((inputMontoValue * this.tarifa).toFixed(2));
       } else {
         this.importe = this.tarifa;
       }
     };
   }
   return dataPaises;
-}
-async function fetchPaises() {
-  const response = await fetch("paises.json");
-  const data = await response.json();
-  return data;
-}
-async function fetchTarifas(tarifa) {
-  const apiUrl = `https://open.er-api.com/v6/latest/${tarifa}`;
-  const url = tarifa ? apiUrl : `divisas.json`;
-  const res = await fetch(url);
-  const data = await res.json();
-  const tarifas = data.rates;
-  return tarifas;
 }
 function filtrarPaisesConTarifa(paises, tarifas) {
   const paisesConCurrencies = paises.filter((pais) => pais.currencies);
