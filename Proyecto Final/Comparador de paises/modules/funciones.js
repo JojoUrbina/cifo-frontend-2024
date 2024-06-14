@@ -1,33 +1,3 @@
-//procesar Datos
-export function procesarDataPaises(paises, tarifas) {
-  const dataPaises = [...paises];
-  for (const pais of dataPaises) {
-    pais.tarifa = Number(
-      (
-        tarifas[Object.keys(pais.currencies)[0]] ||
-        tarifas[Object.keys(pais.currencies)[1]]
-      ).toFixed(2)
-    );
-    //console.log(pais.name.common, (tarifas[Object.keys(pais.currencies)[0]] ||
-    //tarifas[Object.keys(pais.currencies)[1]]));
-    pais.importe = pais.tarifa;
-    pais.actualizarImportePais = function () {
-      const inputMontoValue = document.querySelector("#monto").value
-      if (inputMontoValue) {
-        this.importe = Number((inputMontoValue * this.tarifa).toFixed(2));
-      } else {
-        this.importe = this.tarifa;
-      }
-    };
-  }
-  return dataPaises;
-}
-
-export function actualizarImportes(data) {
-  for (const pais of data) {
-    pais.actualizarImportePais();
-  }
-}
 export function filtrarPaisesConTarifa(paises, tarifas) {
   const paisesConCurrencies = paises.filter((pais) => pais.currencies);
   const paisesConTarifa = paisesConCurrencies.filter(

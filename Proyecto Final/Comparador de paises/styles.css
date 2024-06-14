@@ -1,12 +1,16 @@
 * {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+  transition: all ease-in-out 250m;
 }
 a:hover {
   text-decoration: none;
   border: none;
 }
 
-td {
+td,
+th {
   max-width: 4em !important;
 }
 .bandera {
@@ -70,12 +74,9 @@ td {
 svg {
   width: 8px;
 }
-
-.btn-ordenar{
+.btn-ordenar {
   background-color: transparent;
   border: none;
   padding: 0;
   margin-left: 0.4rem;
 }
-
-
