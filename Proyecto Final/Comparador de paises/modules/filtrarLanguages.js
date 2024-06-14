@@ -518,8 +518,5 @@ function procesarData(paises,tarifas) {
   return paisesConTarifa;
 }
  */
-export function hola() {
-  console.log("funciona");
-}
- 
+
 
