@@ -70,7 +70,12 @@ td {
 svg {
   width: 8px;
 }
-i {
-  margin-left: 0.2rem;
-  cursor: pointer;
+
+.btn-ordenar{
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 0.4rem;
 }
+
+

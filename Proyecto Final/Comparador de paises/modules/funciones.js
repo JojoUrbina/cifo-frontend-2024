@@ -8,10 +8,11 @@ export function procesarDataPaises(paises, tarifas) {
         tarifas[Object.keys(pais.currencies)[1]]
       ).toFixed(2)
     );
+    //console.log(pais.name.common, (tarifas[Object.keys(pais.currencies)[0]] ||
+    //tarifas[Object.keys(pais.currencies)[1]]));
     pais.importe = pais.tarifa;
     pais.actualizarImportePais = function () {
-      const inputMontoValue = document.querySelector("#monto").value;
-
+      const inputMontoValue = document.querySelector("#monto").value
       if (inputMontoValue) {
         this.importe = Number((inputMontoValue * this.tarifa).toFixed(2));
       } else {
