@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let dataPaises = [];
+let dataPaisesNueva = [];
 
 document.querySelector("input#monto").addEventListener("input", (e) => {
   actualizarImportes(dataPaises);
@@ -39,11 +40,11 @@ async function cargarDatos() {
   const tarifas = await fetchTarifas();
   const paisesConTarifa = filtrarPaisesConTarifa(paises, tarifas);
   dataPaises = procesarDataPaises(paisesConTarifa, tarifas);
+  dataPaisesNueva = crearDatosPrincipales(paisesConTarifa, tarifas);
 
-  renderizarTabla(dataPaises);
-  renderizarOpcionesSelect(dataPaises);
+  renderizarTabla(dataPaisesNueva);
+  renderizarOpcionesSelect(dataPaisesNueva);
   actualizarPlaceholder();
-  crearDatosPrincipales(dataPaises, tarifas);
 }
 
 const btnOrdenarImporte = document.querySelector(".ordenar-importe");
