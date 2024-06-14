@@ -12,7 +12,12 @@ import {
   filtrarPaisesConTarifa,
   actualizarPlaceholder,
 } from "./modules/funciones.js";
-//import { ordenarDatosPorImporte } from "./modules/funcionesOrdenar.js";
+import {
+  ordenarDatosPorImporte,
+  ordenarDatosPorDivisa,
+  ordenarDatosPorPais,
+  ordenarDatosPorLenguaje
+} from "./modules/funcionesOrdenar.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarApp();
@@ -57,52 +62,19 @@ function ejecutarLosEventListener() {
     dataPaisesActual = ordenarDatosPorImporte(dataPaisesActual);
     renderizarTabla(dataPaisesActual);
   });
-}
-document.querySelector(".ordenar-divisa").addEventListener("click", () => {
-  dataPaisesActual = ordenarDatosPorDivisa(dataPaisesActual);
-  renderizarTabla(dataPaisesActual);
-});
+  document.querySelector(".ordenar-divisa").addEventListener("click", () => {
+    dataPaisesActual = ordenarDatosPorDivisa(dataPaisesActual);
+    renderizarTabla(dataPaisesActual);
+  });
+  document.querySelector(".ordenar-pais").addEventListener("click", () => {
+    dataPaisesActual = ordenarDatosPorPais(dataPaisesActual);
+    renderizarTabla(dataPaisesActual);
+  });
 
-function ordenarDatosPorDivisa(dataPaises) {
-  const datosOrdenados = [...dataPaises];
-  const esOrdenadoDivisaAZ = dataPaises[0].ordenDatos === "divisa-a-z";
-  if (esOrdenadoDivisaAZ) {
-    datosOrdenados.sort((a, b) => {
-      if (a.divisaPais > b.divisaPais) {
-        return -1;
-      } else if (a.divisaPais < b.divisaPais) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-    datosOrdenados.forEach((pais) => (pais.ordenDatos = "divisa-z-a"));
-  } else {
-    datosOrdenados.sort((a, b) => {
-      if (a.divisaPais > b.divisaPais) {
-        return 1;
-      } else if (a.divisaPais < b.divisaPais) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
-    datosOrdenados.forEach((pais) => (pais.ordenDatos = "divisa-a-z"));
-  }
-
-  return datosOrdenados;
+  document.querySelector(".ordenar-lenguaje").addEventListener("click", () => {
+    dataPaisesActual = ordenarDatosPorLenguaje(dataPaisesActual);
+    renderizarTabla(dataPaisesActual);
+  });
 }
 
-function ordenarDatosPorImporte(dataPaises) {
-  const datosOrdenados = [...dataPaises];
-  const esOrdenadoImporteMenorMayor =
-    dataPaises[0].ordenDatos === "importe-menor-mayor";
-  if (esOrdenadoImporteMenorMayor) {
-    datosOrdenados.sort((a, b) => b.importePais - a.importePais);
-    datosOrdenados.forEach((pais) => (pais.ordenDatos = "importe-mayor-menor"));
-  } else {
-    datosOrdenados.sort((a, b) => a.importePais - b.importePais);
-    datosOrdenados.forEach((pais) => (pais.ordenDatos = "importe-menor-mayor"));
-  }
-  return datosOrdenados;
-}
+

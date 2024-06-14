@@ -16,7 +16,7 @@ export function actualizarTarifas(dataPaisesActual, tarifas) {
       const { currencies, translations, languages, flags } = pais;
       return {
         nombrePais: translations.spa.common,
-        lenguajePais: Object.values(languages)[0],
+        lenguajePais: Object.values(languages).slice(0,3).join(", "),// se puede manipular para enviar la cantidad de idiomas que se quiera
         monedaPais: currencies[Object.keys(currencies)[0]].name,
         simboloMonedaPais:
           currencies[Object.keys(currencies)[0]].symbol?.replace(/\s/g, "") ||
