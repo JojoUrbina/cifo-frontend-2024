@@ -7,18 +7,16 @@ import {
 import {
   renderizarOpcionesSelect,
   renderizarTabla,
-  actualizarPlaceholder
+  actualizarPlaceholder,
 } from "./modules/renderizar.js";
-import {
-  filtrarPaisesConTarifa,
-  
-} from "./modules/funciones.js";
+import { filtrarPaisesConTarifa } from "./modules/funciones.js";
 import {
   ordenarDatosPorImporte,
   ordenarDatosPorDivisa,
   ordenarDatosPorPais,
-  ordenarDatosPorLenguaje
+  ordenarDatosPorLenguaje,
 } from "./modules/funcionesOrdenar.js";
+import { filtrarLenguajesMasUsados } from "./modules/funcionesFiltrar.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarApp();
@@ -37,8 +35,20 @@ async function iniciarApp() {
 
   renderizarTabla(dataPaisesPorDefecto);
   renderizarOpcionesSelect(dataPaisesPorDefecto);
+  const lenguajesMasUsados = filtrarLenguajesMasUsados(dataPaisesPorDefecto)
+
+
+  function renderizarFiltrosLenguajes(lenguajes) {
+    
+    
+  }
+
+
+
+  renderizarFiltrosLenguajes()
   actualizarPlaceholder();
   ejecutarLosEventListener();
+
 }
 
 function ejecutarLosEventListener() {
@@ -78,5 +88,3 @@ function ejecutarLosEventListener() {
     renderizarTabla(dataPaisesActual);
   });
 }
-
-

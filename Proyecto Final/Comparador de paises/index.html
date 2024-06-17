@@ -44,7 +44,7 @@
           height="57"
         />
         <h1 class="display-5 fw-bold text-body-emphasis mb-3">
-          Comparador de monedas
+          Comparador de Países
         </h1>
         <div class="col-lg-6 mx-auto">
           <p class="lead mb-1 fw-normal">
@@ -89,7 +89,7 @@
         <!--Inicio Side menu-->
         <div class="col-lg-3">
           <div id="sidemenu" class="p-3 bg-light rounded">
-            <span class="px-2 fs-5 fw-semibold pb-3 mb-3">Filtrar</span>
+            <span class="px-2 fs-5 fw-semibold pb-3 mb-3">Filtrar por:</span>
             <li class="border-top my-3 list-unstyled"></li>
 
             <ul class="list-unstyled ps-0">
@@ -97,32 +97,18 @@
                 <button
                   class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                   data-bs-toggle="collapse"
-                  data-bs-target="#home-collapse"
+                  data-bs-target="#filtro-lenguajes"
                   aria-expanded="true"
                 >
-                  Home
+                  Lenguajes mas usados:
                 </button>
-                <div class="collapse show" id="home-collapse">
+                <div class="collapse show" id="filtro-lenguajes">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                       <a
                         href="#"
                         class="link-body-emphasis d-inline-flex text-decoration-none rounded"
                         >Overview</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-                        >Updates</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-                        >Reports</a
                       >
                     </li>
                   </ul>
@@ -135,7 +121,7 @@
                   data-bs-target="#dashboard-collapse"
                   aria-expanded="false"
                 >
-                  Dashboard
+                  Divisas mas usadas:
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
@@ -332,7 +318,7 @@
       </div>
     </main>
     <noscript> Tu navegador no soporta javascript </noscript>
-    <template>
+    <template id="template-tabla-tr">
       <tr>
         <td class="py-2 celda-importe"></td>
 
@@ -349,6 +335,17 @@
         </td>
         <td class="py-2">ver mas</td>
       </tr>
+    </template>
+    <template id="template-filtros-ul">
+      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+        <li>
+          <a
+            href="#"
+            class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+            >Overview</a
+          >
+        </li>
+      </ul>
     </template>
   </body>
 </html>

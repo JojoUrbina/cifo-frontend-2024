@@ -34,7 +34,7 @@ export function renderizarOpcionesSelect(data) {
 
 export function renderizarTabla(data) {
   const tbody = document.querySelector("tbody");
-  const template = document.querySelector("template").content;
+  const template = document.querySelector("#template-tabla-tr").content;
   const fragment = document.createDocumentFragment();
 
   tbody.innerHTML = "";
