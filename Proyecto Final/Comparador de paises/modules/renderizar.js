@@ -55,7 +55,7 @@ export function renderizarTabla(data) {
     celdasClonadas[1].textContent = divisaPais;
     celdasClonadas[2].textContent = monedaPais;
     celdasClonadas[3].textContent = nombrePais;
-    celdasClonadas[4].textContent = lenguajePais;
+    celdasClonadas[4].textContent = lenguajePais.join(", ");
     celdasClonadas[5].querySelector("img").src = srcBanderaPais;
     celdasClonadas[5].querySelector("img").alt = altBanderaPais;
     celdasClonadas[6].textContent = "ver mas";

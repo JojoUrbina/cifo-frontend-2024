@@ -9,14 +9,16 @@ import {
   renderizarTabla,
   actualizarPlaceholder,
 } from "./modules/renderizar.js";
-import { filtrarPaisesConTarifa } from "./modules/funciones.js";
 import {
   ordenarDatosPorImporte,
   ordenarDatosPorDivisa,
   ordenarDatosPorPais,
   ordenarDatosPorLenguaje,
 } from "./modules/funcionesOrdenar.js";
-import { filtrarLenguajesMasUsados } from "./modules/funcionesFiltrar.js";
+import {
+  extraerLenguajesYOrdenarPorUso,
+  filtrarPaisesConTarifa,
+} from "./modules/funcionesFiltrar.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarApp();
@@ -35,20 +37,25 @@ async function iniciarApp() {
 
   renderizarTabla(dataPaisesPorDefecto);
   renderizarOpcionesSelect(dataPaisesPorDefecto);
-  const lenguajesMasUsados = filtrarLenguajesMasUsados(dataPaisesPorDefecto)
-
-
-  function renderizarFiltrosLenguajes(lenguajes) {
-    
-    
-  }
-
-
-
-  renderizarFiltrosLenguajes()
   actualizarPlaceholder();
   ejecutarLosEventListener();
 
+  renderizarFiltrosLenguajes(extraerLenguajesYOrdenarPorUso(dataPaisesActual));
+
+  /*   function filtrarPaisesPorLenguaje(dataPaises, lenguaje) {
+    const paisesFiltradosPorLenguaje = dataPaises.filter(
+      (pais) => pais.lenguajePais === lenguaje
+    );
+  }
+
+  const btnsFiltrosLenguaje = document.querySelector(`btn-filtro-${lenguaje}`);
+  btnsFiltrosLenguaje.addEventListener("click", (e) => {});
+  console.log(paisesFiltradosPorLenguaje);
+
+  crearEventosAFiltros(params); */
+  // console.log(btnsFiltrosLenguaje);
+
+  //filtrarPaisesPorLenguaje(dataPaisesPorDefecto, "English");
 }
 
 function ejecutarLosEventListener() {
@@ -87,4 +94,50 @@ function ejecutarLosEventListener() {
     dataPaisesActual = ordenarDatosPorLenguaje(dataPaisesActual);
     renderizarTabla(dataPaisesActual);
   });
+}
+
+function renderizarFiltrosLenguajes(lenguajes) {
+  const template = document.querySelector("#template-filtros-ul").content;
+  const fragment = document.createDocumentFragment();
+  const divFiltroLenguajes = document.querySelector("#filtro-lenguajes");
+
+  for (const [lenguaje, cantidad] of lenguajes) {
+    //Se podria utilizar el valor de cantidad para añadir informacion extra
+    const ulClonados = template.cloneNode(true);
+    const aClonados = ulClonados.querySelector("a");
+    aClonados.textContent = `${lenguaje}`;
+
+    //Para aplicar un efecto tipo hover
+    aClonados.addEventListener("mouseover", () => {
+      aClonados.textContent = `${lenguaje} - Usado en ${cantidad} países`;
+    });
+
+    aClonados.addEventListener("mouseout", () => {
+      aClonados.textContent = lenguaje;
+    });
+    //fin del efecto tipo hover
+
+    aClonados.addEventListener("click", () => {
+      //le puedo colicar como argumento los paisespor defecto, asi no usara los datos ya filtrados y sobre filtrara
+      const paisesFiltrados = filtrarPaisesPorLenguaje(
+        dataPaisesPorDefecto,
+        lenguaje
+      );
+      renderizarTabla(paisesFiltrados);
+    });
+
+    fragment.appendChild(ulClonados);
+  }
+  divFiltroLenguajes.appendChild(fragment);
+}
+
+function filtrarPaisesPorLenguaje(dataPaises, lenguaje) {
+  const paisesFiltrados = dataPaises.filter((pais) => {
+    return (
+      pais.lenguajePais[0] === lenguaje ||
+      pais.lenguajePais[1] === lenguaje ||
+      pais.lenguajePais[2] === lenguaje
+    );
+  });
+  return paisesFiltrados;
 }
