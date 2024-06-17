@@ -7,10 +7,11 @@ import {
 import {
   renderizarOpcionesSelect,
   renderizarTabla,
+  actualizarPlaceholder
 } from "./modules/renderizar.js";
 import {
   filtrarPaisesConTarifa,
-  actualizarPlaceholder,
+  
 } from "./modules/funciones.js";
 import {
   ordenarDatosPorImporte,
@@ -39,6 +40,7 @@ async function iniciarApp() {
   actualizarPlaceholder();
   ejecutarLosEventListener();
 }
+
 function ejecutarLosEventListener() {
   document.querySelector("input#monto").addEventListener("input", (e) => {
     actualizarImportes(dataPaisesActual);

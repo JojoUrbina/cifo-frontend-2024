@@ -7,15 +7,4 @@ export function filtrarPaisesConTarifa(paises, tarifas) {
   );
   return paisesConTarifa;
 }
-export function actualizarPlaceholder() {
-  const seleccionarPais = document.querySelector("#seleccionarPais");
-  const simboloInput = document.querySelector("#inputGroup-sizing-md");
 
-  const monedaPlaceholder = seleccionarPais.selectedOptions[0].ariaLabel;
-  const simboloPlaceholder = seleccionarPais.selectedOptions[0].className;
-
-  const textoPlaceholder = `Escribir monto en ${monedaPlaceholder}`;
-
-  document.querySelector("input#monto").placeholder = textoPlaceholder;
-  simboloInput.textContent = simboloPlaceholder;
-}

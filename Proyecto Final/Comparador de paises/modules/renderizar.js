@@ -31,6 +31,7 @@ export function renderizarOpcionesSelect(data) {
     seleccionarPais.appendChild(opcion);
   }
 }
+
 export function renderizarTabla(data) {
   const tbody = document.querySelector("tbody");
   const template = document.querySelector("template").content;
@@ -61,4 +62,16 @@ export function renderizarTabla(data) {
     fragment.appendChild(filasClonadas);
   }
   tbody.appendChild(fragment);
+}
+export function actualizarPlaceholder() {
+  const seleccionarPais = document.querySelector("#seleccionarPais");
+  const simboloInput = document.querySelector("#inputGroup-sizing-md");
+
+  const monedaPlaceholder = seleccionarPais.selectedOptions[0].ariaLabel;
+  const simboloPlaceholder = seleccionarPais.selectedOptions[0].className;
+
+  const textoPlaceholder = `Escribir monto en ${monedaPlaceholder}`;
+
+  document.querySelector("input#monto").placeholder = textoPlaceholder;
+  simboloInput.textContent = simboloPlaceholder;
 }
