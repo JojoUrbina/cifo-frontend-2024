@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let dataPaisesPorDefecto = [];
 let dataPaisesActual = [];
+let dataPaisesFiltrados = null;
 
 async function iniciarApp() {
   const paises = await fetchPaises();
@@ -37,25 +38,9 @@ async function iniciarApp() {
 
   renderizarTabla(dataPaisesPorDefecto);
   renderizarOpcionesSelect(dataPaisesPorDefecto);
+  renderizarFiltrosLenguajes(extraerLenguajesYOrdenarPorUso(dataPaisesActual));
   actualizarPlaceholder();
   ejecutarLosEventListener();
-
-  renderizarFiltrosLenguajes(extraerLenguajesYOrdenarPorUso(dataPaisesActual));
-
-  /*   function filtrarPaisesPorLenguaje(dataPaises, lenguaje) {
-    const paisesFiltradosPorLenguaje = dataPaises.filter(
-      (pais) => pais.lenguajePais === lenguaje
-    );
-  }
-
-  const btnsFiltrosLenguaje = document.querySelector(`btn-filtro-${lenguaje}`);
-  btnsFiltrosLenguaje.addEventListener("click", (e) => {});
-  console.log(paisesFiltradosPorLenguaje);
-
-  crearEventosAFiltros(params); */
-  // console.log(btnsFiltrosLenguaje);
-
-  //filtrarPaisesPorLenguaje(dataPaisesPorDefecto, "English");
 }
 
 function ejecutarLosEventListener() {
@@ -78,21 +63,44 @@ function ejecutarLosEventListener() {
     });
 
   document.querySelector(".ordenar-importe").addEventListener("click", () => {
-    dataPaisesActual = ordenarDatosPorImporte(dataPaisesActual);
-    renderizarTabla(dataPaisesActual);
+    if (dataPaisesFiltrados) {
+      renderizarTabla(ordenarDatosPorImporte(dataPaisesFiltrados));
+    } else {
+      renderizarTabla(ordenarDatosPorImporte(dataPaisesActual));
+    }
   });
   document.querySelector(".ordenar-divisa").addEventListener("click", () => {
-    dataPaisesActual = ordenarDatosPorDivisa(dataPaisesActual);
-    renderizarTabla(dataPaisesActual);
+    if (dataPaisesFiltrados) {
+      renderizarTabla(ordenarDatosPorDivisa(dataPaisesFiltrados));
+    } else {
+      renderizarTabla(ordenarDatosPorDivisa(dataPaisesActual));
+    }
   });
   document.querySelector(".ordenar-pais").addEventListener("click", () => {
-    dataPaisesActual = ordenarDatosPorPais(dataPaisesActual);
-    renderizarTabla(dataPaisesActual);
+    if (dataPaisesFiltrados) {
+      renderizarTabla(ordenarDatosPorPais(dataPaisesFiltrados));
+    } else {
+      renderizarTabla(ordenarDatosPorPais(dataPaisesActual));
+    }
   });
 
   document.querySelector(".ordenar-lenguaje").addEventListener("click", () => {
-    dataPaisesActual = ordenarDatosPorLenguaje(dataPaisesActual);
-    renderizarTabla(dataPaisesActual);
+    if (dataPaisesFiltrados) {
+      renderizarTabla(ordenarDatosPorLenguaje(dataPaisesFiltrados));
+    } else {
+      renderizarTabla(ordenarDatosPorLenguaje(dataPaisesActual));
+    }
+  });
+
+  document.querySelectorAll(".btn-filtro-lenguaje").forEach((btnLenguaje) => {
+    btnLenguaje.addEventListener("click", () => {
+      const lenguajeSeleccionado = btnLenguaje.dataset.btnLenguaje;
+      dataPaisesFiltrados = filtrarPaisesPorLenguaje(
+        dataPaisesActual,
+        lenguajeSeleccionado
+      );
+      renderizarTabla(dataPaisesFiltrados);
+    });
   });
 }
 
@@ -101,32 +109,24 @@ function renderizarFiltrosLenguajes(lenguajes) {
   const fragment = document.createDocumentFragment();
   const divFiltroLenguajes = document.querySelector("#filtro-lenguajes");
 
-  for (const [lenguaje, cantidad] of lenguajes) {
+  for (const [lenguaje, cantidad] of lenguajes.slice(0, 6)) {
     //Se podria utilizar el valor de cantidad para añadir informacion extra
-    const ulClonados = template.cloneNode(true);
-    const aClonados = ulClonados.querySelector("a");
-    aClonados.textContent = `${lenguaje}`;
+    const elementoUlClonado = template.cloneNode(true);
+    const elementoAClonado = elementoUlClonado.querySelector("a");
+    elementoAClonado.textContent = `${lenguaje}`;
+    elementoAClonado.dataset.btnLenguaje = lenguaje;
 
     //Para aplicar un efecto tipo hover
-    aClonados.addEventListener("mouseover", () => {
-      aClonados.textContent = `${lenguaje} - Usado en ${cantidad} países`;
+    elementoAClonado.addEventListener("mouseover", () => {
+      elementoAClonado.textContent = `${lenguaje} - Usado en ${cantidad} países`;
     });
 
-    aClonados.addEventListener("mouseout", () => {
-      aClonados.textContent = lenguaje;
+    elementoAClonado.addEventListener("mouseout", () => {
+      elementoAClonado.textContent = lenguaje;
     });
     //fin del efecto tipo hover
 
-    aClonados.addEventListener("click", () => {
-      //le puedo colicar como argumento los paisespor defecto, asi no usara los datos ya filtrados y sobre filtrara
-      const paisesFiltrados = filtrarPaisesPorLenguaje(
-        dataPaisesPorDefecto,
-        lenguaje
-      );
-      renderizarTabla(paisesFiltrados);
-    });
-
-    fragment.appendChild(ulClonados);
+    fragment.appendChild(elementoUlClonado);
   }
   divFiltroLenguajes.appendChild(fragment);
 }

@@ -4,6 +4,9 @@
   box-sizing: border-box;
   transition: all ease-in-out 250m;
 }
+a{
+  margin-left: 2rem !important;
+}
 a:hover {
   text-decoration: none;
   border: none;
