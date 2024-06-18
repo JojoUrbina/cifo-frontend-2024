@@ -9,7 +9,7 @@ import {
   renderizarTabla,
   actualizarPlaceholder,
   renderizarFiltros,
-} from "./modules/renderizar.js";
+} from "./modules/funcionesRenderizar.js";
 import {
   ordenarDatosPorImporte,
   ordenarDatosPorDivisa,
@@ -17,10 +17,9 @@ import {
   ordenarDatosPorLenguaje,
 } from "./modules/funcionesOrdenar.js";
 import {
-  extraerLenguajesYOrdenarPorUso,
   filtrarPaisesConTarifa,
-  filtrarPaisesPorLenguaje,
-  extraerMonedasYOrdenarPorUso,
+  contarYOrdenarPropiedad,
+  filtrarPaisesPorCategoria,
 } from "./modules/funcionesFiltrar.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,10 +42,13 @@ async function iniciarApp() {
   renderizarOpcionesSelect(dataPaisesPorDefecto);
 
   renderizarFiltros(
-    extraerLenguajesYOrdenarPorUso(dataPaisesActual),
-    "lenguajes"
+    "lenguajes",
+    contarYOrdenarPropiedad(dataPaisesActual, "lenguaje")
   );
-  renderizarFiltros(extraerMonedasYOrdenarPorUso(dataPaisesActual), "monedas");
+  renderizarFiltros(
+    "monedas",
+    contarYOrdenarPropiedad(dataPaisesActual, "moneda")
+  );
 
   actualizarPlaceholder();
   ejecutarLosEventListener();
@@ -104,9 +106,24 @@ function ejecutarLosEventListener() {
   document.querySelectorAll(".btn-filtro-lenguajes").forEach((btnLenguaje) => {
     btnLenguaje.addEventListener("click", () => {
       const lenguajeSeleccionado = btnLenguaje.dataset.btnValor;
-      dataPaisesFiltrados = filtrarPaisesPorLenguaje(
+      const categoria = "lenguaje";
+      dataPaisesFiltrados = filtrarPaisesPorCategoria(
         dataPaisesActual,
+        categoria,
         lenguajeSeleccionado
+      );
+      renderizarTabla(dataPaisesFiltrados);
+    });
+  });
+
+  document.querySelectorAll(".btn-filtro-monedas").forEach((btnMoneda) => {
+    btnMoneda.addEventListener("click", () => {
+      const monedaSeleccionado = btnMoneda.dataset.btnValor;
+      const categoria = "moneda";
+      dataPaisesFiltrados = filtrarPaisesPorCategoria(
+        dataPaisesActual,
+        categoria,
+        monedaSeleccionado
       );
       renderizarTabla(dataPaisesFiltrados);
     });

@@ -64,7 +64,7 @@ export function renderizarTabla(data) {
   tbody.appendChild(fragment);
 }
 
-export function renderizarFiltros(datos,categoria) {
+export function renderizarFiltros(categoria,datos) {
   const template = document.querySelector("#template-filtros-ul").content;
   const fragment = document.createDocumentFragment();
   const divFiltro = document.querySelector(`#filtro-${categoria}`);

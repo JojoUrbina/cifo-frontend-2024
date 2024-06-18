@@ -8,57 +8,46 @@ export function filtrarPaisesConTarifa(paises, tarifas) {
   return paisesConTarifa;
 }
 
-
 //Funciones Para extraer datos y luego renderizar
-export function extraerLenguajesYOrdenarPorUso(dataPaises) {
-  //filtrar los lenguajes
-  const lenguajes = dataPaises.map((pais) => pais.lenguajePais);
-  //Se usa reduce para crear un objeto que tenga como llave un pais y como valor la cantidad de veces que se repite el pais en los datos.(se crea objeto {lenguaje:cantidad,lenguaje:cantidad,}, como hay paises con varios lenguajes se vuelve a iterar
-  const conteoDeLenguajesObjeto = lenguajes.reduce((acc, lenguajesPorPais) => {
-    if (lenguajesPorPais.length > 1) {
-      lenguajesPorPais.forEach((lenguaje) => {
-        acc[lenguaje] = (acc[lenguaje] || 0) + 1;
-      });
-    } else {
-      acc[lenguajesPorPais] = (acc[lenguajesPorPais] || 0) + 1;
-    }
-    return acc;
-  }, {});
+export function contarYOrdenarPropiedad(dataPaises, categoria) {
+  const propiedadesExtraidas = dataPaises.map(
+    (pais) => pais[`${categoria}Pais`]
+  );
 
+  const conteoDePropiedadesObjeto = propiedadesExtraidas.reduce(
+    (acc, propiedades) => {
+      if (Array.isArray(propiedades)) {
+        propiedades.forEach((propiedad) => {
+          acc[propiedad] = (acc[propiedad] || 0) + 1;
+        });
+      } else {
+        acc[propiedades] = (acc[propiedades] || 0) + 1;
+      }
+      return acc;
+    },
+    {}
+  );
   //se convierte en array para iterarlo
-  const conteoDeLenguajesArray = Object.entries(conteoDeLenguajesObjeto);
 
+  const conteoDePropiedadesArray = Object.entries(conteoDePropiedadesObjeto);
   //se ordena por cantidad que esta en la posicion [1]
-  const lenguajesOrdenadosMasAMenosUsados = conteoDeLenguajesArray.sort(
+
+  const propiedadesOrdenadasMasAmenosRepetidas = conteoDePropiedadesArray.sort(
     (a, b) => b[1] - a[1]
   );
-  return lenguajesOrdenadosMasAMenosUsados;
+  return propiedadesOrdenadasMasAmenosRepetidas;
 }
 
-export function extraerMonedasYOrdenarPorUso(dataPaises) {
-  const monedas = dataPaises.map((pais) => pais.monedaPais);
-
-  const conteoDeMonedasObjeto = monedas.reduce((acc, moneda) => {
-    acc[moneda] = (acc[moneda] || 0) + 1;
-    return acc;
-  }, {});
-
-  const conteoDeMonedasArray = Object.entries(conteoDeMonedasObjeto);
-
-  const monedasOrdenadasMasAmenosUsadas = conteoDeMonedasArray.sort(
-    (a, b) => b[1] - a[1]
-  );
-  return monedasOrdenadasMasAmenosUsadas;
-}
-
-
-export function filtrarPaisesPorLenguaje(dataPaises, lenguaje) {
+export function filtrarPaisesPorCategoria(dataPaises, categoria, filtroSeleccionado) {
   const paisesFiltrados = dataPaises.filter((pais) => {
     return (
-      pais.lenguajePais[0] === lenguaje ||
-      pais.lenguajePais[1] === lenguaje ||
-      pais.lenguajePais[2] === lenguaje
+      pais[`${categoria}Pais`] === filtroSeleccionado ||
+      pais[`${categoria}Pais`][0] === filtroSeleccionado ||
+      pais[`${categoria}Pais`][1] === filtroSeleccionado ||
+      pais[`${categoria}Pais`][2] === filtroSeleccionado
     );
   });
+
   return paisesFiltrados;
 }
+
