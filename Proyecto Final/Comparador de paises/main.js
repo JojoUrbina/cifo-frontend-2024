@@ -8,6 +8,8 @@ import {
   renderizarOpcionesSelect,
   renderizarTabla,
   actualizarPlaceholder,
+  renderizarFiltrosLenguajes,
+  renderizarFiltros,
 } from "./modules/renderizar.js";
 import {
   ordenarDatosPorImporte,
@@ -18,13 +20,15 @@ import {
 import {
   extraerLenguajesYOrdenarPorUso,
   filtrarPaisesConTarifa,
+  filtrarPaisesPorLenguaje,
+  extraerMonedasYOrdenarPorUso,
 } from "./modules/funcionesFiltrar.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarApp();
 });
 
-let dataPaisesPorDefecto = [];
+let dataPaisesPorDefecto = []; //Se podria hacer un objeto global con estas 3 variables
 let dataPaisesActual = [];
 let dataPaisesFiltrados = null;
 
@@ -38,7 +42,13 @@ async function iniciarApp() {
 
   renderizarTabla(dataPaisesPorDefecto);
   renderizarOpcionesSelect(dataPaisesPorDefecto);
-  renderizarFiltrosLenguajes(extraerLenguajesYOrdenarPorUso(dataPaisesActual));
+
+  renderizarFiltros(
+    extraerLenguajesYOrdenarPorUso(dataPaisesActual),
+    "lenguajes"
+  );
+  renderizarFiltros(extraerMonedasYOrdenarPorUso(dataPaisesActual), "monedas");
+
   actualizarPlaceholder();
   ejecutarLosEventListener();
 }
@@ -92,9 +102,9 @@ function ejecutarLosEventListener() {
     }
   });
 
-  document.querySelectorAll(".btn-filtro-lenguaje").forEach((btnLenguaje) => {
+  document.querySelectorAll(".btn-filtro-lenguajes").forEach((btnLenguaje) => {
     btnLenguaje.addEventListener("click", () => {
-      const lenguajeSeleccionado = btnLenguaje.dataset.btnLenguaje;
+      const lenguajeSeleccionado = btnLenguaje.dataset.btnValor;
       dataPaisesFiltrados = filtrarPaisesPorLenguaje(
         dataPaisesActual,
         lenguajeSeleccionado
@@ -102,42 +112,4 @@ function ejecutarLosEventListener() {
       renderizarTabla(dataPaisesFiltrados);
     });
   });
-}
-
-function renderizarFiltrosLenguajes(lenguajes) {
-  const template = document.querySelector("#template-filtros-ul").content;
-  const fragment = document.createDocumentFragment();
-  const divFiltroLenguajes = document.querySelector("#filtro-lenguajes");
-
-  for (const [lenguaje, cantidad] of lenguajes.slice(0, 6)) {
-    //Se podria utilizar el valor de cantidad para añadir informacion extra
-    const elementoUlClonado = template.cloneNode(true);
-    const elementoAClonado = elementoUlClonado.querySelector("a");
-    elementoAClonado.textContent = `${lenguaje}`;
-    elementoAClonado.dataset.btnLenguaje = lenguaje;
-
-    //Para aplicar un efecto tipo hover
-    elementoAClonado.addEventListener("mouseover", () => {
-      elementoAClonado.textContent = `${lenguaje} - Usado en ${cantidad} países`;
-    });
-
-    elementoAClonado.addEventListener("mouseout", () => {
-      elementoAClonado.textContent = lenguaje;
-    });
-    //fin del efecto tipo hover
-
-    fragment.appendChild(elementoUlClonado);
-  }
-  divFiltroLenguajes.appendChild(fragment);
-}
-
-function filtrarPaisesPorLenguaje(dataPaises, lenguaje) {
-  const paisesFiltrados = dataPaises.filter((pais) => {
-    return (
-      pais.lenguajePais[0] === lenguaje ||
-      pais.lenguajePais[1] === lenguaje ||
-      pais.lenguajePais[2] === lenguaje
-    );
-  });
-  return paisesFiltrados;
 }
