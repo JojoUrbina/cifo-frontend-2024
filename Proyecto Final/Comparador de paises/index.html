@@ -113,51 +113,18 @@
                 >
                   Monedas mas usadas:
                 </button>
-                <div class="collapse" id="filtro-monedas">
-                  
-                </div>
+                <div class="collapse" id="filtro-monedas"></div>
               </li>
               <li class="mb-1">
                 <button
                   class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                   data-bs-toggle="collapse"
-                  data-bs-target="#orders-collapse"
+                  data-bs-target="#filtro-region"
                   aria-expanded="false"
                 >
-                  Orders
+                  Region
                 </button>
-                <div class="collapse" id="orders-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                      <a
-                        href="#"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-                        >New</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-                        >Processed</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-                        >Shipped</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-                        >Returned</a
-                      >
-                    </li>
-                  </ul>
-                </div>
+                <div class="collapse" id="filtro-region"></div>
               </li>
               <li class="border-top my-3"></li>
               <li class="mb-1">
@@ -300,8 +267,8 @@
     <template id="template-filtros-ul">
       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
         <li>
-          <a 
-            data-btn-valor ="El valor del boton usado como identificador cuando se selecciona"
+          <a
+            data-btn-valor="El valor del boton usado como identificador cuando se selecciona"
             class="link-body-emphasis d-inline-flex text-decoration-none rounded"
             >Overview</a
           >

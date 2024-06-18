@@ -9,9 +9,9 @@ export function filtrarPaisesConTarifa(paises, tarifas) {
 }
 
 //Funciones Para extraer datos y luego renderizar
-export function contarYOrdenarPropiedad(dataPaises, categoria) {
+export function extraerContarYOrdenarPropiedad(dataPaises, propiedad) {
   const propiedadesExtraidas = dataPaises.map(
-    (pais) => pais[`${categoria}Pais`]
+    (pais) => pais[`${propiedad}`]
   );
 
   const conteoDePropiedadesObjeto = propiedadesExtraidas.reduce(
@@ -38,16 +38,19 @@ export function contarYOrdenarPropiedad(dataPaises, categoria) {
   return propiedadesOrdenadasMasAmenosRepetidas;
 }
 
-export function filtrarPaisesPorCategoria(dataPaises, categoria, filtroSeleccionado) {
+export function filtrarPaisesPorCategoria(
+  dataPaises,
+  propiedaPais,
+  filtroSeleccionado
+) {
   const paisesFiltrados = dataPaises.filter((pais) => {
     return (
-      pais[`${categoria}Pais`] === filtroSeleccionado ||
-      pais[`${categoria}Pais`][0] === filtroSeleccionado ||
-      pais[`${categoria}Pais`][1] === filtroSeleccionado ||
-      pais[`${categoria}Pais`][2] === filtroSeleccionado
+      pais[propiedaPais] === filtroSeleccionado ||
+      pais[propiedaPais][0] === filtroSeleccionado ||
+      pais[propiedaPais][1] === filtroSeleccionado ||
+      pais[propiedaPais][2] === filtroSeleccionado
     );
   });
 
   return paisesFiltrados;
 }
-

@@ -64,7 +64,7 @@ export function renderizarTabla(data) {
   tbody.appendChild(fragment);
 }
 
-export function renderizarFiltros(categoria,datos) {
+export function renderizarFiltros(categoria, datos) {
   const template = document.querySelector("#template-filtros-ul").content;
   const fragment = document.createDocumentFragment();
   const divFiltro = document.querySelector(`#filtro-${categoria}`);
@@ -75,11 +75,15 @@ export function renderizarFiltros(categoria,datos) {
     const elementoAClonado = elementoUlClonado.querySelector("a");
     elementoAClonado.textContent = dato;
     elementoAClonado.dataset.btnValor = dato;
-    elementoAClonado.classList.add(`btn-filtro-${categoria}`)
+    elementoAClonado.classList.add(`btn-filtro-${categoria}`);
 
     //Para aplicar un efecto tipo hover
     elementoAClonado.addEventListener("mouseover", () => {
-      elementoAClonado.textContent = `${dato} - Usado en ${cantidad} países`;
+      if (categoria === "region") {
+        elementoAClonado.textContent = `${dato} - Conformado por ${cantidad} países`;
+      } else {
+        elementoAClonado.textContent = `${dato} - Usado en ${cantidad} países`;
+      }
     });
 
     elementoAClonado.addEventListener("mouseout", () => {
@@ -91,12 +95,6 @@ export function renderizarFiltros(categoria,datos) {
   }
   divFiltro.appendChild(fragment);
 }
-
-
-
-
-
-
 
 export function actualizarPlaceholder() {
   const seleccionarPais = document.querySelector("#seleccionarPais");
