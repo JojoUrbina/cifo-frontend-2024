@@ -64,36 +64,6 @@ export function renderizarTabla(data) {
   tbody.appendChild(fragment);
 }
 
-
-export function renderizarFiltrosLenguajes(lenguajes) {
-  const template = document.querySelector("#template-filtros-ul").content;
-  const fragment = document.createDocumentFragment();
-  const divFiltroLenguajes = document.querySelector("#filtro-lenguajes");
-
-  for (const [lenguaje, cantidad] of lenguajes.slice(0, 6)) {
-    //Se podria utilizar el valor de cantidad para añadir informacion extra
-    const elementoUlClonado = template.cloneNode(true);
-    const elementoAClonado = elementoUlClonado.querySelector("a");
-    elementoAClonado.textContent = `${lenguaje}`;
-    elementoAClonado.dataset.btnValor = lenguaje;
-    elementoAClonado.classList.add("btn-filtro-lenguajes")
-
-
-    //Para aplicar un efecto tipo hover
-    elementoAClonado.addEventListener("mouseover", () => {
-      elementoAClonado.textContent = `${lenguaje} - Usado en ${cantidad} países`;
-    });
-
-    elementoAClonado.addEventListener("mouseout", () => {
-      elementoAClonado.textContent = lenguaje;
-    });
-    //fin del efecto tipo hover
-
-    fragment.appendChild(elementoUlClonado);
-  }
-  divFiltroLenguajes.appendChild(fragment);
-}
-
 export function renderizarFiltros(datos,categoria) {
   const template = document.querySelector("#template-filtros-ul").content;
   const fragment = document.createDocumentFragment();

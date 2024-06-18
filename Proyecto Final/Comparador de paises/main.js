@@ -8,7 +8,6 @@ import {
   renderizarOpcionesSelect,
   renderizarTabla,
   actualizarPlaceholder,
-  renderizarFiltrosLenguajes,
   renderizarFiltros,
 } from "./modules/renderizar.js";
 import {
