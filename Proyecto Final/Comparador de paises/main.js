@@ -109,3 +109,4 @@ function asignarEventoDeOrdenar(selector, funcionOrdenar) {
     }
   });
 }
+//pendiente mover estos dos a un archivo aparte e importarle las funciones
