@@ -53,7 +53,13 @@ function ajaxPokemon() {
   );
 }
 /* Task 5 --------------------------------------------------------------------------------------- */
-
+$("#slider").slider({
+  min: 0,
+  max: 42,
+  slide: function(event, ui) {
+    console.log(`Valor del slider: ${ui.value}`);
+  }
+});
 // There is no initial provided code.
 
 /* Task 5 solution ------------------------------------------------------------------------------ */
