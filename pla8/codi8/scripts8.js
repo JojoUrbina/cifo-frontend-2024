@@ -56,9 +56,9 @@ function ajaxPokemon() {
 $("#slider").slider({
   min: 0,
   max: 42,
-  slide: function(event, ui) {
+  slide: function (event, ui) {
     console.log(`Valor del slider: ${ui.value}`);
-  }
+  },
 });
 // There is no initial provided code.
 
