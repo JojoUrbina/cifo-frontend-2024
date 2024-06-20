@@ -4,23 +4,27 @@
   box-sizing: border-box;
   transition: all ease-in-out 250m;
 }
-.btn-filtro{
+.btn-filtro {
   margin-left: 2rem !important;
 }
 a:hover {
   text-decoration: none;
   border: none;
   cursor: pointer;
-  
 }
 
-td,
-th {
-  max-width: 150px
+td {
+  max-width: 150px;
 }
+
 .bandera {
   width: 4em;
+  transition: transform 0.3s ease-in-out;
 }
+.bandera:hover {
+  transform: scale(2.5);
+}
+
 #logo {
   width: 2.5rem;
 }
@@ -50,12 +54,11 @@ th {
   transition: transform 0.35s ease;
   transform-origin: 0.5em 50%;
 }
-#btn-reiniciar-filtros::before{
+#btn-reiniciar-filtros::before {
   position: relative;
   top: 0.2rem;
   opacity: 0.8;
   content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'   width='16' height='16'  viewBox='0 0 576 512'%3e%3cpath d='M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8 3.2-1.8 4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z'/%3e%3c/svg%3e");
-  
 }
 
 [data-bs-theme="dark"] .btn-toggle::before {
@@ -83,12 +86,38 @@ th {
   overflow-y: auto;
 }
 /*fin del side menu*/
-svg {
+button svg {
   width: 8px;
 }
+
 .btn-ordenar {
   background-color: transparent;
   border: none;
   padding: 0;
-  margin-left: 0.4rem;
+  margin-left: 0.2rem;
+}
+
+.estrella{
+  position: relative;
+  top: -2px;
+  width: 15px;
+  transition: fill-opacity 0.2s ease-in-out;
+  margin-right: 10px !important;
+}
+.estrella-invicible{
+  fill-opacity: 0;
+}
+.estrella-opaca {
+  fill-opacity: 0.5;
+}
+.estrella-seleccionada{
+  fill-opacity: 1;
+}
+.estrella:hover {
+  fill-opacity: 1;
+}
+@media (max-width: 768px) {
+  th {
+    min-width: 5.5rem;
+  }
 }
