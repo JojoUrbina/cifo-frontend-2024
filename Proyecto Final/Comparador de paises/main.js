@@ -21,38 +21,44 @@ import {
   extraerContarYOrdenarPropiedad,
   filtrarPaisesPorCategoria,
 } from "./modules/funcionesFiltrar.js";
+import {
+  configurarEventosDeFiltro,
+  configurarEventosDeOrdenar,
+} from "./modules/configurarEventListener.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarApp();
 });
 
-let dataPaisesPorDefecto = []; //Se podria hacer un objeto global con estas 3 variables
-let dataPaisesActual = [];
-let dataPaisesFiltrados = null;
+export const estado = {
+  dataPaisesPorDefecto: [],
+  dataPaisesFiltrados: null,
+  dataPaisesActual: [],
+};
 
 async function iniciarApp() {
   const paises = await fetchPaises();
   const tarifas = await fetchTarifas();
   const paisesConTarifa = filtrarPaisesConTarifa(paises, tarifas);
 
-  dataPaisesPorDefecto = crearDatosPrincipales(paisesConTarifa, tarifas);
-  dataPaisesActual = [...dataPaisesPorDefecto]; // aca le puedo enviar el localStorage
+  estado.dataPaisesPorDefecto = crearDatosPrincipales(paisesConTarifa, tarifas);
+  estado.dataPaisesActual = [...estado.dataPaisesPorDefecto]; // aca le puedo enviar el localStorage
 
-  renderizarTabla(dataPaisesPorDefecto);
-  renderizarOpcionesSelect(dataPaisesPorDefecto);
+  renderizarTabla(estado.dataPaisesPorDefecto);
+  renderizarOpcionesSelect(estado.dataPaisesPorDefecto);
 
   renderizarFiltros(
     "lenguajes",
-    extraerContarYOrdenarPropiedad(dataPaisesActual, "lenguajePais")
+    extraerContarYOrdenarPropiedad(estado.dataPaisesActual, "lenguajePais")
   );
   renderizarFiltros(
     "monedas",
-    extraerContarYOrdenarPropiedad(dataPaisesActual, "monedaPais")
+    extraerContarYOrdenarPropiedad(estado.dataPaisesActual, "monedaPais")
   );
 
   renderizarFiltros(
     "region",
-    extraerContarYOrdenarPropiedad(dataPaisesActual, "regionPais")
+    extraerContarYOrdenarPropiedad(estado.dataPaisesActual, "regionPais")
   );
   actualizarPlaceholder();
   ejecutarLosEventListener();
@@ -60,8 +66,8 @@ async function iniciarApp() {
 
 function ejecutarLosEventListener() {
   document.querySelector("input#monto").addEventListener("input", (e) => {
-    actualizarImportes(dataPaisesActual);
-    renderizarTabla(dataPaisesActual);
+    actualizarImportes(estado.dataPaisesActual);
+    renderizarTabla(estado.dataPaisesActual);
   });
 
   document
@@ -72,41 +78,24 @@ function ejecutarLosEventListener() {
       const tarifaSeleccionada = e.target.value;
       const tarifas = await fetchTarifas(tarifaSeleccionada);
 
-      actualizarTarifas(dataPaisesActual, tarifas);
-      actualizarImportes(dataPaisesActual);
-      renderizarTabla(dataPaisesActual);
+      actualizarTarifas(estado.dataPaisesActual, tarifas);
+      actualizarImportes(estado.dataPaisesActual);
+      renderizarTabla(estado.dataPaisesActual);
     });
 
-  asignarEventoDeOrdenar(".ordenar-importe", ordenarDatosPorImporte);
-  asignarEventoDeOrdenar(".ordenar-divisa", ordenarDatosPorDivisa);
-  asignarEventoDeOrdenar(".ordenar-pais", ordenarDatosPorPais);
-  asignarEventoDeOrdenar(".ordenar-lenguaje", ordenarDatosPorLenguaje);
+  configurarEventosDeOrdenar(".ordenar-importe", ordenarDatosPorImporte);
+  configurarEventosDeOrdenar(".ordenar-divisa", ordenarDatosPorDivisa);
+  configurarEventosDeOrdenar(".ordenar-pais", ordenarDatosPorPais);
+  configurarEventosDeOrdenar(".ordenar-lenguaje", ordenarDatosPorLenguaje);
 
   configurarEventosDeFiltro("lenguajes", "lenguajePais");
   configurarEventosDeFiltro("monedas", "monedaPais");
   configurarEventosDeFiltro("region", "regionPais");
-}
-function configurarEventosDeFiltro(categoria, propiedadPais) {
-  document.querySelectorAll(`.btn-filtro-${categoria}`).forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const dataSetValor = btn.dataset.btnValor;
-      dataPaisesFiltrados = filtrarPaisesPorCategoria(
-        dataPaisesActual,
-        propiedadPais,
-        dataSetValor
-      );
-      renderizarTabla(dataPaisesFiltrados);
-    });
-  });
-}
 
-function asignarEventoDeOrdenar(selector, funcionOrdenar) {
-  document.querySelector(selector).addEventListener("click", () => {
-    if (dataPaisesFiltrados) {
-      renderizarTabla(funcionOrdenar(dataPaisesFiltrados));
-    } else {
-      renderizarTabla(funcionOrdenar(dataPaisesActual));
-    }
-  });
+  document
+    .querySelector("#btn-reiniciar-filtros")
+    .addEventListener("click", () => {
+      estado.dataPaisesFiltrados = null;
+      renderizarTabla(estado.dataPaisesActual);
+    });
 }
-//pendiente mover estos dos a un archivo aparte e importarle las funciones
