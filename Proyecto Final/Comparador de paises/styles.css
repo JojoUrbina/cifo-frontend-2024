@@ -4,7 +4,7 @@
   box-sizing: border-box;
   transition: all ease-in-out 250m;
 }
-a{
+.btn-filtro{
   margin-left: 2rem !important;
 }
 a:hover {
@@ -16,7 +16,7 @@ a:hover {
 
 td,
 th {
-  max-width: 4em !important;
+  max-width: 150px
 }
 .bandera {
   width: 4em;
