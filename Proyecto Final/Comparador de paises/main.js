@@ -47,10 +47,12 @@ async function iniciarApp() {
   estado.dataPaisesActual = JSON.parse(localStorage.getItem("estado"))
     ?.dataPaisesActual || [...estado.dataPaisesPorDefecto];
 
+  actualizarTarifas(estado.dataPaisesActual, tarifas);
   actualizarImportes(estado.dataPaisesActual);
   renderizarTabla(estado.dataPaisesActual);
   actualizarPlaceholder();
   RenderizarIUYconfigurarEventos();
+  localStorage.clear()
 }
 
 function RenderizarIUYconfigurarEventos() {
