@@ -45,7 +45,8 @@ async function iniciarApp() {
 
   estado.dataPaisesPorDefecto = crearDatosPrincipales(paisesConTarifa, tarifas);
   estado.dataPaisesActual = JSON.parse(localStorage.getItem("estado"))
-  ?.dataPaisesActual || [...estado.dataPaisesPorDefecto];
+    ?.dataPaisesActual || [...estado.dataPaisesPorDefecto];
+
   renderizarTabla(estado.dataPaisesActual);
   renderizarOpcionesSelect(estado.dataPaisesActual);
 
