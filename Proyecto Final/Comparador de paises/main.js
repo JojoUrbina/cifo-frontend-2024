@@ -40,7 +40,7 @@ export const estado = {
 
 async function iniciarApp() {
   const paises = await fetchPaises();
-  const tarifas = await fetchTarifas("EUR");
+  const tarifas = await fetchTarifas();
   const paisesConTarifa = filtrarPaisesConTarifa(paises, tarifas);
 
   estado.dataPaisesPorDefecto = crearDatosPrincipales(paisesConTarifa, tarifas);
