@@ -16,23 +16,46 @@
     <!-- Task 1 ---------------------------------------------------------------------------- -->
     <h2>1. Spread, rest i destructuring objects</h2>
 
-    <p class="question">Expliqueu de manera entenedora per què es produeix aquest error...</p>
-    A continuación tenemos una llamada a esta función chooseBetween() , pero si observamos el resultado
-que obtenemos por consola vemos que unas veces es simplemente undefined y otras veces es un error con el
-mensaje undefined is not an object . Por tanto, no obtenemos lo que esperamos. Ejecute el código varias veces
-para comprobar que el resultado va cambiando.
-Explique de manera comprensible por qué se produce este comportamiento erróneo
+    <p class="question">
+      Expliqueu de manera entenedora per què es produeix aquest error...
+    </p>
+    A continuación tenemos una llamada a esta función chooseBetween() , pero si
+    observamos el resultado que obtenemos por consola vemos que unas veces es
+    simplemente undefined y otras veces es un error con el mensaje undefined is
+    not an object . Por tanto, no obtenemos lo que esperamos. Ejecute el código
+    varias veces para comprobar que el resultado va cambiando. Explique de
+    manera comprensible por qué se produce este comportamiento erróneo ¿Qué
+    mecanismo se está aplicando en las dos primeras líneas? Explique su
+    funcionamiento de forma comprensible
 
-¿Qué mecanismo se está aplicando en las dos primeras líneas? Explique su funcionamiento de forma
-comprensible
+    <p>
+      El error que se produce cuando la evaluacion se resuelve en true ya que la
+      funcion intenta mostrar la propiedad name de el array artist el cual no
+      tiene esa propiedad, si no, 3 objetos
+    </p>
 
-    <p>El error que se produce cuando la evaluacion se resuelve en true ya que la funcion intenta mostrar la propiedad name de el array artist el cual no tiene esa propiedad, si no, 3 objetos</p>
+    <p>
+      El error que se produce cuando la evaluacion se resuelve en false sucede
+      ya que la funcion intenta mostrar la propiedad name del segundo parametro
+      el cual no se le envio ningun argumento, lo cual es igual a undefined.
+    </p>
 
-    <p>El error que se produce cuando la evaluacion se resuelve en false sucede ya que la funcion intenta mostrar la propiedad name del segundo parametro el cual no se le envio ningun argumento, lo cual es igual a undefined. </p>
+    <p class="question">
+      Quin mecanisme s'està aplicant a les dues primeres línies?
+    </p>
 
-    <p class="question">Quin mecanisme s'està aplicant a les dues primeres línies?</p>
-
-    <p>En la primera el mecanismo es llamado desestructuración de arrya y consiste en guardar información del array en las constantes o variables por posición que se coloque a la izquierda del igual. La segunda línea sería desestructuración de objetos y, al contrario de la desestructuración de arrays, no funciona por posición, sino por propiedad. Para que se asigne el valor a la constante o variable, esta debe tener la misma denominación que la propiedad. Hay que tener en cuenta que, en la desestructuración de objetos, al asignarle una propiedad, esta no solo buscará la propiedad en la primera capa, sino que, aunque sea una propiedad de otra propiedad, podrá ser desestructurada.</p>
+    <p>
+      En la primera el mecanismo es llamado desestructuración de arrya y
+      consiste en guardar información del array en las constantes o variables
+      por posición que se coloque a la izquierda del igual. La segunda línea
+      sería desestructuración de objetos y, al contrario de la desestructuración
+      de arrays, no funciona por posición, sino por propiedad. Para que se
+      asigne el valor a la constante o variable, esta debe tener la misma
+      denominación que la propiedad. Hay que tener en cuenta que, en la
+      desestructuración de objetos, al asignarle una propiedad, esta no solo
+      buscará la propiedad en la primera capa, sino que, aunque sea una
+      propiedad de otra propiedad, podrá ser desestructurada.
+    </p>
 
     <!-- Task 2 ---------------------------------------------------------------------------- -->
     <h2>2. Emmagatzematge local (local storage)</h2>
@@ -45,30 +68,165 @@ comprensible
       <a href="#" class="btn">#088</a>
       <a href="#" class="btn">#888</a>
     </div>
-
     <p class="question">
-      Expliqueu de manera entenedora quins són els principals avantatges que ofereix l'emmagatzematge local
-      d'informació.
+      Expliqueu de manera entenedora quins són els principals avantatges que
+      ofereix l'emmagatzematge local d'informació.
     </p>
 
-    <p>Aquí la vostra resposta...</p>
+    <p>
+      Entre las principales ventajas de localStorage esta el ser una herramienta
+      fundamental para optimizar el rendimiento, la funcionalidad y la seguridad
+      de las aplicaciones web al almacenar datos directamente en el navegador
+      del usuario teniendo en cuenta que se logra un acceso inmediato y fluido,
+      incluso sin conexión a internet.
+    </p>
 
-    <p class="question">Expliqueu de manera molt detallada què fa el codi de cada una d'aquestes parts.</p>
+    <p>
+      Esto se traduce en páginas web más optimas, con menor carga en el servidor
+      y una experiencia de usuario personalizada que se mantiene entre sesiones.
+      Además, localStorage ofrece un mayor control sobre la información privada,
+      reduciendo el riesgo de filtraciones o accesos no autorizados.
+    </p>
+    <p>Algunos ejemplos pueden ser</p>
+    <p>Ejemplos de uso:</p>
+    <ul>
+      <li>
+        <p>
+          <b>Funcionalidad de favoritos:</b> Muchos sitios web utilizan
+          localStorage para permitir a los usuarios marcar y guardar contenido
+          favorito directamente en su navegador. Esto garantiza que los usuarios
+          puedan acceder fácilmente a su contenido preferido.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>Información de inicio de sesión:</b> Almacenar informacion de
+          autenticación en localStorage permite a los usuarios mantenerse
+          conectados automáticamente entre sesiones sin necesidad de volver a
+          introducir sus datos cada vez que visitan el sitio.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>Guardar el progreso (juegos, aplicaciones educativas, etc.):</b>
+          Aplicaciones como juegos y plataformas educativas pueden almacenar
+          localmente el progreso del usuario, incluyendo niveles completados,
+          logros desbloqueados o lecciones aprendidas. Esto permite una
+          experiencia de usuario fluida y continua..
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>Aplicaciones de notas:</b> Herramientas para tomar notas pueden
+          utilizar localStorage para almacenar las notas del usuario localmente
+          en su navegador. Esto asegura que los usuarios puedan acceder a sus
+          notas rápidamente y editarlas.
+        </p>
+      </li>
+    </ul>
 
-    <p>Aquí la vostra resposta...</p>
+    <p class="question">
+      Expliqueu de manera molt detallada què fa el codi de cada una d'aquestes
+      parts.
+    </p>
+
+    <h3>En la parte 2.1</h3>
+    <ul>
+      <li>
+        <p>
+          En la primera linea, querySelector es un metodo que retorna en este
+          caso dentro del documento HTML el primer elemento que coincide con el
+          selector especificado, que en este caso se podria traducir como el
+          primer elemento que tenga la clase buttons ademas es importante
+          mencionar que querySelector devuelve null si no encuentra ningún
+          elemento que coincida con el selector especificado.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Al encontrar el elemento buscado, se le allade un escuchador de
+          eventos , que en este caso es "click" lo cual cuando se le proporcione
+          un click al elemento encontrado ejecutara la funcion que le enviemos,
+          que seria changeBackground.
+        </p>
+      </li>
+      <li>
+        <p>
+          Es importante tener en cuenta que existen diferentes tipos de eventos
+          como change,input, etc., tambien que las funciones aplicadas de la
+          forma que se aplico changeBackground envia un argumento llamado event,
+          el cual envia datos que se podrian usar dependiendo de la necesidad y
+          en caso de que la funcion aplicada al escuchador no quiera recibir la
+          funcion evento se debe aplicar una funcion tipo flecha
+        </p>
+      </li>
+    </ul>
+    <h3>En la parte 2.2</h3>
+    <ul>
+      <li>
+        <p>
+          En la primera linea de la parte 2.2 se define una función llamada
+          changeBackground que toma un parámetro e, que representa el evento
+        </p>
+      </li>
+      <li>
+        <p>
+          Luego se aplica un condicional if que verifica si e.target(el elemento
+          que activo el evento, en este caso al que se le hizo click) posee la
+          clase (se entra en esa propiedad o atributo con classList) btn(con el
+          metodo contains verifica si contiene esa clase)
+        </p>
+      </li>
+      <li>
+        <p>
+          Dentro del condicional if, ser evaluado como verdadero (true) se
+          define el estilo del body dentro del documento (document.body.style,
+          tener en cuenta que al designarlo mediante style, sera agregado
+          directamente a la etiqueta como atributo style) un
+          background(.background) el texto contenido en el elemento seleccionado
+          (e.target.textContent) al cual le concatenaremos un 6( esto hara que
+          el body cambie su color basado en el texto contenido el el elemento
+          seleccionado )
+        </p>
+      </li>
+      <li>
+        <p>
+          Luego de esto,se llama a una función saveBackgroundColor después de
+          cambiar el color de fondo. Esto hace entender que después de
+          establecer el color de fondo deseado, se guardara de alguna parte el
+          cambio.
+        </p>
+      </li>
+      <li>
+        <p>
+          Por ultimo el e.preventDefault() se utiliza para evitar el
+          comportamiento predeterminado del evento, en este caso previniendo
+          algun tipo de actualizacion de la pagina o realizar alguna accion
+          predeterminada.
+        </p>
+      </li>
+    </ul>
 
     <!-- Task 3 -------------------------------------------------------------------------------- -->
     <h2>3. Classes i mòduls</h2>
 
     <p class="question">
-      Expliqueu quina és aquesta part i en què es diferencia de la sintaxi que havíem utilitzat fins ara.
+      Expliqueu quina és aquesta part i en què es diferencia de la sintaxi que
+      havíem utilitzat fins ara.
+    </p>
+    <p>
+      La parte mencionada dentro del script es el atributo type con valor
+      module, y se diferencia con defer en que el ultimo mencionado, indica que
+      el script debe ser ejecutado después de que el documento HTML haya sido
+      completamente analizado y con type module aparte de generar el mismo
+      efecto tambien permiten importar y exportar funciones, objetos y valores
+      entre diferentes archivos.
     </p>
 
-    <p>Aquí la vostra resposta...</p>
-
     <p class="question">
-      Expliqueu de manera clara quina sintaxi cal seguir per definir una classe i quina sintaxi s'utilitza després per
-      crear un objecte d'aquesta classe.
+      Expliqueu de manera clara quina sintaxi cal seguir per definir una classe
+      i quina sintaxi s'utilitza després per crear un objecte d'aquesta classe.
     </p>
 
     <p>Aquí la vostra resposta...</p>
@@ -77,8 +235,8 @@ comprensible
     <h2>4. Mapatge d'arrays</h2>
 
     <p class="question">
-      Expliqueu de manera entenedora quina és la diferència entre les anomenades higher-order functions i les
-      first-order functions.
+      Expliqueu de manera entenedora quina és la diferència entre les anomenades
+      higher-order functions i les first-order functions.
     </p>
 
     <p>Aquí la vostra resposta...</p>
@@ -87,8 +245,9 @@ comprensible
     <h2>5. Més ES6</h2>
 
     <p class="question">
-      ...trieu una característica de les que apareixen al menú de la part esquerra i feu-ne una explicació amb les
-      vostres paraules i posant-ne exemples...
+      ...trieu una característica de les que apareixen al menú de la part
+      esquerra i feu-ne una explicació amb les vostres paraules i posant-ne
+      exemples...
     </p>
 
     <p>Aquí la vostra resposta...</p>
@@ -96,19 +255,24 @@ comprensible
     <!-- Task 6 -------------------------------------------------------------------------------- -->
     <h2>6. TypeScript</h2>
 
-    <p class="question">...expliqueu la diferència entre aquests dos tipus de llenguatges amb les vostres paraules.</p>
-
-    <p>Aquí la vostra resposta...</p>
-
     <p class="question">
-      ...expliqueu quins són els principals avantatges de fer servir un llenguatge de tipat estàtic com TypeScript per
-      sobre d'un llenguatge de tipat dinàmic com JavaScript.
+      ...expliqueu la diferència entre aquests dos tipus de llenguatges amb les
+      vostres paraules.
     </p>
 
     <p>Aquí la vostra resposta...</p>
 
     <p class="question">
-      ...explicar com funciona a grans trets el procediment per escriure codi TypeScript en un projecte web.
+      ...expliqueu quins són els principals avantatges de fer servir un
+      llenguatge de tipat estàtic com TypeScript per sobre d'un llenguatge de
+      tipat dinàmic com JavaScript.
+    </p>
+
+    <p>Aquí la vostra resposta...</p>
+
+    <p class="question">
+      ...explicar com funciona a grans trets el procediment per escriure codi
+      TypeScript en un projecte web.
     </p>
 
     <p>Aquí la vostra resposta...</p>
