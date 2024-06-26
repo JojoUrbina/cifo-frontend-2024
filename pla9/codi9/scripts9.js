@@ -385,20 +385,25 @@ console.log("Task 4 ---------------------------------------");
 
 /* Task 4 solution ------------------------------------------------------------------------------ */
 
-const numberOfFriends = people.map(person => person.friends.length)// replace null with your expression
+const numberOfFriends = people.map((person) => person.friends.length); // replace null with your expression
 console.log(numberOfFriends);
 
-
-const emailDomains = people.map(person =>person.email.split("@")[1]); // replace null with your expression
+const emailDomains = people.map((person) => person.email.split("@")[1]); // replace null with your expression
 console.log(emailDomains);
 
-const favoriteFruits = [...new Set(people.map(person=>person.favoriteFruit))].sort()
+const favoriteFruits = [
+  ...new Set(people.map((person) => person.favoriteFruit)),
+].sort();
 // replace null with your expression
 console.log(favoriteFruits);
-/* averageAge debe ser un único número que indique la media de edad de estas
-personas. */
-const averageAge = null; // replace null with your expression
+
+const averageAge =
+  people.map((people) => people.age).reduce((a, b) => a + b) / people.length; // replace null with your expression
 console.log(averageAge);
 
-const richPeople = null; // replace null with your expression
+const richPeople =
+  people
+    .map((people) => Number(people.balance.replace("$", "").replace(",", "")))
+    .reduce((a, b) => a + b) / people.length > 2500;
+
 console.log(richPeople);

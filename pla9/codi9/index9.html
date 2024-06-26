@@ -276,8 +276,8 @@
 
     <ul>
       <li>
-        <b>Clase:</b>Se puede definir como una plantilla que define las propiedades y metodos de un
-        tipo de objeto. Es como un modelo general.
+        <b>Clase:</b>Se puede definir como una plantilla que define las
+        propiedades y metodos de un tipo de objeto. Es como un modelo general.
       </li>
       <li>
         <b>Objeto:</b>Es una instancia de una clase, con valores específicos
@@ -293,7 +293,14 @@
       higher-order functions i les first-order functions.
     </p>
 
-    <p>La diferencias radican en lo que reciben como argumentos y en lo que devuelven, en caso de las higher-order functions pueden recibir los tipos de datos como argumento que reciben las first-order functions y tambien funciones, tanto recibir como argumentos como retornar funciones, a diferencia de las first-order functions que no recibe ni retorna funciones. </p>
+    <p>
+      La diferencias radican en lo que reciben como argumentos y en lo que
+      devuelven, en caso de las higher-order functions pueden recibir los tipos
+      de datos como argumento que reciben las first-order functions y tambien
+      funciones, tanto recibir como argumentos como retornar funciones, a
+      diferencia de las first-order functions que no recibe ni retorna
+      funciones.
+    </p>
 
     <!-- Task 5 -------------------------------------------------------------------------------- -->
     <h2>5. Més ES6</h2>
@@ -314,7 +321,14 @@
       vostres paraules.
     </p>
 
-    <p>Aquí la vostra resposta...</p>
+    <p>
+      La diferencia radica en cuando y como se verifican los tipos de variables,
+      ya que en los lenguajes dinamicos, el tipo de variable puede cambiar
+      mientras el programa esta en uso motivado a la recurrente verificacion en
+      tiempo real del tipo de variable, a diferencia del tipo del lenguaje
+      estatico que verifica el tipo de variable en la compilacion, lo que depues
+      no puede cambiar una vez asignada.
+    </p>
 
     <p class="question">
       ...expliqueu quins són els principals avantatges de fer servir un
@@ -322,13 +336,43 @@
       tipat dinàmic com JavaScript.
     </p>
 
-    <p>Aquí la vostra resposta...</p>
+    <p>
+      Entre las ventajas que propone TypeScript esta el establecer el tipado en
+      JavaScript, lo que genera un aumento en la seguridad del programador
+      estableciendo tipos de variables, eso genera un mayor control del codigo,
+      tambien hay que tener en cuenta que TypeScript te alerta sobre
+      asignaciones que van en contra de la regla propuesta.
+    </p>
+    <p>
+      Hace el codigo mas legible, ya que hace entender lo que esperas de cada
+      variable, o funcion que se establece en el codigo agregando contexto al
+      codificar ademas de que ciertas herramientas aportan funcionalidades como
+      las resfactorizaciones automatizadas de VSC.
+    </p>
 
     <p class="question">
       ...explicar com funciona a grans trets el procediment per escriure codi
       TypeScript en un projecte web.
     </p>
 
-    <p>Aquí la vostra resposta...</p>
+    <p>
+      Para escribir código TypeScript en un proyecto web, primero se debe
+      instalar TypeScript globalmente y localmente en la carpeta del proyecto
+      mediante npm (npm install -g typescript y npm install). Luego se verifica
+      que este correctamente instalado escribiendo en la consola tsc -v, despues
+      se abre la herramienta para escribir codigo que se use , se va
+      directamente a la carpeta donde se instalo el copilador , se agrega un
+      archivo tc y se inicia el copilador tsc indicando el documento a copilar,
+      de esa forma se creara un archivo .js el cual sera leido por el navegador
+      con el codigo copilado.
+    </p>
+
+    <p>
+      No es suficiente con cambiar la extensión de los archivos de .js a .ts.
+      Los navegadores no pueden ejecutar archivos TypeScript directamente, por
+      eso es necesario compilar los archivos TypeScript a JavaScript y en caso
+      de que no de por alguna cuestion no funcione se puede resolver utilizando
+      herramientas de construcción como webpack con ts-loader.
+    </p>
   </body>
 </html>
