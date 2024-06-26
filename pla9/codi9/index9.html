@@ -228,8 +228,62 @@
       Expliqueu de manera clara quina sintaxi cal seguir per definir una classe
       i quina sintaxi s'utilitza després per crear un objecte d'aquesta classe.
     </p>
+    <p>
+      Explique de forma muy clara y detallada (de nuevo, ELI5) qué sintaxis se
+      debe seguir cuando queremos definir una clase
+    </p>
 
-    <p>Aquí la vostra resposta...</p>
+    <p>
+      Para crear <b>clases</b> en JavaScript se usa la palabra clave class para
+      definir la clase, seguido del nombre de la clase, despues, usando la
+      palabra clave constructor para inicializar propiedades del objeto, al cual
+      luego del las llaves se agrega la palabra especial this que se refiere al
+      contexto actual, luego un punto para despues del mismo escribir el nombre
+      de la propiedad,el siguiente paso seria agregar el operador de
+      asignacion(=) y se finaliza la propiedad con el valor de la propiedad, que
+      puede ser agregado como parametro y enviado como argumento al crear el
+      objeto con la clase construida, despues de crear todas las propiedades, se
+      le puede asinar un metodo que es comparable a una funcion que puede ser
+      llamada por el objeto creado, esa funcion creada o metodo puede tanto
+      retornar o no retornar valores y de ser necesario modificar el mismo
+      objeto.
+    </p>
+
+    <pre><code>
+      class NombreDeLaClase {
+        constructor(parametros) {
+          this.propiedad = valor;
+        }
+        metodo1() {
+          // Código del método
+        }
+      }
+      </code></pre>
+
+    <p>
+      Para crear un <b>objeto</b> a partir de la clase se usa la palabra clave
+      new seguida del nombre de la clase y los argumentos requeridos por el
+      constructor, del lado derecho de operador de asignacion , del lado
+      izquiero se declara la variable la cual tendra todas las propiedades y
+      metodos de la clase.
+    </p>
+
+    <pre><code>
+      let nuevoObjeto = new NombreDeLaClase(argumentos);
+      </code></pre>
+
+    <p><b>Diferencia entre una clase y un objeto</b></p>
+
+    <ul>
+      <li>
+        <b>Clase:</b>Se puede definir como una plantilla que define las propiedades y metodos de un
+        tipo de objeto. Es como un modelo general.
+      </li>
+      <li>
+        <b>Objeto:</b>Es una instancia de una clase, con valores específicos
+        para sus propiedades y métodos.
+      </li>
+    </ul>
 
     <!-- Task 4 -------------------------------------------------------------------------------- -->
     <h2>4. Mapatge d'arrays</h2>
@@ -239,7 +293,7 @@
       higher-order functions i les first-order functions.
     </p>
 
-    <p>Aquí la vostra resposta...</p>
+    <p>La diferencias radican en lo que reciben como argumentos y en lo que devuelven, en caso de las higher-order functions pueden recibir los tipos de datos como argumento que reciben las first-order functions y tambien funciones, tanto recibir como argumentos como retornar funciones, a diferencia de las first-order functions que no recibe ni retorna funciones. </p>
 
     <!-- Task 5 -------------------------------------------------------------------------------- -->
     <h2>5. Més ES6</h2>

@@ -87,11 +87,19 @@ console.log(albert.greet());
 
 // We import three functions from functions.js.
 // We usually add all our `import` at the top of the file.
-import { addOne, addTwo, addThree } from "./modules/functions.js";
+import { addOne, addThree, addTwo } from "./modules/functions.js";
+import Laptop, { venezuelaAlMundial } from "./modules/stuff.js";
 
 console.log("42 + 1 is " + addOne(42));
 console.log("42 + 2 is " + addTwo(42));
 console.log("42 + 3 is " + addThree(42));
+
+const miLaptop = new Laptop("dell", "Window 11", "900gb");
+console.log(miLaptop.marca);
+console.log(miLaptop.almacenamiento);
+miLaptop.actualizarMemoria("2000gb");
+console.log(miLaptop.almacenamiento);
+console.log(venezuelaAlMundial("si", "si"));
 
 /* Task 3 solution ------------------------------------------------------------------------------ */
 
@@ -377,15 +385,18 @@ console.log("Task 4 ---------------------------------------");
 
 /* Task 4 solution ------------------------------------------------------------------------------ */
 
-const numberOfFriends = null; // replace null with your expression
+const numberOfFriends = people.map(person => person.friends.length)// replace null with your expression
 console.log(numberOfFriends);
 
-const emailDomains = null; // replace null with your expression
+
+const emailDomains = people.map(person =>person.email.split("@")[1]); // replace null with your expression
 console.log(emailDomains);
 
-const favoriteFruits = null; // replace null with your expression
+const favoriteFruits = [...new Set(people.map(person=>person.favoriteFruit))].sort()
+// replace null with your expression
 console.log(favoriteFruits);
-
+/* averageAge debe ser un único número que indique la media de edad de estas
+personas. */
 const averageAge = null; // replace null with your expression
 console.log(averageAge);
 
