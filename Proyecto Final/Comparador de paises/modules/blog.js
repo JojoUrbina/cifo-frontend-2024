@@ -1,10 +1,8 @@
-//import { iniciarApp } from "../main.js";
 const estado = JSON.parse(localStorage.getItem("estado"));
-//se aplico propiedad de blogPais , para filtrarlo y mostrar esa informacion en el blog
+
 function renderizarBlog(estado) {
-  const paisSeleccionado = estado.dataPaisesActual[100];
+  const paisSeleccionado = estado.dataPaisesActual[81];
   //seccion heroe
-  console.log(paisSeleccionado);
   actualizarTextoElemento(
     "#heroe-nombre-principal",
     paisSeleccionado.nombrePais
@@ -30,13 +28,56 @@ function renderizarBlog(estado) {
     paisSeleccionado.altBanderaPais
   );
   //fin de seccion Heroe
+
+  //inicio seccion caracteristicas-principales
+  actualizarTextoElemento(
+    "#caracteristicas-principales-area",
+    paisSeleccionado.areaPais.toLocaleString("en-US") + " km²"
+  );
+  actualizarTextoElemento(
+    "#caracteristicas-principales-poblacion",
+    paisSeleccionado.poblacionPais.toLocaleString("en-US") + " habitantes"
+  );
+  actualizarTextoElemento(
+    "#caracteristicas-principales-gini",
+    paisSeleccionado.giniPais
+  );
+  //fin seccion caracteristicas-principales
+  actualizarTextoElemento(
+    "#caracteristicas-secundarias-capital",
+    paisSeleccionado.capitalPais
+  );
+  actualizarTextoElemento(
+    "#caracteristicas-secundarias-subregion",
+    paisSeleccionado.subregionPais
+  );
+  actualizarTextoElemento(
+    "#caracteristicas-secundarias-independiente",
+    paisSeleccionado.independientePais
+  );
+  actualizarTextoElemento(
+    "#caracteristicas-secundarias-zonaHoraria",
+    paisSeleccionado.zonaHorariaPais.join(", ")
+  );
+  actualizarTextoElemento(
+    "#caracteristicas-secundarias-coordenadas",
+    paisSeleccionado.coordenadasPais
+  );
+  actualizarEnlaceElemento(
+    "#caracteristicas-secundarias-mapa",
+    paisSeleccionado.mapaPais
+  );
 }
 
 renderizarBlog(estado);
 
 function actualizarTextoElemento(elemento, texto) {
   const elementoSeleccionado = document.querySelector(`${elemento}`);
-  elementoSeleccionado.textContent = texto;
+  if (texto) {
+    elementoSeleccionado.textContent = texto.toLocaleString("en-US");
+  } else {
+    elementoSeleccionado.textContent = " Sin informacion";
+  }
 }
 
 function actualizarSrcAltImagen(elemento, src, alt) {
@@ -48,7 +89,24 @@ function actualizarSrcAltImagen(elemento, src, alt) {
     elementoSeleccionado.src = "...";
     elementoSeleccionado.alt = "sin escudo";
   }
+  renderizarPaisesRandom(estado);
+}
+function actualizarEnlaceElemento(elemento, enlace) {
+  const elementoSeleccionado = document.querySelector(`${elemento}`);
+  elementoSeleccionado.href = enlace;
 }
 
-/* const prueba = $cca2;
-prueba.textContent = estado.dataPaisesActual[0].nombrePais; */
+function renderizarPaisesRandom(estado) {
+  const listaPaisesRandom = document.querySelectorAll(
+    "#lista-paises-random li"
+  );
+  listaPaisesRandom.forEach((li) => {
+    const indiceRandom = Math.round(
+      Math.random() * estado.dataPaisesActual.length
+    );
+    const paisRandom = estado.dataPaisesActual[indiceRandom];
+    //console.log(li.querySelector("a"));
+    li.querySelector("img").src = paisRandom.srcBanderaPais;
+    li.querySelector("h6").textContent = paisRandom.nombrePais;
+  });
+}

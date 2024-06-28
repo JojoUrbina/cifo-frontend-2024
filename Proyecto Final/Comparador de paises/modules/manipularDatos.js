@@ -68,9 +68,9 @@ export function crearDatosPrincipales(datos, tarifas) {
       giniPais: gini ? Object.values(gini)[0] : null,
       capitalPais:capital || "No tiene capital",
       subregionPais:subregion || "No forma parte de ninguna subregion",
-      independientePais:independent,
+      independientePais:independent ? "SI": "NO",
       zonaHorariaPais:timezones,
-      coordenadasPais:latlng.join(","),
+      coordenadasPais:latlng,
       mapaPais : maps.openStreetMaps,
       blogPais:false,
 
