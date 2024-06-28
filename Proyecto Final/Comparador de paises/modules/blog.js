@@ -63,6 +63,7 @@ function renderizarBlog(estado) {
     "#caracteristicas-secundarias-coordenadas",
     paisSeleccionado.coordenadasPais
   );
+  console.log(paisSeleccionado.coordenadasPais);
   actualizarEnlaceElemento(
     "#caracteristicas-secundarias-mapa",
     paisSeleccionado.mapaPais
