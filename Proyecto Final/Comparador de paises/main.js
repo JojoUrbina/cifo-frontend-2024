@@ -19,12 +19,13 @@ import {
 import {
   filtrarPaisesConTarifa,
   extraerContarYOrdenarPropiedad,
-  filtrarPaisesPorCategoria,
+  
 } from "./modules/funcionesFiltrar.js";
 import {
   configurarEventosDeFiltro,
   configurarEventosDeOrdenar,
   alternarFavorito,
+  alternarBlogPais
 } from "./modules/configurarEventListener.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -44,7 +45,6 @@ export const estado = {
   const paisesConTarifa = filtrarPaisesConTarifa(paises, tarifas);
 
   estado.dataPaisesPorDefecto = crearDatosPrincipales(paisesConTarifa, tarifas);
-  console.log(estado.dataPaisesPorDefecto);
   estado.dataPaisesActual = JSON.parse(localStorage.getItem("estado"))
     ?.dataPaisesActual || [...estado.dataPaisesPorDefecto];
   actualizarTarifas(estado.dataPaisesActual, tarifas);
@@ -89,6 +89,10 @@ function RenderizarIUYconfigurarEventos() {
     });
 
   document.querySelector("tbody").addEventListener("click", alternarFavorito);
+  document.querySelector("tbody").addEventListener("click", alternarBlogPais);
+
+
+
 
   document
     .querySelector("#btn-filtro-favoritos")
