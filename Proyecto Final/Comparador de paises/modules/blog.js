@@ -119,7 +119,7 @@ function actualizarSrcAltImagen(elemento, src, alt) {
     elementoSeleccionado.src = src;
     elementoSeleccionado.alt = alt || "sin informacion para mostrar";
   } else {
-    elementoSeleccionado.src = "...";
+    elementoSeleccionado.src = "https://via.placeholder.com/150";
     elementoSeleccionado.alt = "sin escudo";
   }
   renderizarPaisesRandom(estado);
