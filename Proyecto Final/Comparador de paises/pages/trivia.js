@@ -3,22 +3,22 @@ const estado = JSON.parse(localStorage.getItem("estado"));
 iniciarApp(estado);
 
 function iniciarApp(estado) {
-  const indiceRandom = generarIndiceRandom(estado);
-
-  const paisActualTrivia = estado.dataPaisesActual[indiceRandom];
-
-  actualizarSrcImagen(
-    "#imagen-bandera-principal",
-    paisActualTrivia.srcBanderaSvgPais
-  );
-
-  renderizarOpciones(generarOpcionesTrivia(estado, paisActualTrivia));
+  const paisActualTrivia = seleccionarPaisAleatorio(estado);
+  mostrarBanderaTrivia(paisActualTrivia);
+  mostrarOpcionesTrivia(crearOpcionesTrivia(estado, paisActualTrivia));
+  configurarEventosDeRespuesta();
 }
-function generarOpcionesTrivia(estado, paisCorrecto) {
+
+function aplicarEstilosRespuesta(inputRespuesta, isRespuestaCorrecta) {
+  const claseOpcion = isRespuestaCorrecta ? "opcionCorrecta" : "opcionErrada";
+  inputRespuesta.classList.add(claseOpcion);
+  inputRespuesta.classList.add("opcionElegida");
+}
+function crearOpcionesTrivia(estado, paisCorrecto) {
   //crear funcion para que no se repitan las opciones
   const opciones = [
-    nombreRandomPais(estado),
-    nombreRandomPais(estado),
+    obtenerNombreAleatorioPais(estado),
+    obtenerNombreAleatorioPais(estado),
     paisCorrecto.nombrePais,
   ];
 
@@ -30,24 +30,72 @@ function generarOpcionesTrivia(estado, paisCorrecto) {
   return opcionesAlAzar;
 }
 
-function renderizarOpciones(opcionesAlAzar) {
+function mostrarOpcionesTrivia(opcionesAlAzar) {
   const elementosOpciones = document.querySelectorAll("span.list-group-item ");
 
   for (const [indice, elemento] of opcionesAlAzar.entries()) {
     elementosOpciones[indice].textContent = elemento;
   }
 }
-function actualizarSrcImagen(elemento, src) {
+function cambiarSrcImagen(elemento, src) {
   const elementoSeleccionado = document.querySelector(`${elemento}`);
   elementoSeleccionado.src = src;
 }
-function actualizarTextoElemento(elemento, texto) {
+function cambiarTextoElemento(elemento, texto) {
   const elementoSeleccionado = document.querySelector(`${elemento}`);
   elementoSeleccionado.textContent = texto.toLocaleString("en-US");
 }
-function generarIndiceRandom(estado) {
+function obtenerIndiceAleatorio(estado) {
   return Math.round(Math.random() * estado.dataPaisesActual.length);
 }
-function nombreRandomPais(estado) {
-  return estado.dataPaisesActual[generarIndiceRandom(estado)].nombrePais;
+function obtenerNombreAleatorioPais(estado) {
+  return estado.dataPaisesActual[obtenerIndiceAleatorio(estado)].nombrePais;
+}
+function seleccionarPaisAleatorio(estado) {
+  const indiceRandom = obtenerIndiceAleatorio(estado);
+
+  const paisActualTrivia = estado.dataPaisesActual[indiceRandom];
+
+  return paisActualTrivia;
+}
+
+function mostrarBanderaTrivia(paisActualTrivia) {
+  cambiarSrcImagen(
+    "#imagen-bandera-principal",
+    paisActualTrivia.srcBanderaSvgPais
+  );
+}
+function desactivarOpciones(elementosOpciones) {
+  elementosOpciones.forEach((opcion) => {
+    document.querySelector(`input#${opcion.htmlFor}`).disabled = true;
+  });
+}
+
+function obtenerIndiceRespuestaCorrecta(paisActualTrivia) {
+  const elementosSpan = [...document.querySelectorAll("span.list-group-item")];
+  const indiceRespuestaCorrecta = elementosSpan.findIndex(
+    (span) => span.textContent === paisActualTrivia.nombrePais
+  );
+  return indiceRespuestaCorrecta;
+}
+function configurarEventosDeRespuesta() {
+  const inputsRespuestas = [
+    ...document.querySelectorAll("label.list-group-item "),
+  ];
+  for (const [
+    indiceInputRespuesta,
+    inputRespuesta,
+  ] of inputsRespuestas.entries()) {
+    inputRespuesta.addEventListener("click", () => {
+      const indiceRespuestaCorrecta =
+        obtenerIndiceRespuestaCorrecta(paisActualTrivia);
+      inputsRespuestas[indiceRespuestaCorrecta].classList.add("opcionCorrecta");
+
+      const isRespuestaCorrecta =
+        indiceInputRespuesta === indiceRespuestaCorrecta;
+
+      aplicarEstilosRespuesta(inputRespuesta, isRespuestaCorrecta);
+      desactivarOpciones(inputsRespuestas);
+    });
+  }
 }
