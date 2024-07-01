@@ -1,12 +1,21 @@
-const estado = JSON.parse(localStorage.getItem("estado"));
+const estadoActual = "estado";
+const estado = JSON.parse(localStorage.getItem(estadoActual));
 //hasta ahora solo muestra 3 nombres y uno de ellos es el correcto
-iniciarApp(estado);
+iniciarTrivia(estado);
 
-function iniciarApp(estado) {
-  const paisActualTrivia = seleccionarPaisAleatorio(estado);
-  mostrarBanderaTrivia(paisActualTrivia);
-  mostrarOpcionesTrivia(crearOpcionesTrivia(estado, paisActualTrivia));
-  configurarEventosDeRespuesta();
+function iniciarTrivia(estado) {
+  const indiceAleatorio = obtenerIndiceAleatorio(estado);
+  alternarPaisCorrectoTrivia(estado, indiceAleatorio);
+  mostrarBanderaTrivia(estado.dataPaisesActual[indiceAleatorio]);
+  renderizarOpcionesTrivia(generarRespuestasTrivia(estado));
+  configurarEventosDeRespuestas(estado);
+}
+function reiniciarTrivia(estado) {
+  const indiceAleatorio = obtenerIndiceAleatorio(estado);
+  alternarPaisCorrectoTrivia(estado, indiceAleatorio);
+  mostrarBanderaTrivia(estado.dataPaisesActual[indiceAleatorio]);
+  renderizarOpcionesTrivia(generarRespuestasTrivia(estado));
+  reiniciarEstilos();
 }
 
 function aplicarEstilosRespuesta(inputRespuesta, isRespuestaCorrecta) {
@@ -14,23 +23,29 @@ function aplicarEstilosRespuesta(inputRespuesta, isRespuestaCorrecta) {
   inputRespuesta.classList.add(claseOpcion);
   inputRespuesta.classList.add("opcionElegida");
 }
-function crearOpcionesTrivia(estado, paisCorrecto) {
+function generarRespuestasTrivia(estado) {
   //crear funcion para que no se repitan las opciones
+  const respuestaCorrecta = estado.dataPaisesActual.find(
+    (pais) => pais.paisCorrectoTrivia
+  ).nombrePais;
   const opciones = [
     obtenerNombreAleatorioPais(estado),
     obtenerNombreAleatorioPais(estado),
-    paisCorrecto.nombrePais,
+    respuestaCorrecta,
   ];
 
-  //mejorar esta funcion
-  const opcionesAlAzar = [...opciones]
-    .sort((opcion) => Math.round(Math.random() * 2) - 1)
-    .sort((opcion) => Math.round(Math.random() * 2) - 1);
-  //hacer algo para que no sean los mismos nombres
-  return opcionesAlAzar;
+  // Ordena las opciones de manera aleatoria dos veces para aumentar la aleatoriedad
+  const opcionesAlAzar = [...opciones].sort(
+    (opcion) => Math.round(Math.random() * 2) - 1
+  );
+  estado.dataTrivia.respuestas = opcionesAlAzar.sort(
+    (opcion) => Math.round(Math.random() * 2) - 1
+  );
+  localStorage.setItem(estadoActual, JSON.stringify(estado));
+  return estado.dataTrivia.respuestas;
 }
 
-function mostrarOpcionesTrivia(opcionesAlAzar) {
+function renderizarOpcionesTrivia(opcionesAlAzar) {
   const elementosOpciones = document.querySelectorAll("span.list-group-item ");
 
   for (const [indice, elemento] of opcionesAlAzar.entries()) {
@@ -51,51 +66,55 @@ function obtenerIndiceAleatorio(estado) {
 function obtenerNombreAleatorioPais(estado) {
   return estado.dataPaisesActual[obtenerIndiceAleatorio(estado)].nombrePais;
 }
-function seleccionarPaisAleatorio(estado) {
-  const indiceRandom = obtenerIndiceAleatorio(estado);
-
-  const paisActualTrivia = estado.dataPaisesActual[indiceRandom];
-
-  return paisActualTrivia;
+function mostrarBanderaTrivia(pais) {
+  cambiarSrcImagen("#imagen-bandera-principal", pais.srcBanderaSvgPais);
 }
-
-function mostrarBanderaTrivia(paisActualTrivia) {
-  cambiarSrcImagen(
-    "#imagen-bandera-principal",
-    paisActualTrivia.srcBanderaSvgPais
-  );
-}
-function desactivarOpciones(elementosOpciones) {
+function desactivarRespuestas(elementosOpciones) {
   elementosOpciones.forEach((opcion) => {
     document.querySelector(`input#${opcion.htmlFor}`).disabled = true;
   });
 }
 
-function obtenerIndiceRespuestaCorrecta(paisActualTrivia) {
-  const elementosSpan = [...document.querySelectorAll("span.list-group-item")];
-  const indiceRespuestaCorrecta = elementosSpan.findIndex(
-    (span) => span.textContent === paisActualTrivia.nombrePais
-  );
-  return indiceRespuestaCorrecta;
+function alternarPaisCorrectoTrivia(estado, indice) {
+  estado.dataPaisesActual.forEach((pais) => (pais.paisCorrectoTrivia = false));
+  estado.dataPaisesActual[indice].paisCorrectoTrivia = true;
+  localStorage.setItem(estadoActual, JSON.stringify(estado));
 }
-function configurarEventosDeRespuesta() {
+function configurarEventosDeRespuestas(estado) {
+  reiniciarEstilos();
   const inputsRespuestas = [
     ...document.querySelectorAll("label.list-group-item "),
   ];
-  for (const [
-    indiceInputRespuesta,
-    inputRespuesta,
-  ] of inputsRespuestas.entries()) {
-    inputRespuesta.addEventListener("click", () => {
-      const indiceRespuestaCorrecta =
-        obtenerIndiceRespuestaCorrecta(paisActualTrivia);
+  for (const [indice, input] of inputsRespuestas.entries()) {
+    input.addEventListener("click", () => {
+      const paisTrivia = estado.dataPaisesActual.find(
+        (pais) => pais.paisCorrectoTrivia
+      );
+      const respuestas = estado.dataTrivia.respuestas;
+      const indiceRespuestaCorrecta = respuestas.findIndex(
+        (respuesta) => respuesta === paisTrivia.nombrePais
+      );
       inputsRespuestas[indiceRespuestaCorrecta].classList.add("opcionCorrecta");
+      const isRespuestaCorrecta = indice === indiceRespuestaCorrecta;
+      aplicarEstilosRespuesta(input, isRespuestaCorrecta);
+      desactivarRespuestas(inputsRespuestas);
 
-      const isRespuestaCorrecta =
-        indiceInputRespuesta === indiceRespuestaCorrecta;
+      const timeoutId = setTimeout(() => reiniciarTrivia(estado), 2000);
 
-      aplicarEstilosRespuesta(inputRespuesta, isRespuestaCorrecta);
-      desactivarOpciones(inputsRespuestas);
+      setTimeout(() => {
+        clearTimeout(timeoutId);
+      }, 2001);
     });
   }
+}
+function reiniciarEstilos() {
+  const inputsRespuestas = [
+    ...document.querySelectorAll("label.list-group-item "),
+  ];
+  inputsRespuestas.forEach((input) => {
+    input.classList.remove("opcionCorrecta");
+    input.classList.remove("opcionElegida");
+    input.classList.remove("opcionErrada");
+    document.querySelector(`input#${input.htmlFor}`).disabled = false;
+  });
 }
