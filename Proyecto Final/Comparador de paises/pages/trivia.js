@@ -4,19 +4,98 @@ const estadoEstadisticasTrivia = JSON.parse(
   localStorage.getItem("estadisticasTrivia")
 ) || { puntos: 0, maximoPuntaje: 0, contador: 0 };
 
-iniciarApp(estado);
+let idTemporizadorNuevaTrivia;
 
+iniciarApp(estado);
 function iniciarApp(estado) {
-  comenzarNuevaTrivia(estado);
+  //crearNuevaTrivia(estado);
   configurarEventosDeRespuestas(estado);
+  desactivarRespuestas();
+
+  const btnIniciarTrivia = document.querySelector("#btn-iniciar-trivia");
+  btnIniciarTrivia.addEventListener("click", () => {
+    iniciarTrivia(estado);
+  });
 }
 
-function comenzarNuevaTrivia(estado) {
+function iniciarTrivia(estado) {
+  habilitarRespuestas();
+  const tiempoMaximoTrivia = 5000;
+
+  estadoEstadisticasTrivia.puntos = 0;
+  estadoEstadisticasTrivia.contador = tiempoMaximoTrivia / 1000;
+
+  actualizarTextoElemento(
+    "#estadisticas-puntuacion",
+    estadoEstadisticasTrivia.puntos
+  );
+  actualizarTextoElemento(
+    "#estadisticas-contador",
+    estadoEstadisticasTrivia.contador 
+  );
+
+  crearNuevaTrivia(estado);
+
+  const idInterval = setInterval(() => {
+    estadoEstadisticasTrivia.contador -= 1;
+    actualizarTextoElemento(
+      "#estadisticas-contador",
+      estadoEstadisticasTrivia.contador
+    );
+  }, 1000);
+
+  const timeoutId = setTimeout(() => {
+    clearTimeout(idTemporizadorNuevaTrivia);
+    desactivarRespuestas();
+    reiniciarEstilos();
+    clearInterval(idInterval);
+  }, tiempoMaximoTrivia);
+  setTimeout(() => clearTimeout(timeoutId), tiempoMaximoTrivia + 1);
+}
+
+function configurarEventosDeRespuestas(estado) {
+  reiniciarEstilos();
+  const inputsRespuestas = [
+    ...document.querySelectorAll("label.list-group-item "),
+  ];
+  for (const [indice, input] of inputsRespuestas.entries()) {
+    input.addEventListener("click", () => {
+      const indiceRespuestaCorrecta = buscarIndiceRespuestaCorrecta(estado);
+      inputsRespuestas[indiceRespuestaCorrecta].classList.add("opcionCorrecta");
+      const isRespuestaCorrecta = indice === indiceRespuestaCorrecta;
+
+      actualizarEstadisticaPuntuacion(isRespuestaCorrecta);
+
+      aplicarEstilosRespuesta(input, isRespuestaCorrecta);
+      desactivarRespuestas();
+      actualizarTextoElemento(
+        "#estadisticas-puntuacion",
+        estadoEstadisticasTrivia.puntos
+      );
+      actualizarTextoElemento(
+        "#estadisticas-puntuacion-maxima",
+        estadoEstadisticasTrivia.maximoPuntaje
+      );
+
+      idTemporizadorNuevaTrivia = setTimeout(
+        () => crearNuevaTrivia(estado),
+        1000
+      );
+
+      setTimeout(() => {
+        clearTimeout(idTemporizadorNuevaTrivia);
+      }, 1001);
+    });
+  }
+}
+
+function crearNuevaTrivia(estado) {
   const indiceAleatorio = obtenerIndiceAleatorio(estado);
   alternarPaisCorrectoTrivia(estado, indiceAleatorio);
   mostrarBanderaTrivia(estado.dataPaisesActual[indiceAleatorio]);
   renderizarOpcionesTrivia(generarRespuestasTrivia(estado));
   reiniciarEstilos();
+  habilitarRespuestas();
 }
 
 function aplicarEstilosRespuesta(inputRespuesta, isRespuestaCorrecta) {
@@ -57,7 +136,7 @@ function cambiarSrcImagen(elemento, src) {
   const elementoSeleccionado = document.querySelector(`${elemento}`);
   elementoSeleccionado.src = src;
 }
-function cambiarTextoElemento(elemento, texto) {
+function actualizarTextoElemento(elemento, texto) {
   const elementoSeleccionado = document.querySelector(`${elemento}`);
   elementoSeleccionado.textContent = texto.toLocaleString("en-US");
 }
@@ -70,52 +149,16 @@ function obtenerNombreAleatorioPais(estado) {
 function mostrarBanderaTrivia(pais) {
   cambiarSrcImagen("#imagen-bandera-principal", pais.srcBanderaSvgPais);
 }
-function desactivarRespuestas(elementosOpciones) {
-  elementosOpciones.forEach((opcion) => {
-    document.querySelector(`input#${opcion.htmlFor}`).disabled = true;
-  });
-}
 
 function alternarPaisCorrectoTrivia(estado, indice) {
   estado.dataPaisesActual.forEach((pais) => (pais.paisCorrectoTrivia = false));
   estado.dataPaisesActual[indice].paisCorrectoTrivia = true;
   localStorage.setItem(estadoActual, JSON.stringify(estado));
 }
-function configurarEventosDeRespuestas(estado) {
-  reiniciarEstilos();
-  const inputsRespuestas = [
-    ...document.querySelectorAll("label.list-group-item "),
-  ];
-  for (const [indice, input] of inputsRespuestas.entries()) {
-    input.addEventListener("click", () => {
-      const paisTrivia = estado.dataPaisesActual.find(
-        (pais) => pais.paisCorrectoTrivia
-      );
-      const respuestas = estado.dataTrivia.respuestas;
-      const indiceRespuestaCorrecta = respuestas.findIndex(
-        (respuesta) => respuesta === paisTrivia.nombrePais
-      );
-      inputsRespuestas[indiceRespuestaCorrecta].classList.add("opcionCorrecta");
-      const isRespuestaCorrecta = indice === indiceRespuestaCorrecta;
-      actualizarEstadisticaPuntuacion(isRespuestaCorrecta);
 
-      console.log(estadoEstadisticasTrivia);
-      aplicarEstilosRespuesta(input, isRespuestaCorrecta);
-      desactivarRespuestas(inputsRespuestas);
-
-      const timeoutId = setTimeout(() => comenzarNuevaTrivia(estado), 2000);
-
-      setTimeout(() => {
-        clearTimeout(timeoutId);
-      }, 2001);
-    });
-  }
-}
 function actualizarEstadisticaPuntuacion(isRespuestaCorrecta) {
   if (isRespuestaCorrecta) {
     estadoEstadisticasTrivia.puntos += 1;
-  } else {
-    estadoEstadisticasTrivia.puntos = 0;
   }
   if (
     estadoEstadisticasTrivia.puntos > estadoEstadisticasTrivia.maximoPuntaje
@@ -132,6 +175,33 @@ function reiniciarEstilos() {
     input.classList.remove("opcionCorrecta");
     input.classList.remove("opcionElegida");
     input.classList.remove("opcionErrada");
-    document.querySelector(`input#${input.htmlFor}`).disabled = false;
+    //document.querySelector(`input#${input.htmlFor}`).disabled = false;
   });
+}
+function habilitarRespuestas() {
+  const inputsRespuestas = [
+    ...document.querySelectorAll("label.list-group-item "),
+  ];
+  inputsRespuestas.forEach((opcion) => {
+    document.querySelector(`input#${opcion.htmlFor}`).disabled = false;
+  });
+}
+function desactivarRespuestas() {
+  const inputsRespuestas = [
+    ...document.querySelectorAll("label.list-group-item "),
+  ];
+  inputsRespuestas.forEach((opcion) => {
+    document.querySelector(`input#${opcion.htmlFor}`).disabled = true;
+  });
+}
+
+function buscarIndiceRespuestaCorrecta(estado) {
+  const paisTrivia = estado.dataPaisesActual.find(
+    (pais) => pais.paisCorrectoTrivia
+  );
+  const respuestas = estado.dataTrivia.respuestas;
+
+  return respuestas.findIndex(
+    (respuesta) => respuesta === paisTrivia.nombrePais
+  );
 }
