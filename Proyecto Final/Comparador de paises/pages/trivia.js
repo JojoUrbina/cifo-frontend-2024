@@ -1,22 +1,25 @@
 const estadoActual = "estado3";
 const estado = JSON.parse(localStorage.getItem(estadoActual));
-const estadoEstadisticasTrivia = { puntos: 0, maximoPuntaje: 0, contador: 0 };
-
-estadoEstadisticasTrivia.maximoPuntaje = +localStorage.getItem("maximoPuntajeTrivia") || 0
+const estadoEstadisticasTrivia = { puntos: 0, contador: 0 };
+estadoEstadisticasTrivia.maximoPuntaje = +localStorage.getItem("maximoPuntajeTrivia") || 0;
 let idTemporizadorNuevaTrivia;
 
-iniciarApp(estado);
-function iniciarApp(estado) {
+iniciarApp();
+
+function iniciarApp() {
   actualizarTextoElemento(
     "#estadisticas-puntuacion-maxima",
     estadoEstadisticasTrivia.maximoPuntaje
   );
   configurarEventosDeRespuestas(estado);
   desactivarRespuestas();
-  document.querySelector("#btn-iniciar-trivia").addEventListener("click", () => {
-    document.querySelector(`#btn-iniciar-trivia`).disabled = true;
-    iniciarTrivia(estado);
-  });
+
+  document
+    .querySelector("#btn-iniciar-trivia")
+    .addEventListener("click", () => {
+      document.querySelector(`#btn-iniciar-trivia`).disabled = true;
+      iniciarTrivia(estado);
+    });
 }
 
 function iniciarTrivia(estado) {
@@ -32,7 +35,7 @@ function iniciarTrivia(estado) {
   );
   actualizarTextoElemento(
     "#estadisticas-contador",
-    estadoEstadisticasTrivia.contador 
+    estadoEstadisticasTrivia.contador
   );
 
   crearNuevaTrivia(estado);
@@ -51,7 +54,6 @@ function iniciarTrivia(estado) {
     clearInterval(idInterval);
     desactivarRespuestas();
     reiniciarEstilos();
-    
   }, tiempoMaximoTrivia);
   setTimeout(() => clearTimeout(timeoutId), tiempoMaximoTrivia + 1);
 }
@@ -167,7 +169,10 @@ function actualizarEstadisticaPuntuacion(isRespuestaCorrecta) {
     estadoEstadisticasTrivia.puntos > estadoEstadisticasTrivia.maximoPuntaje
   ) {
     estadoEstadisticasTrivia.maximoPuntaje = estadoEstadisticasTrivia.puntos;
-    localStorage.setItem("maximoPuntajeTrivia",estadoEstadisticasTrivia.maximoPuntaje.toString())
+    localStorage.setItem(
+      "maximoPuntajeTrivia",
+      estadoEstadisticasTrivia.maximoPuntaje.toString()
+    );
   }
 }
 
