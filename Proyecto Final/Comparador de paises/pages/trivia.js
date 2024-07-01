@@ -1,16 +1,17 @@
-const estadoActual = "estado";
+const estadoActual = "estado3";
 const estado = JSON.parse(localStorage.getItem(estadoActual));
-//hasta ahora solo muestra 3 nombres y uno de ellos es el correcto
-iniciarTrivia(estado);
+const estadoEstadisticasTrivia = JSON.parse(
+  localStorage.getItem("estadisticasTrivia")
+) || { puntos: 0, maximoPuntaje: 0, contador: 0 };
 
-function iniciarTrivia(estado) {
-  const indiceAleatorio = obtenerIndiceAleatorio(estado);
-  alternarPaisCorrectoTrivia(estado, indiceAleatorio);
-  mostrarBanderaTrivia(estado.dataPaisesActual[indiceAleatorio]);
-  renderizarOpcionesTrivia(generarRespuestasTrivia(estado));
+iniciarApp(estado);
+
+function iniciarApp(estado) {
+  comenzarNuevaTrivia(estado);
   configurarEventosDeRespuestas(estado);
 }
-function reiniciarTrivia(estado) {
+
+function comenzarNuevaTrivia(estado) {
   const indiceAleatorio = obtenerIndiceAleatorio(estado);
   alternarPaisCorrectoTrivia(estado, indiceAleatorio);
   mostrarBanderaTrivia(estado.dataPaisesActual[indiceAleatorio]);
@@ -96,10 +97,13 @@ function configurarEventosDeRespuestas(estado) {
       );
       inputsRespuestas[indiceRespuestaCorrecta].classList.add("opcionCorrecta");
       const isRespuestaCorrecta = indice === indiceRespuestaCorrecta;
+      actualizarEstadisticaPuntuacion(isRespuestaCorrecta);
+
+      console.log(estadoEstadisticasTrivia);
       aplicarEstilosRespuesta(input, isRespuestaCorrecta);
       desactivarRespuestas(inputsRespuestas);
 
-      const timeoutId = setTimeout(() => reiniciarTrivia(estado), 2000);
+      const timeoutId = setTimeout(() => comenzarNuevaTrivia(estado), 2000);
 
       setTimeout(() => {
         clearTimeout(timeoutId);
@@ -107,6 +111,19 @@ function configurarEventosDeRespuestas(estado) {
     });
   }
 }
+function actualizarEstadisticaPuntuacion(isRespuestaCorrecta) {
+  if (isRespuestaCorrecta) {
+    estadoEstadisticasTrivia.puntos += 1;
+  } else {
+    estadoEstadisticasTrivia.puntos = 0;
+  }
+  if (
+    estadoEstadisticasTrivia.puntos > estadoEstadisticasTrivia.maximoPuntaje
+  ) {
+    estadoEstadisticasTrivia.maximoPuntaje = estadoEstadisticasTrivia.puntos;
+  }
+}
+
 function reiniciarEstilos() {
   const inputsRespuestas = [
     ...document.querySelectorAll("label.list-group-item "),
