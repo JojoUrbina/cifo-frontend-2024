@@ -1,0 +1,5 @@
+Cree un documento styles.css también básico donde da algunos estilos (color, tamaño letra, tipografía, etc.) para el
+selector h1 . Si se fija, en el documento HTML todavía no hay ninguna etiqueta <h1> , pero la añadiremos a
+continuación desde React. El objetivo de este documento styles.css es únicamente ver que una aplicación React
+puede utilizar los estilos CSS de forma similar a como lo hace una aplicación web convencional. Enlace el
+documento HTML con el documento CSS como ha hecho siempre

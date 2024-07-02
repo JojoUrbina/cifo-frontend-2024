@@ -59,6 +59,8 @@ async function iniciarApp() {
 
   localStorage.removeItem("estado")
   localStorage.removeItem("estado1")
+  localStorage.removeItem("estado2")
+
 
 
   actualizarTarifas(estado.dataPaisesActual, tarifas);
