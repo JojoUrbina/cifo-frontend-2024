@@ -1,0 +1,23 @@
+Qué es esto de UNPKG?
+    
+    Es un servicio que ofrece un CDN gratuito para paquetes alojados en npm. Permite que los archivos de estos paquetes estén disponibles públicamente a través de URLs, facilitando su inclusión en proyectos web sin necesidad de instalación local. Básicamente toma cualquier paquete que esté publicado en npm y lo sirve como archivos estáticos que se pueden incluir en tu página web mediante etiquetas <script>.
+
+Inconvenientes posibles de las Single Page Applications (SPA)
+
+1. SEO
+    - Suele tener dificultades para la indexacion de los motores de busqueda porque el contenido se carga dinamicamente con JavaScript.
+
+2. Rendimiento inicial
+    - Se suelen descargar todos los recursos al comienzo por eso suele tener mayor tiempo de carga inicial.
+
+3. Seguridad
+    - Vulnerabilidad a ataques de Cross-Site Scripting (XSS) debido a la carga dinámica de contenido.
+
+4. Memoria y gestión de recursos
+    - Consumo de más memoria con el tiempo si no se gestionan adecuadamente los recursos y eventos.
+
+5. Compatibilidad con navegadores antiguos
+    - Algunas funcionalidades necesarias para una SPA no son compatibles con navegadores más antiguos como el API history.
+
+6. Mantenimiento y complejidad
+    - Mayor complejidad en desarrollo y mantenimiento por manejo de rutas, estados y datos del lado del cliente.

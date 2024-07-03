@@ -1,10 +1,13 @@
-const estadoActual = "estado3";
+const estadoActual = "estado";
 const estado = JSON.parse(localStorage.getItem(estadoActual));
 const estadoEstadisticasTrivia = { puntos: 0, contador: 0 };
-estadoEstadisticasTrivia.maximoPuntaje = +localStorage.getItem("maximoPuntajeTrivia") || 0;
-let idTemporizadorNuevaTrivia;
+estadoEstadisticasTrivia.maximoPuntaje =
+  +localStorage.getItem("maximoPuntajeTrivia") || 0;
+document.addEventListener("DOMContentLoaded", () => {
+  iniciarApp();
+});
 
-iniciarApp();
+let idTemporizadorNuevaTrivia;
 
 function iniciarApp() {
   actualizarTextoElemento(
@@ -24,10 +27,12 @@ function iniciarApp() {
 
 function iniciarTrivia(estado) {
   habilitarRespuestas();
-  const tiempoMaximoTrivia = 10000;
+  const tiempoEnSegundos = 20;
+  const MIL_MILISEGUNDOS = 1000;
+  const tiempoMaximoTrivia = tiempoEnSegundos * MIL_MILISEGUNDOS;
 
   estadoEstadisticasTrivia.puntos = 0;
-  estadoEstadisticasTrivia.contador = tiempoMaximoTrivia / 1000;
+  estadoEstadisticasTrivia.contador = tiempoMaximoTrivia / MIL_MILISEGUNDOS;
 
   actualizarTextoElemento(
     "#estadisticas-puntuacion",
@@ -46,7 +51,7 @@ function iniciarTrivia(estado) {
       "#estadisticas-contador",
       estadoEstadisticasTrivia.contador
     );
-  }, 1000);
+  }, MIL_MILISEGUNDOS);
 
   const timeoutId = setTimeout(() => {
     document.querySelector(`#btn-iniciar-trivia`).disabled = false;
@@ -65,6 +70,7 @@ function configurarEventosDeRespuestas(estado) {
   ];
   for (const [indice, input] of inputsRespuestas.entries()) {
     input.addEventListener("click", () => {
+      const tiempoDeIntervalo = 500;
       const indiceRespuestaCorrecta = buscarIndiceRespuestaCorrecta(estado);
       inputsRespuestas[indiceRespuestaCorrecta].classList.add("opcionCorrecta");
       const isRespuestaCorrecta = indice === indiceRespuestaCorrecta;
@@ -84,12 +90,12 @@ function configurarEventosDeRespuestas(estado) {
 
       idTemporizadorNuevaTrivia = setTimeout(
         () => crearNuevaTrivia(estado),
-        1000
+        tiempoDeIntervalo
       );
 
       setTimeout(() => {
         clearTimeout(idTemporizadorNuevaTrivia);
-      }, 1001);
+      }, tiempoDeIntervalo + 1);
     });
   }
 }
@@ -115,17 +121,18 @@ function generarRespuestasTrivia(estado) {
   ).nombrePais;
   const opciones = [
     obtenerNombreAleatorioPais(estado),
-    obtenerNombreAleatorioPais(estado),
     respuestaCorrecta,
+    obtenerNombreAleatorioPais(estado),
   ];
 
   // Ordena las opciones de manera aleatoria dos veces para aumentar la aleatoriedad
-  const opcionesAlAzar = [...opciones].sort(
-    (opcion) => Math.round(Math.random() * 2) - 1
-  );
-  estado.dataTrivia.respuestas = opcionesAlAzar.sort(
-    (opcion) => Math.round(Math.random() * 2) - 1
-  );
+  estado.dataTrivia.respuestas = [...opciones]
+
+ for (let i = 0; i < 3; i++) estado.dataTrivia.respuestas.sort(
+  (opcion) => Math.round(Math.random() * 2) - 1
+  
+)
+for (let i = 0; i < 3; i++) console.log("se barajea 3 veces");
   localStorage.setItem(estadoActual, JSON.stringify(estado));
   return estado.dataTrivia.respuestas;
 }
@@ -184,7 +191,6 @@ function reiniciarEstilos() {
     input.classList.remove("opcionCorrecta");
     input.classList.remove("opcionElegida");
     input.classList.remove("opcionErrada");
-    //document.querySelector(`input#${input.htmlFor}`).disabled = false;
   });
 }
 function habilitarRespuestas() {
