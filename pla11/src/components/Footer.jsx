@@ -6,7 +6,7 @@ const Footer = () => {
     // Quina precaució hauríem de tenir si volguéssim fer-ho? (Pista: React.Fragment)
     //agregar una etiqueta React.fragment, basicamente no sera renderizada en la interfaz pero si podra mostrar las etiquetas de parrafo.
     <footer>
-      <p>Instapicsum by CIFO L'Hospitalet</p>
+      <p>Instapicsum by CIFO L&apos;Hospitalet</p>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero veritatis necessitatibus aut aliquam at,
         exercitationem voluptas voluptates nihil doloremque deserunt, nesciunt eius expedita dolor quia pariatur fugit

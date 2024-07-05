@@ -6,7 +6,7 @@ const SuggestFollow = ({ users }) => {
       {users.map((user) => (
         // TODO #14
         // Mirant la definició del component User veuràs que aquí falta passar-li dues props molt importants.
-        <User key={user.username} name={user.username} />
+        <User key={user.username} name={user.username}  isPremium={user.isPremium}/>
       ))}
     </div>
   )

@@ -7,8 +7,11 @@ const Story = ({ storyId, photo, author, timestamp, comments, onAddComment }) =>
     <div className='story'>
       <Picture photo={photo} author={author} timestamp={timestamp} />
       {/* TODO #13
-      /// Fes un map sobre l'array comments per tal que per cada comentari
-      /// es mostri un component Comment amb les props que necessiti. */}
+      /// Haz un map sobre el array comments para que por cada comentario /// se muestre un componente Comment con las cercas que necesite. */}
+
+      {comments.map((comment) =>{
+        return <Comment key={comment.id} author={comment.username} text={comment.comment}/> })}
+
       <CommentForm storyId={storyId} onAddComment={onAddComment} />
     </div>
   )
