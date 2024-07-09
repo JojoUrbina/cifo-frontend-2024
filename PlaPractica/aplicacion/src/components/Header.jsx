@@ -1,7 +1,13 @@
-const Header = () => {
-  return (
-    <header><h1>Rastreador de tareas</h1></header>
-  )
-}
+import Button from './Button';
 
-export default Header
+const Header = ({ title }) => {
+  return (
+    <header className="header">
+      <h1>{title} </h1>
+      <Button/>
+      
+    </header>
+  );
+};
+
+export default Header;
