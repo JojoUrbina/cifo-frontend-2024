@@ -26,24 +26,23 @@ const Questions = () => {
       const data = await response.json();
       setQuestions(data.results);
     };
+
     fetchData();
   }, [settings]);
-console.log(questions);
-
   return (
     <div className="bg-quiz">
       <div className="container questions">
-        {questions.map(question => 
-           <Question
+        {questions.map((question) => (
+          <Question
             key={question.question}
             category={question.category}
             type={question.type}
             difficulty={question.difficulty}
             question={question.question}
-            correctAnswer={question.correctAnswer}
-            incorrectAnswers={question.incorrectAnswers}
+            correctAnswer={question.correct_answer}
+            incorrectAnswers={question.incorrect_answers}
           />
-        )}
+        ))}
         {/* TODO #7++
         /// Afegeix aquí un map sobre `questions` de tal manera que per cada element insereixi un
         /// component Question amb les propietats (key + 6) informades adequadament. 

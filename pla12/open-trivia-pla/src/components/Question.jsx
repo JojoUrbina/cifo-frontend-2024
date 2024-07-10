@@ -2,9 +2,11 @@ const Question = ({ category, type, difficulty, question, correctAnswer, incorre
   // TODO #6++
   // Crea una variable `answers` que contingui un array amb totes les respostes (correctes + incorrectes).
   //Crea una variable `answers` que contenga un array con todas las respuestas (correctas + incorrectas).
-console.log(incorrectAnswers);
-  const answers = [...incorrectAnswers,correctAnswer]//falta colocarlas al azar
 
+  const answers = [...incorrectAnswers,correctAnswer]//falta colocarlas al azar
+  for (let i = 0; i < 3; i++) {
+  answers.sort(()=> (Math.round(Math.random() * 2)-1)) 
+  }
   const sanitize = (text) =>
     text
       .replaceAll('&quot;', '"')
