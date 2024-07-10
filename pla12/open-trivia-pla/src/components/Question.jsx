@@ -1,6 +1,9 @@
 const Question = ({ category, type, difficulty, question, correctAnswer, incorrectAnswers }) => {
-  // TODO #6
+  // TODO #6++
   // Crea una variable `answers` que contingui un array amb totes les respostes (correctes + incorrectes).
+  //Crea una variable `answers` que contenga un array con todas las respuestas (correctas + incorrectas).
+console.log(incorrectAnswers);
+  const answers = [...incorrectAnswers,correctAnswer]//falta colocarlas al azar
 
   const sanitize = (text) =>
     text

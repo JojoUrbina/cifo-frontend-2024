@@ -13,8 +13,15 @@ const Setting = ({ property, text, first, second }) => {
       >
         {first}
       </button>
-      {/* TODO #8
-      /// Afegeix el segon botó de cada Setting perquè es mostri i funcioni com al vídeo. */}
+      <button
+        onClick={(e) => updateSetting(property, e.target.textContent)}
+        className={settings[property] === second ? 'btn-selected' : ''}
+      >
+        {second}
+      </button>
+      {/* TODO #8++
+      /// Afegeix el segon botó de cada Setting perquè es mostri i funcioni com al vídeo.
+      Añade el segundo botón de cada Setting para que se muestre y funcione como en el vídeo */}
     </div>
   )
 }
