@@ -2,23 +2,11 @@ import ContadorTiempo from "./ContadorTiempo";
 import ContadorPreguntas from "./ContadorPreguntas";
 import Pregunta from "./Pregunta";
 import ListaRespuestas from "./ListaRespuestas";
-import { useContext, useEffect, useState } from "react";
-import PreguntaActualContext from "../context/preguntaActualContext";
+import { useContext } from "react";
+import DataTriviaContext from "../context/DataTriviaContext";
 
 const Trivia = () => {
-  const [dataTrivia, setDataTrivia] = useState([]);
-
-  const { preguntaActual } = useContext(PreguntaActualContext);
-  useEffect(() => {
-    //aqui le colocaremos la configuracion
-    const fetchData = async () => {
-      const apiUrl = "/preguntas.json";
-      const respuesta = await fetch(apiUrl);
-      const data = await respuesta.json();
-      setDataTrivia(data);
-    };
-    fetchData();
-  }, []);
+  const { preguntaActual, dataTrivia,estadisticas } = useContext(DataTriviaContext);
 
   if (dataTrivia.length === 0) {
     return <div className="text-center">Cargando..</div>; // Mostrar  spinner de carga
@@ -26,7 +14,7 @@ const Trivia = () => {
 
   return (
     <div className="container borde-rojo">
-      <ContadorTiempo />
+      <ContadorTiempo estadisticas={estadisticas} />
       <ContadorPreguntas
         preguntaActual={preguntaActual}
         totalPreguntas={dataTrivia.length}

@@ -1,13 +1,13 @@
-import NavBar  from "./components/NavBar";
+import NavBar from "./components/NavBar";
 import Trivia from "./components/Trivia";
-import {PreguntaActualProvider} from "./context/preguntaActualContext";
+import { DataTriviaProvider } from "./context/DataTriviaContext";
 function App() {
   return (
-    <PreguntaActualProvider>
-    <NavBar/>
-    <h1 className="text-center">Trivia 3.0</h1>
-    <Trivia/>
-    </PreguntaActualProvider>
+    <DataTriviaProvider>
+      <NavBar />
+      <h1 className="text-center">Trivia 3.0</h1>
+      <Trivia />
+    </DataTriviaProvider>
   );
 }
 

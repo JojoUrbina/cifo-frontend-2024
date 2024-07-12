@@ -109,3 +109,12 @@ h1 {
   text-align: center;
 }
 
+.respuesta-incorrecta{
+  background-color: red;
+  color: #0b0517;
+
+}
+.respuesta-correcta {
+  background-color: var(--secundary-color);
+  color: #0b0517;
+}
