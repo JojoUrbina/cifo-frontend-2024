@@ -55,7 +55,14 @@ h1 {
   border: 2px solid red;
 } */
 #contador-tiempo {
-  font-size: 3cap;
+  font-size: clamp(8px, 1.2vw, 12px);
+
+
+  color: var(--secundary-color);
+}
+#contador-tiempo p{
+  font-size: clamp(20px, 2vw, 40px);
+
   color: var(--secundary-color);
 }
 #contador-preguntas {
@@ -63,13 +70,16 @@ h1 {
 }
 
 #pregunta h2 {
-  font-size: clamp(23px, 2.5vw, 40px);
+ /*  font-size: clamp(23px, 2.5vw, 32px); */
+  text-align: justify;
+  font-size: calc(1.3vw + 1vh + 0.5vmin);
 }
 #respuesta {
   padding: 1em;
+  border: 3px solid var(--secundary-color);
 }
 #respuesta h4 {
-  font-size: clamp(16px, 2.5vw, 20px);
+  font-size: clamp(10px, 1.2vw, 17px);
 }
 @media (max-width: 480px) {
   nav {
@@ -98,6 +108,4 @@ h1 {
   font-size: 6px;
   text-align: center;
 }
-#estadisticas p{
-  font-size: 40px;
-}
+
