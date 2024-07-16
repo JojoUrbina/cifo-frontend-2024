@@ -15,7 +15,7 @@ const Trivia = () => {
 
   return (
     <div className="container borde-rojo">
-      <Estadisticas estadisticas={estadisticas} />
+      <Estadisticas estadisticas={estadisticas} categoria={dataTrivia[0].category} />
       <ContadorPreguntas
         preguntaActual={preguntaActual}
         totalPreguntas={dataTrivia.length}

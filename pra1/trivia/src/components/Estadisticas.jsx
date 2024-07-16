@@ -1,4 +1,4 @@
-const Estadisticas = ({ estadisticas }) => {
+const Estadisticas = ({ estadisticas,categoria }) => {
   const { respuestasCorrectas, respuestasIncorrectas } = estadisticas;
   return (
     <div id="estadisticas" className="borde-rojo">
@@ -9,7 +9,7 @@ const Estadisticas = ({ estadisticas }) => {
         <p>{respuestasIncorrectas}</p>Respuestas Incorrectas
       </div>
       <div id="contador-tiempo" className="borde-rojo">
-        <p>Geography</p>Categoria
+        <p>{categoria}</p>Categoria
       </div>
     </div>
   );

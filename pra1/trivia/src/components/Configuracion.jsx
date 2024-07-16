@@ -1,27 +1,39 @@
-import { useContext } from 'react'
-import ConfiguracionContext from '../context/configuracionContext.jsx'
+import { useContext } from "react";
+import ConfiguracionesContext from "../context/ConfiguracionesContext.jsx";
 
-const Configuracion = ({ propiedad, texto, primero, segundo }) => {
-  const { Configuraciones, actualizarConfiguracion } = useContext(ConfiguracionContext)
+const Configuracion = ({ property, text, first, second, third }) => {
+  const { configuraciones, actualizarConfiguracion } =
+    useContext(ConfiguracionesContext);
 
   return (
-    <div className='Configuracion'>
-      <p>{texto}</p>
+    <div className="Configuracion">
+      <p>{text}</p>
       <button
-        onClick={(e) => actualizarConfiguracion(propiedad, e.target.textContent)}
-        className={Configuraciones[propiedad] === primero ? 'btn-selected' : ''}
+        onClick={(e) =>
+          actualizarConfiguracion(property, e.target.textContent)
+        }
+        className={configuraciones[property] === first ? "btn-selected" : ""}
       >
-        {primero}
+        {first}
       </button>
       <button
-        onClick={(e) => actualizarConfiguracion(propiedad, e.target.textContent)}
-        className={Configuraciones[propiedad] === segundo ? 'btn-selected' : ''}
+        onClick={(e) =>
+          actualizarConfiguracion(property, e.target.textContent)
+        }
+        className={configuraciones[property] === second ? "btn-selected" : ""}
       >
-        {segundo}
+        {second}
       </button>
-
+      <button
+        onClick={(e) =>
+          actualizarConfiguracion(property, e.target.textContent)
+        }
+        className={configuraciones[property] === third ? "btn-selected" : ""}
+      >
+        {third}
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default Configuracion
+export default Configuracion;
