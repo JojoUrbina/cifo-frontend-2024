@@ -1,23 +1,20 @@
-import { useContext, useState } from "react";
 
 const Respuesta = ({
   respuesta,
   respuestaCorrecta,
   onRespuesta,
   pintarRespuestas,
-  indice,
-  indiceSeleccionado
+  respuestaSeleccionada
 }) => {
   const isCorrecta = respuesta === respuestaCorrecta;
-  const esIndiceSeleccionado = indice === indiceSeleccionado
+  const esRespuestaSeleccionada = respuesta === respuestaSeleccionada
   const colorRespuestaCorrecta = isCorrecta ? "respuesta-correcta" : "" 
-  const colorRespuestaSeleccionada =esIndiceSeleccionado && !isCorrecta ? "respuesta-incorrecta":""
-
-
+  const colorRespuestaSeleccionada =esRespuestaSeleccionada && !isCorrecta ? "respuesta-incorrecta":""
 
   return (
     <div
-      onClick={() => onRespuesta(respuesta,indice)}
+    
+      onClick={() => onRespuesta(respuesta)}
       id="respuesta"
       className={`text-center ${
         pintarRespuestas ? colorRespuestaCorrecta : ""
@@ -31,29 +28,3 @@ const Respuesta = ({
 };
 export default Respuesta;
 
-/*  const timeoutId = setTimeout(() => {
-      setPreguntaActual(preguntaActual + 1);
-    }, 500);*/
-/* const siguientePregunta = () => {
-    if (preguntaActual === dataTrivia.length - 1) {
-      setColorRespuestaSeleccionada("respuesta-correcta");
-      return alert("ganaste");
-    }
-    setColorRespuestaSeleccionada("respuesta-correcta");
-    const timeoutId = setTimeout(() => {
-      setPreguntaActual(preguntaActual + 1);
-    }, 500);
-  };
-  const anteriorPregunta = () => {
-    if (preguntaActual === 0) {
-      setColorRespuestaSeleccionada("respuesta-incorrecta");
-      return;
-    }
-
-    setColorRespuestaSeleccionada("respuesta-incorrecta");
-    const timeoutId = setTimeout(() => {
-      setPreguntaActual(preguntaActual - 1);
-    }, 500);
-    setTimeout(() => clearTimeout(timeoutId), 500 + 1);
-  }; */
-/* seleccionado ? colorRespuestaSeleccionada : isRespuestaCorrecta ? "respuesta-correcta": "" */

@@ -1,56 +1,74 @@
-import { useState,useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import PreguntaAcualContext from "../context/DataTriviaContext";
 import Respuesta from "./Respuesta";
 
 const ListaRespuestas = ({ respuestasIncorrectas, respuestaCorrecta }) => {
-  const { preguntaActual, setPreguntaActual,estadisticas,setEstadisticas } =
-  useContext(PreguntaAcualContext);
+  const {
+    dataTrivia,
+    preguntaActual,
+    setPreguntaActual,
+    estadisticas,
+    setEstadisticas,
+  } = useContext(PreguntaAcualContext);
 
-const [pintarRespuestas, setPintarRespuestas] = useState(false)
-const [indiceSeleccionado,setIndiceSeleccionado]=useState("")
+  const [pintarRespuestas, setPintarRespuestas] = useState(false);
+  const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
+  const [respuestas, setRespuestas] = useState([]);
 
-const onRespuesta = (respuesta,indice) => {
-  setPintarRespuestas(true)
-  setIndiceSeleccionado(indice)
+  useEffect(() => {
+    setRespuestas(
+      [...respuestasIncorrectas, respuestaCorrecta].sort(
+        () => Math.random() - 0.5
+      )
+    );
+  }, [respuestaCorrecta]);
 
- const isRespuestaCorrecta = respuesta === respuestaCorrecta;
+  const totalPreguntas = dataTrivia.length;
 
- if (isRespuestaCorrecta) {
-  const nuevaEstadistica = {
-    ...estadisticas,
-    respuestasCorrectas: estadisticas.respuestasCorrectas + 1,
+  const actualizarEstadisticas = (esCorrecta) => {
+    setEstadisticas((prevEstadisticas) => ({
+      ...prevEstadisticas,
+      respuestasCorrectas: esCorrecta
+        ? prevEstadisticas.respuestasCorrectas + 1
+        : prevEstadisticas.respuestasCorrectas,
+      respuestasIncorrectas: !esCorrecta
+        ? prevEstadisticas.respuestasIncorrectas + 1
+        : prevEstadisticas.respuestasIncorrectas,
+    }));
   };
-  setEstadisticas(nuevaEstadistica);
-} else {
-  const nuevaEstadistica = {
-    ...estadisticas,
-    respuestasIncorrectas: estadisticas.respuestasIncorrectas + 1,
+
+  const onRespuesta = (respuesta) => {
+    if (
+      estadisticas.respuestasCorrectas + estadisticas.respuestasIncorrectas >=
+      totalPreguntas
+    )
+      return;
+
+    setPintarRespuestas(true);
+    setRespuestaSeleccionada(respuesta);
+
+    const isRespuestaCorrecta = respuesta === respuestaCorrecta;
+    actualizarEstadisticas(isRespuestaCorrecta);
+
+    setTimeout(() => {
+      setPintarRespuestas(false);
+      if (preguntaActual + 1 < totalPreguntas) {
+        setPreguntaActual(preguntaActual + 1);
+      }
+    }, 500);
   };
-  setEstadisticas(nuevaEstadistica);
-}
 
 
-
- const timeoutId = setTimeout(() => {
-  setPreguntaActual(preguntaActual + 1);
-  setPintarRespuestas(false)
-
-}, 500);
-setTimeout(() => clearTimeout(timeoutId), 500 + 1)
-};
-
-  const respuestas = [...respuestasIncorrectas, respuestaCorrecta];
   return (
     <div id="lista-respuestas" className="borde-rojo">
-      {respuestas.map((respuesta,indice) => (
+      {respuestas.map((respuesta) => (
         <Respuesta
           respuesta={respuesta}
           key={respuesta}
           respuestaCorrecta={respuestaCorrecta}
           onRespuesta={onRespuesta}
           pintarRespuestas={pintarRespuestas}
-          indice={indice}
-          indiceSeleccionado={indiceSeleccionado}
+          respuestaSeleccionada={respuestaSeleccionada}
         />
       ))}
     </div>

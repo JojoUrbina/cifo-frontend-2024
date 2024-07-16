@@ -1,4 +1,4 @@
-import ContadorTiempo from "./ContadorTiempo";
+import Estadisticas from "./Estadisticas";
 import ContadorPreguntas from "./ContadorPreguntas";
 import Pregunta from "./Pregunta";
 import ListaRespuestas from "./ListaRespuestas";
@@ -6,15 +6,16 @@ import { useContext } from "react";
 import DataTriviaContext from "../context/DataTriviaContext";
 
 const Trivia = () => {
-  const { preguntaActual, dataTrivia,estadisticas } = useContext(DataTriviaContext);
+  const { preguntaActual, dataTrivia, estadisticas } =
+    useContext(DataTriviaContext);
 
   if (dataTrivia.length === 0) {
-    return <div className="text-center">Cargando..</div>; // Mostrar  spinner de carga
+    return <div className="text-center">Cargando..</div>; 
   }
 
   return (
     <div className="container borde-rojo">
-      <ContadorTiempo estadisticas={estadisticas} />
+      <Estadisticas estadisticas={estadisticas} />
       <ContadorPreguntas
         preguntaActual={preguntaActual}
         totalPreguntas={dataTrivia.length}
