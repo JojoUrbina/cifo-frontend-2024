@@ -6,16 +6,19 @@ import { useContext } from "react";
 import DataTriviaContext from "../context/DataTriviaContext";
 
 const Trivia = () => {
-  const { preguntaActual, dataTrivia, estadisticas } =
+  const { preguntaActual, dataTrivia, estadisticas} =
     useContext(DataTriviaContext);
 
   if (dataTrivia.length === 0) {
-    return <div className="text-center">Cargando..</div>; 
+    return <div className="text-center">Cargando..</div>;
   }
 
   return (
     <div className="container borde-rojo">
-      <Estadisticas estadisticas={estadisticas} categoria={dataTrivia[0].category} />
+      <Estadisticas
+        estadisticas={estadisticas}
+        categoria={dataTrivia[0].category}
+      />
       <ContadorPreguntas
         preguntaActual={preguntaActual}
         totalPreguntas={dataTrivia.length}

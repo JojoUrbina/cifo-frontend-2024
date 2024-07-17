@@ -13,7 +13,6 @@ const Respuesta = ({
 
   return (
     <div
-    
       onClick={() => onRespuesta(respuesta)}
       id="respuesta"
       className={`text-center ${

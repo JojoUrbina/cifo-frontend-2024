@@ -1,16 +1,31 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import ConfigutacionesContext from "./ConfiguracionesContext";
+import ConfiguracionesContext from "./ConfiguracionesContext";
 const DataTriviaContext = createContext();
 
 export const DataTriviaProvider = ({ children }) => {
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [dataTrivia, setDataTrivia] = useState([]);
-  const [estadisticas, setEstadisticas] = useState({
-    respuestasCorrectas: 0,
-    respuestasIncorrectas: 0,
-  });
 
-  const { configuraciones } = useContext(ConfigutacionesContext);
+  const [estadisticas, setEstadisticas] = useState(
+    JSON.parse(localStorage.getItem("estadisticas")) || {
+      respuestasCorrectas: 0,
+      respuestasIncorrectas: 0,
+      puntuacionMaxima: 0,
+      partidasJugadas: 0,
+    }
+  );
+  const { configuraciones } = useContext(ConfiguracionesContext);
+  const [partidaTeminada, setPartidaTerminada] = useState(false);
+  const [reiniciarPartida, setReiniciarPartida] = useState(false);
+
+  useEffect(() => {
+    if (estadisticas.respuestasCorrectas > estadisticas.puntuacionMaxima) {
+      setEstadisticas((prevEstadisticas) => ({
+        ...prevEstadisticas,
+        puntuacionMaxima: estadisticas.respuestasCorrectas,
+      }));
+    }
+  }, [estadisticas]);
 
   const apiUrl = "https://opentdb.com/api.php?type=multiple";
 
@@ -33,19 +48,25 @@ export const DataTriviaProvider = ({ children }) => {
       const filterCategory = "&category=" + categoria;
       const filterDifficulty =
         "&difficulty=" + configuraciones.difficulty.toLowerCase();
-      const response = await fetch(
+      /*   const response = await fetch(
         `${apiUrl}${filterNumber}${filterCategory}${filterDifficulty}`
-      );
+      );  */
+      const response = await fetch("/preguntas.json");
       const data = await response.json();
-      setDataTrivia(data.results);
+      //setDataTrivia(data.results);
+      setDataTrivia(data);
     };
     fetchData();
-    setEstadisticas({
+    localStorage.setItem("estadisticas", JSON.stringify(estadisticas));
+
+    setEstadisticas((prevEstadisticas) => ({
+      ...prevEstadisticas,
       respuestasCorrectas: 0,
       respuestasIncorrectas: 0,
-    });
+    }));
     setPreguntaActual(0);
-  }, [configuraciones]);
+    setPartidaTerminada(false);
+  }, [configuraciones, reiniciarPartida]);
 
   return (
     <DataTriviaContext.Provider
@@ -55,6 +76,9 @@ export const DataTriviaProvider = ({ children }) => {
         setPreguntaActual,
         estadisticas,
         setEstadisticas,
+        partidaTeminada,
+        setPartidaTerminada,
+        setReiniciarPartida,
       }}
     >
       {children}

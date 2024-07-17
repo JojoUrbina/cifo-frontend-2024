@@ -9,6 +9,7 @@ const ListaRespuestas = ({ respuestasIncorrectas, respuestaCorrecta }) => {
     setPreguntaActual,
     estadisticas,
     setEstadisticas,
+    setPartidaTerminada,
   } = useContext(PreguntaAcualContext);
 
   const [pintarRespuestas, setPintarRespuestas] = useState(false);
@@ -16,12 +17,14 @@ const ListaRespuestas = ({ respuestasIncorrectas, respuestaCorrecta }) => {
   const [respuestas, setRespuestas] = useState([]);
 
   useEffect(() => {
-    setRespuestas(
+
+    setRespuestas([...respuestasIncorrectas, respuestaCorrecta])
+    /* setRespuestas(
       [...respuestasIncorrectas, respuestaCorrecta].sort(
         () => Math.random() - 0.5
       )
-    );
-  }, [respuestaCorrecta]);
+    ); */
+  }, [respuestaCorrecta, respuestasIncorrectas]);
 
   const totalPreguntas = dataTrivia.length;
 
@@ -41,8 +44,9 @@ const ListaRespuestas = ({ respuestasIncorrectas, respuestaCorrecta }) => {
     if (
       estadisticas.respuestasCorrectas + estadisticas.respuestasIncorrectas >=
       totalPreguntas
-    )
+    ) {
       return;
+    }
 
     setPintarRespuestas(true);
     setRespuestaSeleccionada(respuesta);
@@ -52,12 +56,28 @@ const ListaRespuestas = ({ respuestasIncorrectas, respuestaCorrecta }) => {
 
     setTimeout(() => {
       setPintarRespuestas(false);
-      if (preguntaActual + 1 < totalPreguntas) {
-        setPreguntaActual(preguntaActual + 1);
+      if (
+        estadisticas.respuestasCorrectas + estadisticas.respuestasIncorrectas >=
+        totalPreguntas - 1
+      ) {
+        setEstadisticas((prevEstadisticas) => ({
+          ...prevEstadisticas,
+          partidasJugadas: prevEstadisticas.partidasJugadas + 1,
+
+        }));
+     /*    estadisticas.respuestasCorrectas >= estadisticas.puntuacionMaxima &&
+          setEstadisticas((prevEstadisticas) => ({
+            ...prevEstadisticas,
+            puntuacionMaxima: estadisticas.respuestasCorrectas,
+          })); */
+
+        setPartidaTerminada(true);
+        return;
       }
+
+      setPreguntaActual(preguntaActual + 1);
     }, 500);
   };
-
 
   return (
     <div id="lista-respuestas" className="borde-rojo">

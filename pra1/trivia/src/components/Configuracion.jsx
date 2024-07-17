@@ -6,13 +6,13 @@ const Configuracion = ({ property, text, first, second, third }) => {
     useContext(ConfiguracionesContext);
 
   return (
-    <div className="Configuracion">
-      <p>{text}</p>
+    <div className="configuracion">
+      <h2>{text}</h2>
       <button
         onClick={(e) =>
           actualizarConfiguracion(property, e.target.textContent)
         }
-        className={configuraciones[property] === first ? "btn-selected" : ""}
+        className= {configuraciones[property] === first ? "btn-selected" : ""}
       >
         {first}
       </button>
