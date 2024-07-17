@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all ease-in-out 100ms; 
+  transition: all ease-in-out 100ms;
 }
 body {
   font-family: "inter", sans-serif;
@@ -20,7 +20,7 @@ body {
 div {
   margin-bottom: 0.5rem;
 }
-h2{
+h2 {
   margin-bottom: 0.5em;
 }
 nav {
@@ -53,7 +53,7 @@ li {
 }
 h1 {
   width: max-content;
-  margin: 1em auto
+  margin: 1em auto;
 }
 #contador-tiempo {
   font-size: clamp(8px, 1.2vw, 12px);
@@ -64,12 +64,11 @@ h1 {
 
   color: var(--secundary-color);
 }
-#contador-tiempo.dificultad-o-categoria:hover, #contador-tiempo.dificultad-o-categoria:hover p{
+#contador-tiempo.dificultad-o-categoria:hover,
+#contador-tiempo.dificultad-o-categoria:hover p {
   color: white;
   cursor: pointer;
 }
-
-
 
 #contador-preguntas {
   font-size: clamp(10px, 2vw, 12px);
@@ -136,12 +135,72 @@ button {
   color: #0b0517;
 }
 
-#titulo-trivia:hover{
+#titulo-trivia:hover {
   color: var(--secundary-color);
   cursor: pointer;
 }
+.instrucciones {
+  margin: 1em 0;
+  text-align: justify;
+}
+.container-instrucciones {
+  width: clamp(20em, 80vw, 40em);
+  margin: 3em auto;
+  padding: 1.5em;
+  box-shadow: 0 2px 4px #faf8ff31;
+  background-color: #0b0517;
+}
+.container-instrucciones h2 {
+  font-size: clamp(1.2em, 3vw, 2em);
+}
+.container-instrucciones p {
+  font-size: clamp(0.7em, 1.5vw, 1em);
+}
+a,
+a:active {
+  color: var(--secundary-color);
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+}
 
+.not-found-container {
+  text-align: center;
+  padding: 50px;
+  margin: 0 auto;
+  max-width: 600px;
+}
 
+.not-found-container h1 {
+  font-size: 100px;
+  margin-bottom: 20px;
+  color: var(--secundary-color);
+}
+
+.not-found-container h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.not-found-container p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.inicio-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--secundary-color);
+  color: var(--primary-color);
+  border-radius: 5px;
+}
+
+.inicio-link:hover {
+  background-color: var(--primary-color);
+}
 @media (max-width: 480px) {
   nav {
     box-shadow: 0 2px 4px rgba(250, 248, 248, 0.5);
@@ -166,10 +225,4 @@ button {
     margin: 0.3em auto;
     text-align: center;
   }
-}
-.instrucciones {
-  margin: 1em 0;
-  font-size: 1.1em;
-  text-align: justify;
-  color: #333;
 }

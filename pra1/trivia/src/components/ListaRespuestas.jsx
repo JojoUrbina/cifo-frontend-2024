@@ -17,13 +17,11 @@ const ListaRespuestas = ({ respuestasIncorrectas, respuestaCorrecta }) => {
   const [respuestas, setRespuestas] = useState([]);
 
   useEffect(() => {
-
-    setRespuestas([...respuestasIncorrectas, respuestaCorrecta])
-    /* setRespuestas(
+    setRespuestas(
       [...respuestasIncorrectas, respuestaCorrecta].sort(
         () => Math.random() - 0.5
       )
-    ); */
+    );
   }, [respuestaCorrecta, respuestasIncorrectas]);
 
   const totalPreguntas = dataTrivia.length;
@@ -63,13 +61,7 @@ const ListaRespuestas = ({ respuestasIncorrectas, respuestaCorrecta }) => {
         setEstadisticas((prevEstadisticas) => ({
           ...prevEstadisticas,
           partidasJugadas: prevEstadisticas.partidasJugadas + 1,
-
         }));
-     /*    estadisticas.respuestasCorrectas >= estadisticas.puntuacionMaxima &&
-          setEstadisticas((prevEstadisticas) => ({
-            ...prevEstadisticas,
-            puntuacionMaxima: estadisticas.respuestasCorrectas,
-          })); */
 
         setPartidaTerminada(true);
         return;

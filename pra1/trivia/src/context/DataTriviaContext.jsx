@@ -29,7 +29,6 @@ export const DataTriviaProvider = ({ children }) => {
     }
   }, [estadisticas]);
 
-
   const apiUrl = "https://opentdb.com/api.php?type=multiple";
 
   function obtenerCategoria(categoriaSeleccionada) {
@@ -51,16 +50,19 @@ export const DataTriviaProvider = ({ children }) => {
       const filterCategory = "&category=" + categoria;
       const filterDifficulty =
         "&difficulty=" + configuraciones.difficulty.toLowerCase();
-      /*   const response = await fetch(
+     /*  const response = await fetch(
         `${apiUrl}${filterNumber}${filterCategory}${filterDifficulty}`
-      );  */
+      ); */
       const response = await fetch("/preguntas.json");
       const data = await response.json();
       //setDataTrivia(data.results);
       setDataTrivia(data);
     };
-    fetchData();
-    //localStorage.setItem("estadisticas", JSON.stringify(estadisticas));
+    setDataTrivia([]);
+
+    const timeoutId = setTimeout(() => {
+      fetchData();
+    }, 1000);
 
     setEstadisticas((prevEstadisticas) => ({
       ...prevEstadisticas,
@@ -69,6 +71,7 @@ export const DataTriviaProvider = ({ children }) => {
     }));
     setPreguntaActual(0);
     setPartidaTerminada(false);
+    return () => clearTimeout(timeoutId);
   }, [configuraciones, reiniciarPartida]);
 
   return (
@@ -81,6 +84,7 @@ export const DataTriviaProvider = ({ children }) => {
         setEstadisticas,
         partidaTeminada,
         setPartidaTerminada,
+        reiniciarPartida,
         setReiniciarPartida,
       }}
     >

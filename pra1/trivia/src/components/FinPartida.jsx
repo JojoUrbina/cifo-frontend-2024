@@ -2,16 +2,14 @@ import { useContext } from "react";
 import dataTriviaContext from "../context/DataTriviaContext";
 
 const FinPartida = () => {
-  const { estadisticas, setReiniciarPartida } = useContext(dataTriviaContext);
+  const { estadisticas, reiniciarPartida, setReiniciarPartida } =
+    useContext(dataTriviaContext);
   const { respuestasCorrectas, puntuacionMaxima, partidasJugadas } =
     estadisticas;
   const puntuacionPartida = respuestasCorrectas;
 
-  const handleReiniciarPartida = () => {
-    setReiniciarPartida(true);
-    setTimeout(() => {
-      setReiniciarPartida(false);
-    }, 100); // Espera 100 ms antes de establecer a true nuevamente porque no habilitaba el useEffec
+  const handleReiniciarPartida = (reiniciarPartida) => {
+    setReiniciarPartida(!reiniciarPartida);
   };
 
   return (
@@ -30,7 +28,7 @@ const FinPartida = () => {
       </div>
       <button
         onClick={() => {
-          handleReiniciarPartida();
+          handleReiniciarPartida(reiniciarPartida);
         }}
       >
         Reiniciar Partida

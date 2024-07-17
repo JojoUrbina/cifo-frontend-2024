@@ -14,7 +14,7 @@ const Trivia = () => {
 
   return (
     <>
-      <div className="container borde-rojo">
+      <div className="container ">
         <Estadisticas />
         <ContadorPreguntas
           preguntaActual={preguntaActual}
@@ -26,16 +26,7 @@ const Trivia = () => {
           respuestaCorrecta={dataTrivia[preguntaActual].correct_answer}
         />
       </div>
-      <div className="container">
-        <p className="instrucciones">
-          Haz clic en el título "Trivia 3.0" para finalizar la partida actual y
-          ver los resultados.
-        </p>
-        <p className="instrucciones">
-          Haz clic en el texto de categoría o dificultad para alternar entre
-          mostrar la categoría de las preguntas y la dificultad.
-        </p>
-      </div>
+      
     </>
   );
 };
