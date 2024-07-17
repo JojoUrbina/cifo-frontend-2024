@@ -12,7 +12,6 @@ function App() {
       <DataTriviaProvider>
         <Router>
           <NavBar />
-          <h1 className="text-center">Trivia 3.0</h1>
           <Routes>
             <Route
               path="/"

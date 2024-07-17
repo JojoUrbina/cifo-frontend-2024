@@ -19,6 +19,8 @@ export const DataTriviaProvider = ({ children }) => {
   const [reiniciarPartida, setReiniciarPartida] = useState(false);
 
   useEffect(() => {
+    localStorage.setItem("estadisticas", JSON.stringify(estadisticas));
+
     if (estadisticas.respuestasCorrectas > estadisticas.puntuacionMaxima) {
       setEstadisticas((prevEstadisticas) => ({
         ...prevEstadisticas,
@@ -26,6 +28,7 @@ export const DataTriviaProvider = ({ children }) => {
       }));
     }
   }, [estadisticas]);
+
 
   const apiUrl = "https://opentdb.com/api.php?type=multiple";
 
@@ -57,7 +60,7 @@ export const DataTriviaProvider = ({ children }) => {
       setDataTrivia(data);
     };
     fetchData();
-    localStorage.setItem("estadisticas", JSON.stringify(estadisticas));
+    //localStorage.setItem("estadisticas", JSON.stringify(estadisticas));
 
     setEstadisticas((prevEstadisticas) => ({
       ...prevEstadisticas,

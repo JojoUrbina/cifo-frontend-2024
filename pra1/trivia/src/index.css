@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* transition: all ease-in-out 250ms; */
+  transition: all ease-in-out 100ms; 
 }
 body {
   font-family: "inter", sans-serif;
@@ -52,14 +52,11 @@ li {
   text-align: center;
 }
 h1 {
-  margin: 1em;
+  width: max-content;
+  margin: 1em auto
 }
-/* .borde-rojo {
-  border: 2px solid red;
-} */
 #contador-tiempo {
   font-size: clamp(8px, 1.2vw, 12px);
-
   color: var(--secundary-color);
 }
 #contador-tiempo p {
@@ -67,6 +64,13 @@ h1 {
 
   color: var(--secundary-color);
 }
+#contador-tiempo.dificultad-o-categoria:hover, #contador-tiempo.dificultad-o-categoria:hover p{
+  color: white;
+  cursor: pointer;
+}
+
+
+
 #contador-preguntas {
   font-size: clamp(10px, 2vw, 12px);
 }
@@ -113,9 +117,14 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2em;
 }
 .configuraciones h2 {
   text-align: center;
+}
+.configuraciones p {
+  padding: 0.5em;
+  text-align: justify;
 }
 .configuracion button:hover {
   border: 3px solid var(--secundary-color);
@@ -126,6 +135,12 @@ button {
   border: 3px solid var(--secundary-color);
   color: #0b0517;
 }
+
+#titulo-trivia:hover{
+  color: var(--secundary-color);
+  cursor: pointer;
+}
+
 
 @media (max-width: 480px) {
   nav {
@@ -151,4 +166,10 @@ button {
     margin: 0.3em auto;
     text-align: center;
   }
+}
+.instrucciones {
+  margin: 1em 0;
+  font-size: 1.1em;
+  text-align: justify;
+  color: #333;
 }
