@@ -50,13 +50,13 @@ export const DataTriviaProvider = ({ children }) => {
       const filterCategory = "&category=" + categoria;
       const filterDifficulty =
         "&difficulty=" + configuraciones.difficulty.toLowerCase();
-     /*  const response = await fetch(
+      const response = await fetch(
         `${apiUrl}${filterNumber}${filterCategory}${filterDifficulty}`
-      ); */
-      const response = await fetch("/preguntas.json");
+      );
       const data = await response.json();
-      //setDataTrivia(data.results);
-      setDataTrivia(data);
+      setDataTrivia(data.results);
+      //const response = await fetch("/preguntas.json"); //Para probar la aplicacion sin sobre cargar la api
+      //setDataTrivia(data);
     };
     setDataTrivia([]);
 

@@ -10,6 +10,13 @@ const Respuesta = ({
   const esRespuestaSeleccionada = respuesta === respuestaSeleccionada
   const colorRespuestaCorrecta = isCorrecta ? "respuesta-correcta" : "" 
   const colorRespuestaSeleccionada =esRespuestaSeleccionada && !isCorrecta ? "respuesta-incorrecta":""
+  const sanitize = (text) =>
+    text
+      .replaceAll('&quot;', '"')
+      .replaceAll('&#039;', "'")
+      .replaceAll('&amp;', '&')
+      .replaceAll('&deg;', 'º')
+      .replaceAll('&shy;', '\u00AD')
 
   return (
     <div
@@ -21,7 +28,7 @@ const Respuesta = ({
         pintarRespuestas ? colorRespuestaSeleccionada : ""
       } `}
     >
-      <h4>{respuesta} </h4>
+      <h4>{sanitize(respuesta)} </h4>
     </div>
   );
 };
