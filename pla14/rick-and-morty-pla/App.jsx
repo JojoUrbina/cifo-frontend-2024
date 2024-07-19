@@ -19,6 +19,9 @@ const App = () => {
       <Stack.Navigator screenOptions={screenOptions}>
         {/* TODO #1 
         /// Afegeix una altra Stack.Screen (abans de la que ja hi ha) pel component ListScreen, passant-li el títol dins de les opcions. */}
+        {/* Añade otra Stack.Screen (antes de la que ya hay) por el componente ListScreen, pasándole el título dentro de las opciones. */}
+        <Stack.Screen name='List' component={ListScreen} options={({ route }) => ({ title: route.params.name })} />
+        
         <Stack.Screen name='Detail' component={DetailScreen} options={({ route }) => ({ title: route.params.name })} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -31,8 +34,11 @@ const screenOptions = {
   },
   headerTintColor: '#fff',
   headerTitleStyle: {
+    fontWeight:"bold",
+    fontSize:22
     // TODO #2
     // Fes que el text de la barra de navegació es mostri en negreta i de mida 22.
+    //Haz que el texto de la barra de navegación se muestre en negrita y tamaño 22.
   },
 }
 

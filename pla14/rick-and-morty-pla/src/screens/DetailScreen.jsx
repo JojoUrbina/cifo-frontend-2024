@@ -9,6 +9,8 @@ const DetailScreen = ({ route }) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`${api}/${route.params.id}`)
+      const data = await response.json()
+      setData(data)
       // TODO #6
       // Afegeix el codi que manca en aquesta funció en aquest punt (Pista: 2 línies de sobres conegudes).
     }
@@ -24,7 +26,7 @@ const DetailScreen = ({ route }) => {
       <Image source={{ uri: data.image }} accessibilityLabel={data.name} />
       {/* TODO #8
       /// Afegeix el contingut que ha de mostrar aquest component Text. */}
-      <Text></Text>
+      <Text>hhhh</Text>
     </View>
   )
 }

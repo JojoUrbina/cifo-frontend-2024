@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 // TODO #5
 // Afegeix tot el que calgui dins de les claus de l'import a la línia següent.
-import {} from 'react-native'
-import Character from '../components/Character'
-import localData from '../data/data.json'
-import emptyData from '../data/empty.json'
-import Colors from '../common/Colors'
+import { StyleSheet, FlatList, View, Text } from "react-native";
+import Character from "../components/Character";
+import localData from "../data/data.json";
+import emptyData from "../data/empty.json";
+import Colors from "../common/Colors";
 
 const ListScreen = ({ navigation }) => {
-  const [characters, setCharacters] = useState([])
+  const [characters, setCharacters] = useState([]);
 
   // Data -- Using real API.
   // const api = 'https://rickandmortyapi.com/api/character'
@@ -24,10 +24,10 @@ const ListScreen = ({ navigation }) => {
   // Data -- Local file to prevent API calls.
   useEffect(() => {
     const fetchData = async () => {
-      setCharacters(localData.results)
-    }
-    fetchData()
-  }, [])
+      setCharacters(localData.results);
+    };
+    fetchData();
+  }, []);
 
   // Data -- Local file to test empty results.
   // useEffect(() => {
@@ -37,11 +37,12 @@ const ListScreen = ({ navigation }) => {
   //   fetchData()
   // }, [])
 
-  const separator = () => <View style={styles.separator} />
+  const separator = () => <View style={styles.separator} />;
 
   // TODO #3
   // Millora la UI que es mostra en cas de no rebre dades, aquest simple Text queda molt pobre.
-  if (characters.length === 0) return <Text>No data</Text>
+  // Mejora la UI que se muestra en caso de no recibir datos, ese simple Texto queda muy pobre.
+  if (characters.length === 0) return <Text>No data</Text>;
 
   return (
     <FlatList
@@ -49,16 +50,23 @@ const ListScreen = ({ navigation }) => {
       renderItem={({ item }) => (
         <Character
           gender={item.gender}
+          image={item.image}
+          name={item.name}
+          species={item.species}
+          status={item.status}
           // TODO #4
           // Revisa Character.jsx i afegeix aquí les props que manquen.
-          onPress={() => navigation.navigate('Detail', { id: item.id, name: item.name })}
+          //Revisa Character.jsx y añade aquí las cercas que faltan.
+          onPress={() =>
+            navigation.navigate("Detail", { id: item.id, name: item.name })
+          }
         />
       )}
       keyExtractor={(item) => item.id}
       ItemSeparatorComponent={separator}
     />
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   nodataContainer: {},
@@ -68,6 +76,6 @@ const styles = StyleSheet.create({
     left: 16,
     backgroundColor: Colors.primary,
   },
-})
+});
 
-export default ListScreen
+export default ListScreen;
