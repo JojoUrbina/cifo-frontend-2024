@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
-import { Dimensions, Image, StyleSheet, Text, View,Button } from "react-native";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+} from "react-native";
 
-const DetailScreen = ({ route,navigation }) => {
+const DetailScreen = ({ route, navigation }) => {
   const [data, setData] = useState({});
 
   // Data -- Using real API.
@@ -19,12 +26,19 @@ const DetailScreen = ({ route,navigation }) => {
     fetchData();
   }, []);
 
+  if (!data.name || !data.image || !data.episode) {
+    return (
+      <View style={styles.nodataContainer}>
+        <Text style={styles.nodataText}>Datos no disponibles</Text>
+      </View>
+    );
+  }
+
   return (
     // TODO #7
     // Afegeix els estils corresponents a cadascun dels quatre components del següent subarbre de components.
     //Agregue los estilos correspondientes a cada uno de los cuatro componentes del siguiente componente subterráneo.
     <View style={styles.container}>
-     
       <Text style={styles.name}>{data.name}</Text>
       <Image
         style={styles.image}
@@ -62,6 +76,13 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#888",
   },
+  nodataContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.cell,
+  },
+  nodataText: { fontSize: 22 },
 });
 
 export default DetailScreen;

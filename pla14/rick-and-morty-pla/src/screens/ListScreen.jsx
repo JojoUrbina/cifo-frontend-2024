@@ -42,7 +42,13 @@ const ListScreen = ({ navigation }) => {
   // TODO #3
   // Millora la UI que es mostra en cas de no rebre dades, aquest simple Text queda molt pobre.
   // Mejora la UI que se muestra en caso de no recibir datos, ese simple Texto queda muy pobre.
-  if (characters.length === 0) return <Text>No data</Text>;
+  if (characters.length === 0) {
+    return (
+      <View style={styles.nodataContainer}>
+        <Text style={styles.nodataText}>No hay datos disponibles </Text>
+      </View>
+    );
+  }
 
   return (
     <FlatList
@@ -69,8 +75,13 @@ const ListScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  nodataContainer: {},
-  nodataText: {},
+  nodataContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.cell,
+  },
+  nodataText: { fontSize: 22 },
   separator: {
     height: 0.6,
     left: 16,
