@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import styles from "../common/GlobalStyles";
+import styles from "../../common/GlobalStyles";
 
 const Comments = ({ author, text, icon }) => {
   return (

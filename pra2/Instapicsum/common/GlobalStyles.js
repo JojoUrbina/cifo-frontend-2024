@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
   title2: {
     fontSize: 25,
     padding: 10,
-    color: '#000',
-    textShadowColor: '#888',
+    color: "#000",
+    textShadowColor: "#888",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 3,
   },
@@ -62,13 +62,12 @@ const styles = StyleSheet.create({
     fontSize: 10,
     paddingHorizontal: 20,
     paddingVertical: 5,
-    paddingBottom:15,
+    paddingBottom: 15,
     color: blue,
   },
   storyComments: {
     paddingHorizontal: 30,
     paddingVertical: 5,
-
   },
   authorComment: {
     color: blue,

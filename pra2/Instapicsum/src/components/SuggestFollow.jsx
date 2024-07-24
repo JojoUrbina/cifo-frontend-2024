@@ -1,7 +1,7 @@
 import { FlatList, View, Text } from "react-native";
 import User from "./Users";
-import styles from "../common/GlobalStyles";
-import { data } from "../public/data";
+import styles from "../../common/GlobalStyles";
+import { data } from "../../public/data";
 
 const SuggestFollow = () => {
   const usersSuggested = data.suggestedFollows;

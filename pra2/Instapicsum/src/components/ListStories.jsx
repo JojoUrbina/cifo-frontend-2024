@@ -1,7 +1,7 @@
 import { FlatList, Text, View } from "react-native";
-import styles from "../common/GlobalStyles";
+import styles from "../../common/GlobalStyles";
 
-import { data } from "../public/data";
+import { data } from "../../public/data";
 import Story from "./Story";
 
 const ListStories = () => {
