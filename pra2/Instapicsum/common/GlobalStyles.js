@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
   title2: {
     fontSize: 25,
     padding: 10,
+    color: '#000',
+    textShadowColor: '#888',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 3,
   },
   listSuggest: {
     flex: 1,
@@ -52,23 +56,26 @@ const styles = StyleSheet.create({
     height: 300,
   },
   story: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
   storyFigcaption: {
     fontSize: 10,
     paddingHorizontal: 20,
-    paddingVertical: 3,
+    paddingVertical: 5,
+    paddingBottom:15,
     color: blue,
   },
   storyComments: {
     paddingHorizontal: 30,
-    paddingVertical: 3,
+    paddingVertical: 5,
+
   },
-  authorComment:{
+  authorComment: {
     color: blue,
     fontSize: 15,
-
-
-  }
+  },
+  comment: {
+    paddingLeft: 25,
+  },
 });
 export default styles;
