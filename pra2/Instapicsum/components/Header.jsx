@@ -6,7 +6,7 @@ export default function App() {
   return (
     <View>
       <View style={styles.header}>
-        <Text style={styles.title}>Trivia App</Text>
+        <Text style={styles.title}>Instapicsum</Text>
       </View>
       <StatusBar style="auto" />
     </View>

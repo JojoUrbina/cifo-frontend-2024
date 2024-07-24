@@ -11,6 +11,7 @@ const User = ({ name, avatar, isPremium }) => {
         }}
       />
       <Text style={styles.textAvatar}>{name}</Text>
+      <Text style={styles.textAvatar}>{isPremium ? "❤️" : ""}</Text>
     </View>
   );
 };

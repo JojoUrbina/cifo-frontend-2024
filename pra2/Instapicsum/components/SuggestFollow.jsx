@@ -1,15 +1,13 @@
-import React, { useState } from "react";
 import { FlatList, View, Text } from "react-native";
 import User from "./Users";
 import styles from "../common/GlobalStyles";
 import { data } from "../public/data";
-console.log(data.suggestedFollows);
 
 const SuggestFollow = () => {
   const usersSuggested = data.suggestedFollows;
 
   return (
-    <>
+    <View>
       <Text style={styles.title2}>WHO TO FOLLOW</Text>
       <FlatList
         horizontal
@@ -22,8 +20,9 @@ const SuggestFollow = () => {
             isPremium={item.premium}
           />
         )}
+        showsHorizontalScrollIndicator={false}
       />
-    </>
+    </View>
   );
 };
 

@@ -1,5 +1,8 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
+
+const blue = "#58a";
+const red = "#d34";
+const gray = "#333";
 
 const styles = StyleSheet.create({
   container: {
@@ -11,8 +14,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#6200ea",
-    paddingTop: 30,
-    paddingBottom: 15,
+    paddingTop: 35,
+    paddingBottom: 20,
     paddingHorizontal: 25,
     marginBottom: 10,
     elevation: 5,
@@ -44,5 +47,28 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 20,
   },
+  photoStory: {
+    width: "auto",
+    height: 300,
+  },
+  story: {
+    marginVertical: 10,
+  },
+  storyFigcaption: {
+    fontSize: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 3,
+    color: blue,
+  },
+  storyComments: {
+    paddingHorizontal: 30,
+    paddingVertical: 3,
+  },
+  authorComment:{
+    color: blue,
+    fontSize: 15,
+
+
+  }
 });
 export default styles;
