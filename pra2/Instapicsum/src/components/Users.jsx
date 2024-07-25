@@ -1,5 +1,5 @@
-import { Text, View, Image } from "react-native";
 import styles from "../../common/GlobalStyles";
+import { Text, View, Image } from "react-native";
 
 const User = ({ name, avatar, isPremium }) => {
   return (

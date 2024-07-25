@@ -1,6 +1,6 @@
+import styles from "../../common/GlobalStyles";
 import { StatusBar } from "expo-status-bar";
 import {Text, View } from "react-native";
-import styles from "../../common/GlobalStyles";
 
 export default function App() {
   return (

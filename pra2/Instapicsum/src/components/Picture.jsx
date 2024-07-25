@@ -1,5 +1,5 @@
-import { Image, Text, View } from "react-native";
 import styles from "../../common/GlobalStyles";
+import { Image, Text, View } from "react-native";
 
 const Picture = ({ photo, author, timestamp }) => {
   const photoTime = new Date(timestamp);

@@ -1,10 +1,10 @@
-import { Text, View } from "react-native";
 import styles from "../../common/GlobalStyles";
+import { Text, View } from "react-native";
 
 const Comments = ({ author, text, icon }) => {
   return (
     <View style={styles.storyComments}>
-      <View style={{flexDirection:"row"}}>
+      <View style={{ flexDirection: "row" }}>
         <Text style={{ marginRight: 5 }}>{icon}</Text>
         <Text style={styles.authorComment}>{author}</Text>
       </View>
@@ -12,5 +12,4 @@ const Comments = ({ author, text, icon }) => {
     </View>
   );
 };
-
 export default Comments;

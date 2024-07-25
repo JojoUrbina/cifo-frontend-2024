@@ -26,6 +26,7 @@ import {
   alternarFavorito,
   alternarBlogPais,
 } from "./modules/configurarEventListener.js";
+import { actualizarTablaYPaginacion  } from "./modules/paginacion.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarApp();
@@ -40,6 +41,8 @@ export const estado = {
   dataTrivia: {
     respuestas: [],
   },
+  paginaActual: 1,
+  dataOrdenada: null,
 };
 
 async function iniciarApp() {
@@ -58,7 +61,8 @@ async function iniciarApp() {
 
   actualizarTarifas(estado.dataPaisesActual, tarifas);
   actualizarImportes(estado.dataPaisesActual);
-  renderizarTabla(estado.dataPaisesActual);
+  //renderizarTabla(estado.dataPaisesActual);
+  actualizarTablaYPaginacion();
   actualizarPlaceholder();
   RenderizarIUYconfigurarEventos();
 }
@@ -107,15 +111,22 @@ function RenderizarIUYconfigurarEventos() {
         (pais) => pais.paisFavorito === true
       );
       estado.dataPaisesFiltrados = [...estado.dataPaisesFavoritos];
+      estado.dataOrdenada = null;
+      estado.paginaActual = 1;
+      actualizarTablaYPaginacion();
 
-      renderizarTabla(estado.dataPaisesFiltrados);
+      //renderizarTabla(estado.dataPaisesFiltrados);
     });
 
   document
     .querySelector("#btn-reiniciar-filtros")
     .addEventListener("click", () => {
       estado.dataPaisesFiltrados = null;
-      renderizarTabla(estado.dataPaisesActual);
+      estado.dataOrdenada = null;
+      estado.paginaActual = 1;
+
+      //renderizarTabla(estado.dataPaisesActual);
+      actualizarTablaYPaginacion();
     });
 
   configurarEventosDeOrdenar(".ordenar-importe", ordenarDatosPorImporte);

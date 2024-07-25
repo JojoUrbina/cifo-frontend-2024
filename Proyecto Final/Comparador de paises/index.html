@@ -8,14 +8,12 @@
     <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./styles.css" />
     <title>Comparador de países</title>
-
   </head>
   <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="./index.html">
           <img src="icons/icons8-currencies-96.png" alt="Logo" />
-          
         </a>
         <button
           class="navbar-toggler collapsed"
@@ -60,16 +58,16 @@
 
         <ul class="list-unstyled lead">
           <li>
-            <strong >Monedas:</strong> Conoce las divisas oficiales de cada país,
+            <strong>Monedas:</strong> Conoce las divisas oficiales de cada país,
             sus valores y cómo se comparan con otras monedas.
           </li>
           <li>
-            <strong >Idiomas:</strong> Descubre los idiomas predominantes y
+            <strong>Idiomas:</strong> Descubre los idiomas predominantes y
             oficiales de cada nación, crucial para viajeros y negocios
             internacionales.
           </li>
           <li>
-            <strong >Datos geográficos y culturales:</strong> Información sobre
+            <strong>Datos geográficos y culturales:</strong> Información sobre
             ubicación, población y aspectos culturales relevantes de los países.
           </li>
         </ul>
@@ -193,7 +191,7 @@
         <!-- fin Side menu-->
         <!--inicio de Tabla-->
         <div class="col-lg-9">
-          <div class="table-responsive rounded-top-1">
+          <div class="table-responsive table-container rounded-top-1">
             <table class="table table-hover table-sm">
               <thead class="table-light">
                 <tr>
@@ -274,7 +272,12 @@
               <tbody></tbody>
             </table>
           </div>
-        </div>
+          <div >
+            <ul id="paginacion" class="pagination justify-content-center">
+             
+            </ul>
+          </div>
+          <!-- <div id="paginacion"></div> -->
       </div>
     </main>
     <footer class="py-5 text-center text-body-secondary bg-secondary-subtle">

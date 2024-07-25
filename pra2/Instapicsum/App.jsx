@@ -1,9 +1,8 @@
-import { ScrollView } from "react-native";
+import styles from "./common/GlobalStyles";
 import Header from "./src/components/Header";
 import ListStories from "./src/components/ListStories";
 import SuggestFollow from "./src/components/SuggestFollow";
-
-import styles from "./common/GlobalStyles";
+import { ScrollView } from "react-native";
 
 export default function App() {
   return (

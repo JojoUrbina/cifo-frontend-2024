@@ -1,8 +1,7 @@
-import { FlatList, Text, View } from "react-native";
 import styles from "../../common/GlobalStyles";
-
 import { data } from "../../public/data";
 import Story from "./Story";
+import { FlatList, Text, View } from "react-native";
 
 const ListStories = () => {
   const stories = data.stories;
@@ -10,7 +9,6 @@ const ListStories = () => {
   return (
     <View>
       <Text style={styles.title2}>LATEST STORIES</Text>
-
       <FlatList
         keyExtractor={(item) => item.id}
         data={stories}
