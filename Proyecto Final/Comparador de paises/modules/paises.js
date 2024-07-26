@@ -1,7 +1,8 @@
 const nombreEstadoActual = "estado";
-const estado = JSON.parse(localStorage.getItem(nombreEstadoActual));
-
-renderizarBlog(estado);
+document.addEventListener("DOMContentLoaded", () => {
+  const estado = JSON.parse(localStorage.getItem(nombreEstadoActual)) || {};
+  renderizarBlog(estado);
+});
 window.addEventListener("storage", (event) => {
   if (event.key === nombreEstadoActual) {
     const estado = JSON.parse(localStorage.getItem(nombreEstadoActual));
@@ -204,4 +205,3 @@ function setCountry(country) {
   url.searchParams.set("pais", country);
   window.history.pushState({}, "", url);
 }
-
