@@ -1,8 +1,6 @@
 const nombreEstadoActual = "estado";
-document.addEventListener("DOMContentLoaded", () => {
-  const estado = JSON.parse(localStorage.getItem(nombreEstadoActual)) || {};
-  renderizarBlog(estado);
-});
+const estado = JSON.parse(localStorage.getItem(nombreEstadoActual));
+renderizarBlog(estado);
 window.addEventListener("storage", (event) => {
   if (event.key === nombreEstadoActual) {
     const estado = JSON.parse(localStorage.getItem(nombreEstadoActual));
