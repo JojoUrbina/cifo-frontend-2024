@@ -146,6 +146,27 @@
                 <button
                   class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                   data-bs-toggle="collapse"
+                  data-bs-target="#filtro-pais"
+                  aria-expanded="false"
+                >
+                  Pais
+                </button>
+                <div class="collapse btn-filtro" id="filtro-pais">
+                  <form class="d-flex" role="search">
+                    <input
+                      id="input-buscar"
+                      class="form-control me-2"
+                      type="search"
+                      placeholder="Nombre del pais"
+                      aria-label="Search"
+                    />
+                  </form>
+                </div>
+              </li>
+              <li class="mb-1">
+                <button
+                  class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                  data-bs-toggle="collapse"
                   data-bs-target="#filtro-region"
                   aria-expanded="false"
                 >
@@ -153,6 +174,7 @@
                 </button>
                 <div class="collapse" id="filtro-region"></div>
               </li>
+
               <li class="mb-1">
                 <button
                   class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
@@ -272,12 +294,10 @@
               <tbody></tbody>
             </table>
           </div>
-          <div >
-            <ul id="paginacion" class="pagination justify-content-center">
-             
-            </ul>
+          <div>
+            <ul id="paginacion" class="pagination justify-content-center"></ul>
           </div>
-          <!-- <div id="paginacion"></div> -->
+        </div>
       </div>
     </main>
     <footer class="py-5 text-center text-body-secondary bg-secondary-subtle">
